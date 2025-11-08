@@ -1,30 +1,31 @@
+import Link from 'next/link'
 import React from 'react'
 
 const categoryData = [
     {
         link: "",
         title: "Rings",
-        img: "https://www.graff.com/dw/image/v2/BFNT_PRD/on/demandware.static/-/Library-Sites-GraffSharedLibrary/default/dwe66c084f/Homepage%20Images/November_25/Graff-homepage-necklaces-pendants-2-1333x1777px.jpg"
+        img: "https://www.buccellati.com/media/.renditions/wysiwyg/2_5_HP_Ramage.jpg"
     },
     {
         link: "",
         title: "Bracelets",
-        img: "https://www.graff.com/dw/image/v2/BFNT_PRD/on/demandware.static/-/Library-Sites-GraffSharedLibrary/default/dwe87fa35b/files/Shot05_AC_GRAFFFESTIVE_0725_BUTTERFLY_062_RGB%20v2%204x5.jpg"
+        img: "https://www.buccellati.com/media/.renditions/wysiwyg/2_1_HP_Macri.jpg"
     },
     {
         link: "",
         title: "earings",
-        img: "https://www.graff.com/dw/image/v2/BFNT_PRD/on/demandware.static/-/Library-Sites-GraffSharedLibrary/default/dw3dc5fa94/images/PLP%20HEADERS/RGP707%20%2020250520_MD_GRAFF_SHOT_08_F4.jpg"
+        img: "https://www.buccellati.com/media/.renditions/wysiwyg/2_4_HP_Etoilee.jpg"
     },
     {
         link: "",
         title: "anklets",
-        img: "https://www.graff.com/dw/image/v2/BFNT_PRD/on/demandware.static/-/Library-Sites-GraffSharedLibrary/default/dw71d60a51/Homepage%20Images/November_25/Graff-Homepage-high-jewelley-look-2-2000x1125px.jpg"
+        img: "https://www.buccellati.com/media/.renditions/wysiwyg/2_8_HP_Ghirlanda.jpg"
     },
     {
         link: "",
         title: "Necklace",
-        img: "https://www.graff.com/dw/image/v2/BFNT_PRD/on/demandware.static/-/Library-Sites-GraffSharedLibrary/default/dw7d2d73f2/Homepage%20Images/November_25/Graff-homepage-icon-8-1490x995px.jpg"
+        img: "https://www.buccellati.com/media/.renditions/wysiwyg/2_2_HP_Opera.jpg"
     },
 ]
 const Category = () => {
@@ -36,12 +37,14 @@ const Category = () => {
                 </div>
                 <div className="home_category_paren">
                     {categoryData.map((item, index) => (
-                        <div key={index} className="category_box">
-                            <div className="category_box_img_paren">
-                                <img src={item.img} alt={item.title} />
+                        <a key={index} href="/products">
+                            <div className="category_box">
+                                <div className="category_box_img_paren">
+                                    <img src={item.img} alt={item.title} />
+                                </div>
+                                <p className='text-base uppercase'>{item.title}</p>
                             </div>
-                            <p className='text-base uppercase'>{item.title}</p>
-                        </div>
+                        </a>
                     ))}
                 </div>
             </div>

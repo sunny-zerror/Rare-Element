@@ -13,7 +13,7 @@
   bottom: 20%;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
 }
 
 .lookbook_bg_img {
@@ -23,10 +23,10 @@
   display: block;
 }
 
-.lookbook_green_button {
+.lookbook_button {
   width: fit-content;
-  padding: 0.75rem 6rem;
-  background-color: #174d38;
+  padding: 0.75rem 4rem;
+  background-color: #2F3720;
   color: white;
 }
 
@@ -50,11 +50,20 @@
 }
 
 .lookbookCard_text {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
   text-align: center;
 }
 .lookbookCard_link {
+  width: fit-content;
   opacity: 0.8;
+}
+.lookbookCard_link:hover{
+  text-decoration: underline;
 }
 
 .lookbookSlider_section {
@@ -96,7 +105,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.25rem; /* 20px */
+  gap: 2rem; /* 20px */
   width: 20vw;
 }
 

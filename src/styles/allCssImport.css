@@ -2,6 +2,7 @@
 
 @import "./components/common/header.css";
 @import "./components/common/footer.css";
+@import "./components/common/shopCard.css";
 
 
 @import "./components/home/hero.css";
@@ -9,5 +10,9 @@
 @import "./components/home/featuredCollection.css";
 @import "./components/home/lookBook.css";
 @import "./components/home/socialReels.css";
+
+
+@import "./components/products/products.css";
+@import "./components/products/productDetail.css";
 
 

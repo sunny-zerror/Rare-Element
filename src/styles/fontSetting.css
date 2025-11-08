@@ -1,3 +1,16 @@
+@font-face {
+  font-family: railway-light;
+  src: url(../../public/fonts/raleway/Raleway-Light.ttf);
+}
+@font-face {
+  font-family: railway-regular;
+  src: url(../../public/fonts/raleway/Raleway-Regular.ttf);
+}
+@font-face {
+  font-family: safira;
+  src: url(../../public/fonts/safira/SafiraMarchPersonalUse-gxeKY.otf);
+}
+
 html,
 body {
   width: 100%;
@@ -16,29 +29,29 @@ body {
   }
 }
 a {
-  font-family: sans-serif;
   text-decoration: none;
   cursor: pointer;
   color: black;
 }
+
 p,
 a,
 span,
 input,
 li,
 button {
-  font-family: sans-serif;
+  font-weight: 1000;
+  font-family: railway-light;
   cursor: pointer;
+}
+h2 {
+  font-weight: 100;
+  font-family: safira;
 }
 h3 {
   font-weight: 100;
+  font-family: railway-regular;
 }
-h2 {
-  font-weight: 800;
-  font-family: serif;
-
-}
-
 .text-xxs {
   font-size: 0.625rem; /* 10px */
   line-height: 0.875rem; /* ~14px, optional for balance */
@@ -61,17 +74,17 @@ h2 {
 
 .text-lg {
   font-size: 1.125rem; /* 18px */
-  line-height: 1.75rem; /* 28px */
+  line-height: 1.25rem; /* 28px */
 }
 
 .text-xl {
   font-size: 1.25rem; /* 20px */
-  line-height: 1.75rem; /* 28px */
+  line-height: 2.5rem; /* 28px */
 }
 
 .text-2xl {
   font-size: 1.5rem; /* 24px */
-  line-height: 1.5rem; /* 32px */
+  line-height: 3.25rem; /* 32px */
 }
 
 .text-3xl {
@@ -81,7 +94,7 @@ h2 {
 
 .text-4xl {
   font-size: 2.25rem; /* 36px */
-  line-height: 2.5rem; /* 40px */
+  line-height: 4rem; /* 40px */
 }
 
 .text-5xl {

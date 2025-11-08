@@ -1,6 +1,7 @@
 .header {
   position: fixed;
   top: 2.25rem;
+  height: 6rem;
   z-index: 99;
   left: 0;
   width: 100vw;
@@ -8,14 +9,23 @@
   align-items: center;
   justify-content: space-between;
 }
-
+.logo_paren{
+  width: 25%;
+}
+.header_logo{
+  transform: translateY(.2rem);
+  mix-blend-mode: difference;
+  width: 18vw;
+}
 .nav_links {
+  width: 50%;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 2rem;
 }
 .nav_links p {
-  color: rgb(255, 255, 255);
+  color: white;
   cursor: pointer;
   text-transform: uppercase;
 }
@@ -23,7 +33,13 @@
   text-decoration: underline;
 }
 .short_links {
+  width: 25%;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
+}
+.short_links_icon{
+  width: 1.5rem;
+  mix-blend-mode: difference;
 }
