@@ -1,10 +1,11 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { usePathname } from 'next/navigation';
-gsap.registerPlugin(ScrollTrigger)
+import CustomEase from 'gsap/dist/CustomEase';
+gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 const navLinks = [
     {
@@ -30,55 +31,55 @@ const navLinks = [
 ]
 const Header = () => {
     const pathname = usePathname()
+
+    useGSAP(() => {
+        if (pathname?.startsWith("/products/")) {
+            gsap.set(".header_bg", {
+                top: 0,
+            });
+        }
+    }, [pathname]);
+
     useGSAP(() => {
         if (pathname !== "/") {
+            gsap.set(".dummy_paren", {
+                display: "none",
+            })
+            // gsap.set(".header_bg", {
+            //     top: 0,
+            // })
             gsap.set(".header", {
                 top: 0,
-                ease: "linear",
-            })
-            gsap.set(".header", {
-                backgroundColor: "#F9F9F9",
-                height: "4rem",
-            })
-            gsap.set(".nav_links p", {
-                color: "black",
-            })
-            gsap.set(".header_logo", {
-                width: "12vw",
-                ease: "linear",
+                position: "fixed",
+                left: 0
             })
         }
 
-        if (pathname !== "/") return
+    }, [pathname])
+
+
+    useGSAP(() => {
+        if (pathname === "/products/") return
         var tl = gsap.timeline({
             scrollTrigger: {
-                trigger: 'body',
-                start: "top top",
-                end: "35px top",
-                scrub: true,
+                trigger: ".header",
+                start: "bottom top",
+                toggleActions: "play none none reverse",
+                // end:"30rem top",
+                // scrub:true,
+                // markers:true,
             }
         })
-        tl.to(".header", {
+        tl.to(".header_bg", {
             top: 0,
-            ease: "linear",
+            duration: .25
         })
-        tl.to(".header", {
-            backgroundColor: "#F9F9F9",
-            height: "4rem",
-        })
-        tl.to(".nav_links p", {
-            color: "black",
-        }, ">")
-        tl.to(".header_logo", {
-            width: "12vw",
-            ease: "linear",
-            duration: 4
-        }, ">")
     })
-
     return (
         <>
+            <div className="dummy_paren"></div>
             <div className="header padding">
+                <div className="header_bg"></div>
                 <div className="logo_paren">
                     <a href="/">
                         <img className='header_logo' src="/logo.svg" alt="" />
@@ -88,7 +89,7 @@ const Header = () => {
                     {
                         navLinks.map((item, index) => (
                             <a href={item.link} key={index}>
-                                <p className='text-base'>{item.title}</p>
+                                <h3 className='text-sm hover_text'>{item.title}</h3>
                             </a>
                         ))
                     }

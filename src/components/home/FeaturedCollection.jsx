@@ -8,8 +8,8 @@ const FeaturedCollection = () => {
         <>
             <div className="featured_collections_section ">
                 <div className="featured_header">
-                    <p className="featured_subtitle text-xl uppercase">Crafted for Every Moment</p>
-                    <h2 className="featured_title text-4xl">Featured Collections</h2>
+                    <p className="featured_subtitle text-base uppercase">Crafted for Every Moment</p>
+                    <h2 className="featured_title text-3xl">Featured Collections</h2>
                 </div>
 
                 <div className="featured_scroll">
