@@ -18,7 +18,7 @@ const Hero = () => {
                 scrub: true,
                 // markers: true
             },
-            y:250,
+            y:200,
             ease:"linear"
         })
     }, [pathname])
