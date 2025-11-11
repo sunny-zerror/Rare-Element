@@ -33,7 +33,9 @@
   padding: 0 1.5rem;
   gap: 1rem;
 }
-
+.footer_classname_featureCard h3{
+  width: 80%;
+}
 /* ========== Links Grid Section ========== */
 .footer_classname_linksGrid {
   margin: 5rem 0;

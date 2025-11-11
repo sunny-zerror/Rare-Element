@@ -6,6 +6,14 @@ import ShopCard from '@/components/common/ShopCard';
 import { ProductsData } from '@/utils/ProductsData';
 import Link from 'next/link';
 gsap.registerPlugin(ScrollTrigger);
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 const ProductDetail = () => {
 
     useGSAP(() => {
@@ -91,14 +99,30 @@ const ProductDetail = () => {
                 <div className="suggestion_parent_header">
                     <p className='text-base uppercase'>you may also like </p>
                 </div>
-                <div className="featured_scroll">
-                    {ProductsData?.map((item, i) => (
-                        <a key={i} href="/products/ring">
-                            <div className="featured_shopcard">
-                                <ShopCard item={item} />
-                            </div>
-                        </a>
-                    ))}
+                <div className="featured_scroll relative">
+                    <Swiper
+                        slidesPerView={'auto'}
+                        spaceBetween={0}
+                        loop={true}
+                        infinite={true}
+                        navigation={true}
+                        modules={[Navigation, Autoplay]}
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                        }}
+                        className="mySwiper"
+                    >
+                        {ProductsData?.map((item, i) => (
+                            <SwiperSlide key={i} className="featured_shopcard">
+                                <a href="/products/ring">
+                                    <div className="featured_shopcard">
+                                        <ShopCard item={item} />
+                                    </div>
+                                </a>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
             </div>
 

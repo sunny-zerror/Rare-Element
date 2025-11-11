@@ -19,6 +19,7 @@
 }
 .home_hero{
     color: white;
+    overflow: hidden;
     position: absolute;
     top: 2.25rem;
     width: 100%;

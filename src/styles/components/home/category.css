@@ -1,14 +1,20 @@
 .category_header {
-  margin-top: 4rem;
+  margin-top: 3rem;
   text-align: center;
 }
 
 .home_category_paren {
   margin: 2rem 0;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home_category_inner{
+  width: 80%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .category_box {
   width: 100%;

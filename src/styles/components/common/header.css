@@ -76,7 +76,7 @@
   align-items: center;
   gap: 1.5rem;
 }
-.short_links_icon {
+.short_links_icon { 
   width: 1.22rem;
   mix-blend-mode: difference;
 }

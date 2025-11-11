@@ -55,7 +55,7 @@ const Footer = () => {
               <img src={item.img} className='' alt="Feature Icon" />
               </div>
               <p className="footer_classname_featureTitle text-sm  uppercase">{item.title}</p>
-              <h3 className="footer_classname_featureDesc text-base">
+              <h3 className="footer_classname_featureDesc text-sm">
                 {item.desc}
               </h3>
             </div>

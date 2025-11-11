@@ -7,7 +7,7 @@ const ShopCard = ({ item }) => {
 
                 <img className='shopCard_hoverImg' src={item?.hoverImage} alt="" />
 
-                <div className="shopCard_img_wrapper">
+                <div className="shopCard_img_wrapper center">
                     <img
                         src={item?.image}
                         alt="coverImg"
@@ -15,10 +15,15 @@ const ShopCard = ({ item }) => {
                 </div>
                 <div className="shopCard_card_info">
                     <div>
-                        <p className="shopCard_item_name text-base uppercase">{item?.title}</p>
+                        <p className="shopCard_item_name text-sm uppercase">{item?.title}</p>
                         <p className="shopCard_item_price text-sm">Rs. {item?.price}</p>
                     </div>
-                    <img className=' short_links_icon' src="/icons/heart.svg" alt="" />
+                    <div className="heart_icon">
+                        <div className="icon_pr">
+                        <img className='  short_links_icon_heart invert' src="/icons/heart.svg" alt="" />
+                        <img className=' short_links_icon_heart_hover' src="/icons/heartFill.svg" alt="" />
+                    </div>
+                        </div>
                 </div>
             </div>
         </>

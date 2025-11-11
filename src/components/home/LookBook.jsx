@@ -6,8 +6,62 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import { ProductsData } from "@/utils/ProductsData";
+import { usePathname } from "next/navigation";
+
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { useGSAP } from "@gsap/react";
+gsap.registerPlugin(ScrollTrigger)
 
 const LookBook = () => {
+
+    const pathname = usePathname()
+
+    useGSAP(() => {
+        gsap.fromTo(".lookbook_bg_img", {
+            y: -100
+        }, {
+            scrollTrigger: {
+                trigger: ".lookbook_section",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+                // markers: true
+            },
+            y: 100,
+            ease:"linear"
+        })
+
+        gsap.fromTo(".lookbookCard_image img", {
+            y: -100
+        }, {
+            scrollTrigger: {
+                trigger: ".lookbookCard_box",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+                // markers: true
+            },
+            y: 100,
+            ease:"linear"
+        })
+
+        gsap.fromTo(".lookbookSlider_left img", {
+            y: -100
+        }, {
+            scrollTrigger: {
+                trigger: ".lookbookSlider_left",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+                // markers: true
+            },
+            y: 100,
+            ease:"linear"
+        })
+
+    }, [pathname])
+
     return (
         <>
             <div className="lookbook_section">
@@ -22,7 +76,7 @@ const LookBook = () => {
                 </div>
                 <img
                     className="lookbook_bg_img"
-                    src="/images/homepage/BookletHero.svg"
+                    src="/images/homepage/bookletHero.svg"
                     alt="Aurora Drop Earrings"
                 />
             </div>
@@ -69,6 +123,7 @@ const LookBook = () => {
                             centeredSlides={true}
                             spaceBetween={"150rem"}
                             loop
+                            infinite={true}
                             autoplay={{
                                 delay: 3000,
                                 disableOnInteraction: false,

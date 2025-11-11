@@ -9,6 +9,7 @@
 
 .lookbook_content {
   position: absolute;
+  z-index: 9;
   left: 2rem;
   bottom: 20%;
   display: flex;
@@ -26,7 +27,7 @@
 .lookbook_button {
   width: fit-content;
   padding: 0.75rem 4rem;
-  background-color: #2f3720;
+  background-color: #174d38;
   color: white;
 }
 
@@ -45,6 +46,7 @@
 }
 
 .lookbookCard_image {
+  overflow: hidden;
   width: 100%;
   aspect-ratio: 6 / 7;
 }
@@ -74,6 +76,7 @@
 }
 
 .lookbookSlider_left {
+  overflow: hidden;
   width: 50%;
   height: 100%;
 }

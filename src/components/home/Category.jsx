@@ -34,18 +34,20 @@ const Category = () => {
             <div className="padding">
                 <div className="category_header">
                     <p className='text-base uppercase'>The Essence of Elegance</p>
-                </div>
+            </div>
                 <div className="home_category_paren">
-                    {categoryData.map((item, index) => (
-                        <a key={index} href="/products">
-                            <div className="category_box">
-                                <div className="category_box_img_paren">
-                                    <img src={item.img} className='category_box_img' alt={item.title} />
+                    <div className="home_category_inner">
+                        {categoryData.map((item, index) => (
+                            <a key={index} href="/products">
+                                <div className="category_box">
+                                    <div className="category_box_img_paren">
+                                        <img src={item.img} className='category_box_img' alt={item.title} />
+                                    </div>
+                                    <p className='text-sm uppercase'>{item.title}</p>
                                 </div>
-                                <p className='text-base uppercase'>{item.title}</p>
-                            </div>
-                        </a>
-                    ))}
+                            </a>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>

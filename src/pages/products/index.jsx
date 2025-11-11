@@ -3,6 +3,14 @@ import { ProductsData } from '@/utils/ProductsData'
 import Link from 'next/link'
 import React from 'react'
 
+const dummyImages=[
+    "https://www.buccellati.com/media/wysiwyg/2_PLP_Ramage_2.jpg",
+    "https://www.buccellati.com/media/wysiwyg/2_Opera_Cover.jpg",
+    "https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500",
+    "https://www.buccellati.com/media/wysiwyg/2_Macri_221102_650x650px.jpg",
+    "https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500",
+]
+
 const AllProducts = () => {
     return (
         <>
