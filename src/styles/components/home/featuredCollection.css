@@ -1,21 +1,26 @@
 .featured_collections_section {
   width: 100%;
-  margin-top: 10rem;
+  margin-top: 6rem;
 }
-
+@media (min-width: 750px) {
+  .featured_collections_section {
+    width: 100%;
+    margin-top: 8rem;
+  }
+}
 .featured_header {
   width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 1rem; 
+  gap: 1rem;
 }
 
 .featured_scroll {
-  padding: 0rem 2rem;
-  margin-top: 2.5rem; 
+  padding: 0rem 0rem;
+  margin-top: 2.5rem;
 }
-.mySwiper{
+.mySwiper {
   display: flex;
   width: 100%;
   overflow: hidden;
@@ -32,16 +37,41 @@
 .swiper-button-next,
 .swiper-button-prev {
   color: black !important;
-  padding: .8rem ;
+  padding: 1.5rem;
+  scale: 0.6;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10rem;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(236, 236, 236);
   transition: opacity 0.3s;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
   opacity: 0.7;
+}
+
+@media (min-width: 750px) {
+  .featured_scroll {
+    padding: 0rem 2rem;
+    margin-top: 2.5rem;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: black !important;
+    padding: 0.8rem;
+    scale: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10rem;
+    background-color: rgb(255, 255, 255);
+    transition: opacity 0.3s;
+  }
+
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    opacity: 0.7;
+  }
 }

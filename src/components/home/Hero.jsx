@@ -10,6 +10,7 @@ const Hero = () => {
     const pathname = usePathname()
 
     useGSAP(() => {
+        if(window.innerWidth<1020) return
         gsap.to(".home_hero_video", {
             scrollTrigger: {
                 trigger: ".home_hero",

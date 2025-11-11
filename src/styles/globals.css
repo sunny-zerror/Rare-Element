@@ -27,7 +27,12 @@ button {
   background-color: #f6f6f6;
 }
 .padding{
+  padding: 0rem 1rem;
+}
+@media (min-width:750px) {
+  .padding{
   padding: 0rem 2rem;
+}
 }
 .uppercase{
   text-transform: uppercase;
@@ -42,4 +47,27 @@ button {
 }
 .underline:hover{
   text-decoration: underline;
+}
+
+
+
+.under_anim{
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+}
+.under_anim::after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: .1rem;
+  border-radius: 20rem;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: black;
+  transition: width 0.3s ease;
+}
+.under_anim:hover::after{
+  width: 100%;
 }

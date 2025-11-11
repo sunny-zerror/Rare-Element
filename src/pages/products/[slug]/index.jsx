@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import ShopCard from '@/components/common/ShopCard';
 import { ProductsData } from '@/utils/ProductsData';
@@ -14,46 +14,51 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+ const accordionData = [
+    {
+      title: "DESCRIPTION",
+      content:
+        "At Rare Element, Every Piece Is A Blend Of Artistry And Precision Designed To Celebrate Your Story. From Everyday Classics To Statement Creations, Our Jewellery Reflects Beauty That Endures Beyond Trends.",
+    },
+    {
+      title: "INSTRUCTIONS",
+      content:
+        "Handle your jewellery with care. Store it in a soft pouch when not in use and avoid exposure to harsh chemicals or moisture.",
+    },
+  ];
+
+
 const ProductDetail = () => {
 
-    useGSAP(() => {
-        gsap.to(".productDetail_line-inner", {
-            scrollTrigger: {
-                trigger: ".productDetail_main",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: .4
-            },
-            transform: "translateY(calc(100vh))",
-            ease: "linear"
-        })
-    })
+     const [openIndex, setOpenIndex] = useState(0);
+
+
+     
+  const handleToggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
     return (
         <>
-            <div className="productDetail_main">
+            <div className="productDetail_main padding">
                 <div className="productDetail_left">
-                    <div className="productDetail_block ">
-                        <img className='cover' src="https://www.buccellati.com/media/.renditions/wysiwyg/2_5_HP_Ramage.jpg" alt="" />
-                    </div>
-                    <div className="productDetail_block ">
+                    <div className="productDetail_left_upper">
                         <img className='cover' src="https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500" alt="" />
                     </div>
-                    <div className="productDetail_block ">
-                        <img className='cover' src="https://www.buccellati.com/media/.renditions/wysiwyg/2_2_HP_Opera.jpg" alt="" />
+                    <div className="productDetail_left_lower">
+                        <img className='cover' src="https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500" alt="" />
+                        <img className='cover' src="https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500" alt="" />
+                        <img className='cover' src="https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500" alt="" />
+
                     </div>
                 </div>
                 <div className="productDetail_right">
                     <div className="productDetail_sticky">
-                        <div class="productDetail_line">
-                            <div class="productDetail_line-inner"></div>
-                        </div>
                         <div className="productDetail_info">
                             <p className="productDetail_category text-base">RINGS</p>
                             <h2 className="productDetail_title text-xl uppercase">Aurora</h2>
                             <p className="productDetail_price text-base">Rs. 28,200</p>
                         </div>
-
                         <div className="productDetail_options">
                             <div className="productDetail_row ">
                                 <div className="productDetail_select productDetail_select--green">
@@ -76,21 +81,43 @@ const ProductDetail = () => {
                                 <h3>+</h3>
                             </div>
                         </div>
-
                         <div className="productDetail_footer">
                             <div className="productDetail_addtocart">
                                 <div className="productDetail_btn ">
-                                    <h2 className='text-xxs'>Add To Cart</h2>
+                                    <h3 className='text-lg'>Add To Cart</h3>
                                 </div>
                                 <div className="productDetail_btn_icon center">
-                                    <img className='invert' src="/icons/heart.svg" alt="heart icon" />
+                                    <div className="icon_pr">
+                                        <img className='  short_links_icon_heart invert' src="/icons/heart.svg" alt="" />
+                                        <img className=' short_links_icon_heart_hover' src="/icons/heartFill.svg" alt="" />
+                                    </div>
+                                    {/* <img className='invert' src="/icons/heart.svg" alt="heart icon" /> */}
                                 </div>
                             </div>
-                            <div className="productDetail_links">
-                                <p className="productDetail_link uppercase text-sm">Description</p>
-                                <p className="productDetail_link uppercase text-sm">Care Instruction</p>
-                            </div>
                         </div>
+                    </div>
+
+                    <div className="accordion_container">
+                        {accordionData.map((item, index) => (
+                            <div className="accordion_item" key={index}>
+                                <button
+                                    className="accordion_header"
+                                    onClick={() => handleToggle(index)}
+                                >
+                                    <p className=" text-sm accordion_title">{item.title}</p>
+                                    <h3 className="accordion_icon text-lg">
+                                        {openIndex === index ? "−" : "+"}
+                                    </h3>
+                                </button>
+
+                                <div
+                                    className={`accordion_content ${openIndex === index ? "open" : ""
+                                        }`}
+                                >
+                                    <p className='text-sm'>{item.content}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

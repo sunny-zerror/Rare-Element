@@ -29,7 +29,8 @@ const navLinks = [
         link: "/products"
     },
 ]
-const Header = () => {
+const MobileHeader = () => {
+
     const pathname = usePathname()
 
     useGSAP(() => {
@@ -48,7 +49,7 @@ const Header = () => {
             // gsap.set(".header_bg", {
             //     top: 0,
             // })
-            gsap.set(".header", {
+            gsap.set(".mobile_header", {
                 top: 0,
                 position: "fixed",
                 left: 0
@@ -61,7 +62,7 @@ const Header = () => {
         if (pathname === "/products/") return
         var tl = gsap.timeline({
             scrollTrigger: {
-                trigger: ".header",
+                trigger: ".mobile_header",
                 start: "bottom top",
                 toggleActions: "play none none reverse",
                 // end:"30rem top",
@@ -74,39 +75,19 @@ const Header = () => {
             duration: .25
         })
     })
+
+
     return (
         <>
             <div className="dummy_paren"></div>
-            <div className="header padding">
+            <div className="mobile_header padding">
                 <div className="header_bg"></div>
-                <div className="logo_paren">
-                    <a href="/">
-                        <img className='header_logo' src="/logo.svg" alt="" />
-                    </a>
-                </div>
-                <div className="nav_links">
-                    {
-                        navLinks.map((item, index) => (
-                            <a href={item.link} key={index}>
-                                <h3 className='text-sm hover_text'>{item.title}</h3>
-                            </a>
-                        ))
-                    }
-                </div>
-                <div className="short_links">
-                    <a href="/">
-                        <img className='short_links_icon' src="/icons/heart.svg" alt="" />
-                    </a>
-                    <a href="/">
-                        <img className='short_links_icon' src="/icons/cart.svg" alt="" />
-                    </a>
-                    <a href="/">
-                        <img className='short_links_icon' src="/icons/profile.svg" alt="" />
-                    </a>
-                </div>
+                <img className='short_links_icon' src="/icons/menu.svg" alt="" />
+                <img className='mobile_logo' src="/logo.svg" alt="" />
+                <img className='short_links_icon'  src="/icons/cart.svg" alt="" />
             </div>
         </>
     )
 }
 
-export default Header
+export default MobileHeader

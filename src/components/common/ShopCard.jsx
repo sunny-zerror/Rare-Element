@@ -20,10 +20,10 @@ const ShopCard = ({ item }) => {
                     </div>
                     <div className="heart_icon">
                         <div className="icon_pr">
-                        <img className='  short_links_icon_heart invert' src="/icons/heart.svg" alt="" />
-                        <img className=' short_links_icon_heart_hover' src="/icons/heartFill.svg" alt="" />
-                    </div>
+                            <img className='  short_links_icon_heart invert' src="/icons/heart.svg" alt="" />
+                            <img className=' short_links_icon_heart_hover' src="/icons/heartFill.svg" alt="" />
                         </div>
+                    </div>
                 </div>
             </div>
         </>

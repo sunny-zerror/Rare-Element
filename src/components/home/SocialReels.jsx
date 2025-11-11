@@ -40,7 +40,7 @@ const SocialReels = () => {
                 <h2 className="social_title text-3xl">Instagram</h2>
                 <p className='text-base underline '>@rareelement</p>
             </div>
-            <div className="socialCard_section padding">
+            <div className="socialCard_section scroller_none padding">
                 {SocialCardData?.map((item, i) => (
                     <div key={i} className="socialCard_box">
                       <video className='cover socialCard_box_vid ' loop autoPlay muted playsInline src={item.vid}></video>

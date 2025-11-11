@@ -14,7 +14,7 @@
     text-decoration: underline;
 }
 .dummy_hero_div{
-    height: calc(100vh - 2.25rem);
+    height: calc(80vh - 8.5rem);
     pointer-events: none;
 }
 .home_hero{
@@ -23,7 +23,22 @@
     position: absolute;
     top: 2.25rem;
     width: 100%;
-    height: calc(100vh - 2.25rem);
+    height: calc(80vh - 2.25rem);
+}
+
+@media (min-width:750px) {
+  .dummy_hero_div{
+    height: calc(75vh - 8.5rem);
+    pointer-events: none;
+}
+.home_hero{
+    color: white;
+    overflow: hidden;
+    position: absolute;
+    top: 2.25rem;
+    width: 100%;
+    height: calc(75vh - 2.25rem);
+}
 }
 .home_hero video{
     position: absolute;

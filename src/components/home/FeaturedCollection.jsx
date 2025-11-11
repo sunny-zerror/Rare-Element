@@ -22,7 +22,8 @@ const FeaturedCollection = () => {
           spaceBetween={0}
           loop={true}
           infinite={true}
-          navigation={true} 
+          speed={800}
+          navigation={true}
           modules={[Navigation, Autoplay]}
           autoplay={{
             delay: 2500,

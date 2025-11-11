@@ -1,0 +1,22 @@
+.mobile_header {
+  position: sticky;
+  top: 0;
+  height: 5rem;
+  z-index: 99;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 750px) {
+  .mobile_header {
+    display: none;
+  }
+}
+
+.mobile_logo {
+  mix-blend-mode: difference;
+  width: 16rem;
+}

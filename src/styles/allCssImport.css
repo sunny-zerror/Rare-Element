@@ -1,6 +1,7 @@
 @import "./fontSetting.css";
 
 @import "./components/common/header.css";
+@import "./components/common/mobileheader.css";
 @import "./components/common/footer.css";
 @import "./components/common/shopCard.css";
 

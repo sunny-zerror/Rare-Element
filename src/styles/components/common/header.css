@@ -1,18 +1,31 @@
 .dummy_paren {
-  height: 2.25rem;
+  height: 1.25rem;
   pointer-events: none;
   width: 100%;
 }
 .header_bg {
   position: fixed;
-  top: -4.1rem;
+  top: -5.1rem;
   transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0s;
   left: 0;
   z-index: -1;
   background-color: white;
   width: 100%;
-  height: 4rem;
+  height: 5rem;
 }
+
+@media (min-width: 750px) {
+  .dummy_paren {
+    height: 2.25rem;
+    pointer-events: none;
+    width: 100%;
+  }
+  .header_bg {
+    top: -4.1rem;
+    height: 4rem;
+  }
+}
+
 .header {
   position: sticky;
   top: 0;
@@ -20,9 +33,14 @@
   z-index: 99;
   left: 0;
   width: 100vw;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
+}
+@media (min-width: 750px) {
+  .header {
+    display: flex;
+  }
 }
 .logo_paren {
   width: 25%;
@@ -46,26 +64,25 @@
   text-transform: uppercase;
 }
 
-.hover_text{
+.hover_text {
   position: relative;
   width: fit-content;
   cursor: pointer;
-
 }
-.hover_text::after{
+.hover_text::after {
   content: "";
   display: block;
   position: absolute;
-  bottom: .1rem;
+  bottom: 0.1rem;
   border-radius: 20rem;
   left: 0;
   width: 0;
-  height: .1rem;
+  height: 0.1rem;
   mix-blend-mode: difference;
   background-color: #ffffff;
   transition: width 0.3s ease;
 }
-.hover_text:hover::after{
+.hover_text:hover::after {
   width: 100%;
 }
 
@@ -76,11 +93,18 @@
   align-items: center;
   gap: 1.5rem;
 }
-.short_links_icon { 
+.short_links_icon {
   transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  width: 1.22rem;
+  width: 2rem;
   mix-blend-mode: difference;
 }
-.short_links_icon:hover{
+
+@media (min-width: 750px) {
+  .short_links_icon {
+    width: 1.22rem;
+  }
+}
+
+.short_links_icon:hover {
   scale: 1.15;
 }

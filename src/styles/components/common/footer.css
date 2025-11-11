@@ -3,7 +3,7 @@
   width: 100%;
   background-color: #174d38;
   color: white;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .footer_classname_container {
@@ -16,14 +16,16 @@
   position: relative;
   z-index: 9;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem 0rem;
   background: white;
   color: black;
   padding: 3rem 0;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
 .footer_classname_featureCard {
+  cursor: pointer;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -33,22 +35,25 @@
   padding: 0 1.5rem;
   gap: 1rem;
 }
-.footer_classname_featureCard h3{
-  width: 80%;
+.footer_classname_featureCard h3 {
+  width: 100%;
 }
 /* ========== Links Grid Section ========== */
 .footer_classname_linksGrid {
-  margin: 5rem 0;
+  margin: 4rem 0;
   width: 100%;
   display: grid;
-  grid-template-columns: 39% 15.25% 15.25% 15.25% 15.25%;
+  /* grid-template-columns: 39% 15.25% 15.25% 15.25% 15.25%; */
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .footer_classname_about {
-  width: 50%;
+  grid-column: span 2;
+  width: 100%;
 }
 
 .footer_classname_heading {
+  margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
 
@@ -61,13 +66,12 @@
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
-.footer_classname_column{
-  padding-left: 5.5rem;
+.footer_classname_column {
+  padding-left: 0;
 }
 .footer_classname_column h3:hover {
   opacity: 0.6;
 }
-
 
 /* ========== Bottom Section ========== */
 .footer_classname_bottom {
@@ -78,10 +82,104 @@
   align-items: center;
   gap: 1rem;
 }
-.footer_logo{
-    width: 28vw;
+.footer_logo {
+  width: 60vw;
 }
 
-.footer_classname_bottom p ,.copyright_txt {
+.footer_classname_bottom p,
+.copyright_txt {
   opacity: 0.8;
+}
+
+@media (min-width: 750px) {
+  .footer_classname_wrapper {
+    margin-top: 5rem;
+    width: 100%;
+    background-color: #174d38;
+    color: white;
+    padding: 2rem;
+  }
+
+  .footer_classname_container {
+    width: 100%;
+  }
+
+  /* ========== Features Section ========== */
+  .footer_classname_features {
+    width: 100%;
+    position: relative;
+    z-index: 9;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: white;
+    color: black;
+    padding: 3rem 0;
+    border-radius: 0.25rem;
+  }
+
+  .footer_classname_featureCard {
+    cursor: pointer;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    gap: 1rem;
+  }
+  .footer_classname_featureCard h3 {
+    width: 80%;
+  }
+  /* ========== Links Grid Section ========== */
+  .footer_classname_linksGrid {
+    margin: 5rem 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 39% 15.25% 15.25% 15.25% 15.25%;
+  }
+
+  .footer_classname_about {
+    grid-column: span 1;
+    width: 50%;
+  }
+
+  .footer_classname_heading {
+    margin-top: 0rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer_links_column {
+    margin-top: 1rem;
+  }
+
+  .footer_links_column h3 {
+    margin: 0.5rem 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .footer_classname_column {
+    padding-left: 5.5rem;
+  }
+  .footer_classname_column h3:hover {
+    opacity: 0.6;
+  }
+
+  /* ========== Bottom Section ========== */
+  .footer_classname_bottom {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .footer_logo {
+    width: 28vw;
+  }
+
+  .footer_classname_bottom p,
+  .copyright_txt {
+    opacity: 0.8;
+  }
 }

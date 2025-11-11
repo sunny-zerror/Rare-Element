@@ -4,7 +4,7 @@
   background: white;
   position: relative;
   flex-shrink: 0;
-  border: 1px solid #e6e6e6;
+  border: 1px solid #f5f5f5;
 }
 .shopCard_hoverImg {
   position: absolute;
@@ -23,7 +23,7 @@
 
 .shopCard_img_wrapper {
   width: 100%;
-  height: 88%;
+  height: 85%;
 }
 
 .shopCard_img_wrapper img {
@@ -33,7 +33,7 @@
 
 .shopCard_card_info {
   background: white;
-  height: 12%;
+  height: 15%;
   display: flex;
   align-items: flex-start;
   width: 100%;
@@ -54,23 +54,106 @@
   align-items: center;
   gap: 1.5rem;
 }
-.icon_pr{
+.icon_pr {
+  cursor: pointer;
   position: relative;
 }
-.short_links_icon_heart_hover{
+.short_links_icon_heart_hover {
   transition: all 0.3s ease-in-out;
   opacity: 0;
   position: absolute;
   left: 0;
   z-index: 99;
 }
-.short_links_icon_heart,.short_links_icon_heart_hover { 
+.short_links_icon_heart,
+.short_links_icon_heart_hover {
   width: 1.22rem;
 }
-.icon_pr:hover .short_links_icon_heart_hover{
+.icon_pr:hover .short_links_icon_heart_hover {
   opacity: 1;
   scale: 1.5;
 }
-.icon_pr:hover .short_links_icon_heart{
+.icon_pr:hover .short_links_icon_heart {
   opacity: 0;
+}
+
+@media (min-width: 750px) {
+  .shopCard_card {
+    aspect-ratio: 352/ 518;
+    width: 100%;
+    background: white;
+    position: relative;
+    flex-shrink: 0;
+    border: 1px solid #e6e6e6;
+  }
+  .shopCard_hoverImg {
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  .shopCard_card:hover .shopCard_hoverImg {
+    opacity: 1;
+  }
+
+  .shopCard_img_wrapper {
+    width: 100%;
+    height: 88%;
+  }
+
+  .shopCard_img_wrapper img {
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .shopCard_card_info {
+    background: white;
+    height: 12%;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0.75rem; /* 12px */
+    justify-content: space-between;
+  }
+
+  .shopCard_item_price {
+    opacity: 0.7;
+  }
+
+  .heart_icon {
+    width: 25%;
+    position: relative;
+    z-index: 9;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .icon_pr {
+    cursor: pointer;
+    position: relative;
+  }
+  .short_links_icon_heart_hover {
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    z-index: 99;
+  }
+  .short_links_icon_heart,
+  .short_links_icon_heart_hover {
+    width: 1.22rem;
+  }
+  .icon_pr:hover .short_links_icon_heart_hover {
+    opacity: 1;
+    scale: 1.5;
+  }
+  .icon_pr:hover .short_links_icon_heart {
+    opacity: 0;
+  }
 }
