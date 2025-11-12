@@ -1,3 +1,18 @@
+.mobile_dummy_paren {
+  height: 2.25rem;
+  pointer-events: none;
+  width: 100%;
+}
+.mobile_header_bg {
+  position: fixed;
+  top: -5.1rem;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+  left: 0;
+  z-index: -1;
+  background-color: white;
+  width: 100%;
+  height: 5rem;
+}
 .mobile_header {
   position: sticky;
   top: 0;
@@ -11,12 +26,13 @@
 }
 
 @media (min-width: 750px) {
-  .mobile_header {
+  .mobile_header,
+  .mobile_dummy_paren {
     display: none;
   }
 }
 
 .mobile_logo {
   mix-blend-mode: difference;
-  width: 16rem;
+  width: 11rem;
 }

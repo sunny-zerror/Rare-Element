@@ -1,5 +1,5 @@
 .shopCard_card {
-  aspect-ratio: 352/ 518;
+  aspect-ratio: 3/ 4;
   width: 100%;
   background: white;
   position: relative;
@@ -79,7 +79,7 @@
 
 @media (min-width: 750px) {
   .shopCard_card {
-    aspect-ratio: 352/ 518;
+    aspect-ratio: 3/ 4;
     width: 100%;
     background: white;
     position: relative;

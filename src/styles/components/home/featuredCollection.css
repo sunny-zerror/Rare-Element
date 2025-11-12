@@ -23,7 +23,8 @@
 .mySwiper {
   display: flex;
   width: 100%;
-  overflow: hidden;
+  background-color: green;
+  /* overflow: hidden; */
 }
 
 .featured_scroll::-webkit-scrollbar {
@@ -31,11 +32,11 @@
 }
 
 .featured_shopcard {
-  width: 20rem !important;
+  width: 22rem !important;
   flex-shrink: 0;
 }
-.swiper-button-next,
-.swiper-button-prev {
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
   color: black !important;
   padding: 1.5rem;
   scale: 0.6;
@@ -47,8 +48,8 @@
   transition: opacity 0.3s;
 }
 
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
+.mySwiper .swiper-button-next:hover,
+.mySwiper .swiper-button-prev:hover {
   opacity: 0.7;
 }
 
@@ -57,8 +58,8 @@
     padding: 0rem 2rem;
     margin-top: 2.5rem;
   }
-  .swiper-button-next,
-  .swiper-button-prev {
+  .mySwiper .swiper-button-next,
+  .mySwiper .swiper-button-prev {
     color: black !important;
     padding: 0.8rem;
     scale: 0.8;
@@ -70,8 +71,8 @@
     transition: opacity 0.3s;
   }
 
-  .swiper-button-next:hover,
-  .swiper-button-prev:hover {
+  .mySwiper .swiper-button-next:hover,
+  .mySwiper .swiper-button-prev:hover {
     opacity: 0.7;
   }
 }

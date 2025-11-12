@@ -8,117 +8,194 @@ import Link from 'next/link';
 gsap.registerPlugin(ScrollTrigger);
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Navigation, A11y, Autoplay, Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
- const accordionData = [
+const accordionData = [
     {
-      title: "DESCRIPTION",
-      content:
-        "At Rare Element, Every Piece Is A Blend Of Artistry And Precision Designed To Celebrate Your Story. From Everyday Classics To Statement Creations, Our Jewellery Reflects Beauty That Endures Beyond Trends.",
+        title: "DESCRIPTION",
+        content:
+            "At Nahara, Every Piece Is A Blend Of Artistry And Precision Designed To Celebrate Your Story. From Everyday Classics To Statement Creations, Our Jewellery Reflects Beauty That Endures Beyond Trends.",
     },
     {
-      title: "INSTRUCTIONS",
-      content:
-        "Handle your jewellery with care. Store it in a soft pouch when not in use and avoid exposure to harsh chemicals or moisture.",
+        title: "INSTRUCTIONS",
+        content:
+            "Handle your jewellery with care. Store it in a soft pouch when not in use and avoid exposure to harsh chemicals or moisture.",
     },
-  ];
+];
 
+const images = [
+    "https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500",
+    "https://www.buccellati.com/media/catalog/category/2_Ghirlanda_Desktop.jpg?width=500",
+    "https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500",
+    "https://www.buccellati.com/media/wysiwyg/2_Macri_221102_650x650px.jpg"
+]
 
 const ProductDetail = () => {
 
-     const [openIndex, setOpenIndex] = useState(0);
+    const [openIndex, setOpenIndex] = useState(0);
 
 
-     
-  const handleToggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+
+    const handleToggle = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
+
+
+    const [swiperInstance, setSwiperInstance] = useState(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const handleThumbnailClick = (index) => {
+        if (swiperInstance) {
+            swiperInstance.slideToLoop(index);
+        }
+    };
 
     return (
         <>
             <div className="productDetail_main padding">
+
                 <div className="productDetail_left">
-                    <div className="productDetail_left_upper">
-                        <img className='cover' src="https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500" alt="" />
-                    </div>
-                    <div className="productDetail_left_lower">
-                        <img className='cover' src="https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500" alt="" />
-                        <img className='cover' src="https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500" alt="" />
-                        <img className='cover' src="https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500" alt="" />
+
+                    <div className="MobileImageSlider_container">
+                        {/* Thumbnails */}
+                        <div className="MobileImageSlider_thumbnails">
+                            {images?.map((image, index) => (
+                                <div
+                                    key={index}
+                                    onMouseEnter={() => handleThumbnailClick(index)}
+                                    className={`MobileImageSlider_thumbnail ${activeIndex === index
+                                        ? "MobileImageSlider_thumbnail--active"
+                                        : "MobileImageSlider_thumbnail--inactive"
+                                        }`}
+                                >
+                                    <img src={image} alt={`Product Image ${index + 1}`} />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Swiper */}
+                        <Swiper
+                            modules={[Navigation, A11y, Autoplay, Pagination]}
+                            spaceBetween={0}
+                            slidesPerView={1}
+                            speed={800}
+                            navigation={true}
+                            loop
+                            className="MobileImageSlider_swiper"
+                            autoplay={{ delay: 4500, disableOnInteraction: false }}
+                            onSwiper={setSwiperInstance}
+                            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                        >
+                            {images?.map((image, index) => (
+                                <SwiperSlide key={index} className="MobileImageSlider_slide">
+                                    <img
+                                        src={image}
+                                        alt={`Product Image ${index + 1}`}
+                                        className="MobileImageSlider_slideImage"
+                                    />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                        <div className="MobileImageSlider_nav">
+                            <button
+                                className="MobileImageSlider_arrow left"
+                                onClick={() => swiperInstance?.slidePrev()}
+                            >
+                                <img src="/icons/arrowLeft.svg" alt="" />
+                            </button>
+                            <button
+                                className="MobileImageSlider_arrow right"
+                                onClick={() => swiperInstance?.slideNext()}
+                            >
+                                <img src="/icons/arrowRight.svg" alt="" />
+
+                            </button>
+                        </div>
 
                     </div>
+
                 </div>
+
+
+
+
                 <div className="productDetail_right">
                     <div className="productDetail_sticky">
                         <div className="productDetail_info">
-                            <p className="productDetail_category text-base">RINGS</p>
-                            <h2 className="productDetail_title text-xl uppercase">Aurora</h2>
-                            <p className="productDetail_price text-base">Rs. 28,200</p>
-                        </div>
-                        <div className="productDetail_options">
-                            <div className="productDetail_row ">
-                                <div className="productDetail_select productDetail_select--green">
-                                    <button className='text-sm'>
-                                        <h3>Silver</h3>
-                                        <h3>↓</h3>
-                                    </button>
-                                </div>
-                                <div className="productDetail_select productDetail_select--white">
-                                    <button className='text-sm'>
-                                        <h3>Medium</h3>
-                                        <h3>↓</h3>
-                                    </button>
-                                </div>
+                            <div className="productDetail_info_left">
+                                <a href="/products">
+                                    <p className="productDetail_category text-sm ">RINGS</p>
+                                </a>
+                                <h2 className="productDetail_title text-lg uppercase">Aurora</h2>
+                                <p className="productDetail_price text-base">₹  28,200</p>
                             </div>
-
-                            <div className="productDetail_quantity text-sm">
-                                <h3>-</h3>
-                                <h3>1</h3>
-                                <h3>+</h3>
-                            </div>
-                        </div>
-                        <div className="productDetail_footer">
-                            <div className="productDetail_addtocart">
-                                <div className="productDetail_btn ">
-                                    <h3 className='text-lg'>Add To Cart</h3>
-                                </div>
+                            <div className="productDetail_info_right">
                                 <div className="productDetail_btn_icon center">
                                     <div className="icon_pr">
                                         <img className='  short_links_icon_heart invert' src="/icons/heart.svg" alt="" />
                                         <img className=' short_links_icon_heart_hover' src="/icons/heartFill.svg" alt="" />
                                     </div>
-                                    {/* <img className='invert' src="/icons/heart.svg" alt="heart icon" /> */}
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="accordion_container">
-                        {accordionData.map((item, index) => (
-                            <div className="accordion_item" key={index}>
-                                <button
-                                    className="accordion_header"
-                                    onClick={() => handleToggle(index)}
-                                >
-                                    <p className=" text-sm accordion_title">{item.title}</p>
-                                    <h3 className="accordion_icon text-lg">
-                                        {openIndex === index ? "−" : "+"}
-                                    </h3>
-                                </button>
-
-                                <div
-                                    className={`accordion_content ${openIndex === index ? "open" : ""
-                                        }`}
-                                >
-                                    <p className='text-sm'>{item.content}</p>
+                        <div className="productDetail_options">
+                            <div className="productDetail_row ">
+                                <div className="productDetail_select productDetail_select--green">
+                                    <button className='text-sm'>
+                                        <p>Silver</p>
+                                        <img className='productDetail_quantity_icon' src="/icons/longArrowDown.svg" alt="" />
+                                    </button>
+                                </div>
+                                <div className="productDetail_select productDetail_select--white">
+                                    <button className='text-sm'>
+                                        <p>Medium</p>
+                                        <img className='productDetail_quantity_icon' src="/icons/longArrowDown.svg" alt="" />
+                                    </button>
                                 </div>
                             </div>
-                        ))}
+
+                            <div className="productDetail_quantity text-base">
+                                <img className='productDetail_quantity_icon' src="/icons/minus.svg" alt="" />
+                                <h3>1</h3>
+                                <img className='productDetail_quantity_icon' src="/icons/plus.svg" alt="" />
+                            </div>
+                        </div>
+                        <div className="productDetail_addtocart">
+                            <div className="productDetail_btn ">
+                                <h3 className='text-lg uppercase'>Add To Cart</h3>
+                            </div>
+                        </div>
+                        <div className="accordion_container">
+                            {accordionData.map((item, index) => (
+                                <div className="accordion_item" key={index}>
+                                    <button
+                                        className="accordion_header"
+                                        onClick={() => handleToggle(index)}
+                                    >
+                                        <p className="text-sm accordion_title uppercase">{item.title}</p>
+
+                                        <img
+                                            className={`productDetail_quantity_icon ${openIndex === index ? "rotated" : ""}`}
+                                            src="/icons/arrowDown.svg"
+                                            alt=""
+                                        />
+                                    </button>
+
+                                    <div
+                                        className={`accordion_content ${openIndex === index ? "open" : ""}`}
+                                    >
+                                        <h3 className="text-base">{item.content}</h3>
+                                    </div>
+                                </div>
+                            ))}
+
+                        </div>
                     </div>
+
                 </div>
             </div>
 

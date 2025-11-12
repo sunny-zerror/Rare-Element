@@ -31,60 +31,74 @@ const navLinks = [
 ]
 const MobileHeader = () => {
 
-    const pathname = usePathname()
+      const pathname = usePathname()
 
-    useGSAP(() => {
-        if (pathname?.startsWith("/products/")) {
-            gsap.set(".header_bg", {
-                top: 0,
-            });
-        }
-    }, [pathname]);
+  useEffect(() => {
+    if(window.innerWidth > 750) return
+    // Reset or set conditions when changing paths
+    if (pathname?.startsWith("/products/")) {
+      gsap.set(".mobile_header_bg", { top: 0 });
+    }
+  }, [pathname]);
 
-    useGSAP(() => {
-        if (pathname !== "/") {
-            gsap.set(".dummy_paren", {
-                display: "none",
-            })
-            // gsap.set(".header_bg", {
-            //     top: 0,
-            // })
-            gsap.set(".mobile_header", {
-                top: 0,
-                position: "fixed",
-                left: 0
-            })
-        }
+  useEffect(() => {
+    if(window.innerWidth > 750) return
+    if (pathname === "/") {
+      gsap.set(".mobile_dummy_paren", { display: "block" });
+      gsap.set(".mobile_header", {
+        position: "sticky",
+        height: "4rem",
+        display: "flex",
+      });
+      gsap.set(".mobile_header_bg", { top: "-4.1rem", height: "4rem" });
+    }
+  }, [pathname]);
 
-    }, [pathname])
+  useEffect(() => {
+    if(window.innerWidth > 750) return
+    if (pathname !== "/") {
+      gsap.set(".mobile_dummy_paren", { display: "none" });
+      gsap.set(".mobile_header", { top: 0, position: "fixed", left: 0 });
+    }
+  }, [pathname]);
 
-    useGSAP(() => {
-        if (pathname === "/products/") return
-        var tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".mobile_header",
-                start: "bottom top",
-                toggleActions: "play none none reverse",
-                // end:"30rem top",
-                // scrub:true,
-                // markers:true,
-            }
-        })
-        tl.to(".header_bg", {
-            top: 0,
-            duration: .25
-        })
-    })
+  useEffect(() => {
+    if(window.innerWidth > 750) return
+    if (pathname?.startsWith("/products/")) return;
 
+    // Kill old ScrollTriggers
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".mobile_header",
+        start: "bottom top",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    tl.to(".mobile_header_bg", {
+      top: 0,
+      duration: 0.25,
+    });
+
+    // Cleanup
+    return () => {
+      tl.kill();
+      ScrollTrigger.killAll();
+    };
+  }, [pathname]);
 
     return (
         <>
-            <div className="dummy_paren"></div>
+            <div className="mobile_dummy_paren"></div>
             <div className="mobile_header padding">
-                <div className="header_bg"></div>
+                <div className="mobile_header_bg"></div>
                 <img className='short_links_icon' src="/icons/menu.svg" alt="" />
-                <img className='mobile_logo' src="/logo.svg" alt="" />
-                <img className='short_links_icon'  src="/icons/cart.svg" alt="" />
+                <a href="/">
+                    <img className='mobile_logo' src="/logo.svg" alt="" />
+                </a>
+                <img className='short_links_icon' src="/icons/cart.svg" alt="" />
             </div>
         </>
     )

@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Lottie from 'lottie-react';
 import SecureLock from "../../../public/icons/animationJson/SecureLock.json";
@@ -41,8 +41,7 @@ export const featureData = [
 
 const Footer = () => {
 
-  useGSAP(() => {
-    if (window.innerWidth < 1020) return
+  useEffect(() => {
     gsap.from(".footer_below", {
       scrollTrigger: {
         trigger: ".footer_classname_wrapper",
@@ -113,7 +112,7 @@ const Footer = () => {
           <div className="footer_classname_linksGrid">
             <div className="footer_classname_about">
               <h3 className='text-base'>
-                Rare Element is where timeless design meets modern craftsmanship — every piece a statement of individuality.
+                Nahara is where timeless design meets modern craftsmanship — every piece a statement of individuality.
               </h3>
             </div>
 
@@ -133,7 +132,7 @@ const Footer = () => {
               <div className='footer_links_column' >
                 <h3 className='text-sm' >Home</h3>
                 <h3 className='text-sm' >Shop</h3>
-                <h3 className='text-sm' >About Rare Element</h3>
+                <h3 className='text-sm' >About Nahara</h3>
               </div>
             </div>
 
@@ -158,8 +157,10 @@ const Footer = () => {
 
           {/* Footer Bottom Section */}
           <div className="footer_classname_bottom">
-            <img className='footer_logo' src="/logo.svg" alt="Rare Element Logo" />
-            <h3 className='uppercase text-xs copyright_txt'>© 2025 Rare Element. All rights reserved. Developed by Zerror Studios</h3>
+            <a href="/">
+            <img className='footer_logo' src="/logo.svg" alt="Nahara Logo" />
+            </a>
+            <h3 className='uppercase text-xs copyright_txt'>© 2025 Nahara. All rights reserved. Developed by Zerror Studios</h3>
           </div>
         </div>
       </div>

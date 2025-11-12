@@ -10,7 +10,7 @@ const Hero = () => {
     const pathname = usePathname()
 
     useGSAP(() => {
-        if(window.innerWidth<1020) return
+        if (window.innerWidth < 1020) return
         gsap.to(".home_hero_video", {
             scrollTrigger: {
                 trigger: ".home_hero",
@@ -19,8 +19,8 @@ const Hero = () => {
                 scrub: true,
                 // markers: true
             },
-            y:200,
-            ease:"linear"
+            y: 200,
+            ease: "linear"
         })
     }, [pathname])
 
@@ -28,7 +28,7 @@ const Hero = () => {
         <>
             {pathname === "/" && (
                 <div className="info_header center">
-                    <h3 className='text-xs'> Free Shipping on orders above Rs. 3,000 </h3>
+                    <h3 className='text-xs'> Free Shipping on orders above ₹  3,000 </h3>
                 </div>
             )}
             <div className="dummy_hero_div"></div>

@@ -121,7 +121,7 @@
   align-items: center;
   text-align: center;
   gap: 1rem; /* 20px */
-  width: 70vw !important;
+  width: 94vw !important;
 }
 
 .lookbookSlider_card_image {
@@ -157,7 +157,7 @@
   .lookbookSlider_section {
     margin-top: 3rem;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 4rem);
     display: flex;
     flex-direction: row;
   }
@@ -186,7 +186,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5rem; /* 80px */
+  gap: 5rem; 
 }
 
 .lookbookSlider_card {
@@ -196,6 +196,7 @@
   align-items: center;
   text-align: center;
   gap: 1rem; /* 20px */
-  width: 20vw !important;
+  width: 25vw !important;
+  transform: translateX(-2rem);
 }
 }

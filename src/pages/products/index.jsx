@@ -11,7 +11,7 @@ const AllProducts = () => {
                 <div className="products_content padding">
                     <h2 className='text-xl uppercase'>Aurora Drop Earrings</h2>
                     <h3 className='text-base'>
-                        At Rare Element, every piece is a blend of artistry and precision designed to celebrate your story.
+                        At Nahara, every piece is a blend of artistry and precision designed to celebrate your story.
                         From everyday classics to statement creations, our jewellery reflects beauty that endures beyond trends.
                     </h3>
                 </div>

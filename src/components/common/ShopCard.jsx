@@ -16,7 +16,7 @@ const ShopCard = ({ item }) => {
                 <div className="shopCard_card_info">
                     <div>
                         <p className="shopCard_item_name text-sm uppercase">{item?.title}</p>
-                        <p className="shopCard_item_price text-sm">Rs. {item?.price}</p>
+                        <p className="shopCard_item_price text-sm">₹ {item?.price}</p>
                     </div>
                     <div className="heart_icon">
                         <div className="icon_pr">

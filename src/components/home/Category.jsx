@@ -34,7 +34,7 @@ const Category = () => {
             <div className="padding">
                 <div className="category_header">
                     <p className='text-base uppercase'>The Essence of Elegance</p>
-            </div>
+                </div>
                 <div className="home_category_paren scroller_none">
                     <div className="home_category_inner scroller_none">
                         {categoryData.map((item, index) => (
