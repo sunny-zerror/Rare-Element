@@ -5,36 +5,39 @@ import React, { useEffect } from 'react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { usePathname } from 'next/navigation';
 import CustomEase from 'gsap/dist/CustomEase';
+import { RiCloseLine } from '@remixicon/react';
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 const navLinks = [
-    {
-        title: "rings",
-        link: "/products"
-    },
-    {
-        title: "earings",
-        link: "/products"
-    },
-    {
-        title: "necklaces",
-        link: "/products"
-    },
-    {
-        title: "bracelets",
-        link: "/products"
-    },
-    {
-        title: "anklets",
-        link: "/products"
-    },
+  {
+    title: "rings",
+    link: "/products"
+  },
+  {
+    title: "earings",
+    link: "/products"
+  },
+  {
+    title: "necklaces",
+    link: "/products"
+  },
+  {
+    title: "bracelets",
+    link: "/products"
+  },
+  {
+    title: "anklets",
+    link: "/products"
+  },
 ]
 const MobileHeader = () => {
 
-      const pathname = usePathname()
+  CustomEase.create("in-out-quint", "0.83,0,0.17,1");
+
+  const pathname = usePathname()
 
   useEffect(() => {
-    if(window.innerWidth > 750) return
+    if (window.innerWidth > 750) return
     // Reset or set conditions when changing paths
     if (pathname?.startsWith("/products/")) {
       gsap.set(".mobile_header_bg", { top: 0 });
@@ -42,7 +45,7 @@ const MobileHeader = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if(window.innerWidth > 750) return
+    if (window.innerWidth > 750) return
     if (pathname === "/") {
       gsap.set(".mobile_dummy_paren", { display: "block" });
       gsap.set(".mobile_header", {
@@ -55,7 +58,7 @@ const MobileHeader = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if(window.innerWidth > 750) return
+    if (window.innerWidth > 750) return
     if (pathname !== "/") {
       gsap.set(".mobile_dummy_paren", { display: "none" });
       gsap.set(".mobile_header", { top: 0, position: "fixed", left: 0 });
@@ -63,7 +66,7 @@ const MobileHeader = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if(window.innerWidth > 750) return
+    if (window.innerWidth > 750) return
     if (pathname?.startsWith("/products/")) return;
 
     // Kill old ScrollTriggers
@@ -89,19 +92,77 @@ const MobileHeader = () => {
     };
   }, [pathname]);
 
-    return (
-        <>
-            <div className="mobile_dummy_paren"></div>
-            <div className="mobile_header padding">
-                <div className="mobile_header_bg"></div>
-                <img className='short_links_icon' src="/icons/menu.svg" alt="" />
-                <a href="/">
-                    <img className='mobile_logo' src="/logo.svg" alt="" />
-                </a>
-                <img className='short_links_icon' src="/icons/cart.svg" alt="" />
-            </div>
-        </>
-    )
+  const openMenu = () => {
+    if (window.lenis) lenis.stop();
+    gsap.to(".mobile_menu_classname_open_menu", {
+      left: 0,
+      duration: .8,
+      ease: "in-out-quint",
+      onComplete: () => {
+        gsap.set(".mobile_header", { pointerEvents: "none" });
+      }
+    });
+    gsap.fromTo(".mobile_menu_classname_anii", {
+      y: 50,
+    }, {
+      y: 0,
+      delay: 0.4,
+      stagger: 0.05
+    })
+  }
+  const closeMenu = () => {
+    if (window.lenis) lenis.stop();
+    gsap.to(".mobile_menu_classname_anii", {
+      y: -50,
+      stagger: 0.05
+    })
+    gsap.to(".mobile_menu_classname_open_menu", {
+      left: "-100%",
+      delay: 0.4,
+      duration: .8,
+      ease: "in-out-quint",
+      onComplete: () => {
+        gsap.set(".mobile_header", { pointerEvents: "auto" });
+      }
+    });
+  }
+
+  return (
+    <>
+
+
+      <div className="mobile_menu_classname_open_menu">
+        <div className="mobile_menu_classname_close_icon_container">
+          <img onClick={() => closeMenu()}
+            src="/icons/close.svg" alt="" />
+        </div>
+
+        <div className="mobile_menu_classname_center">
+          {navLinks.map((item, index) => (
+            <a
+              key={index}
+              href={item.link}
+              onClick={() => closeMenu()}
+              className="mobile_menu_classname_link"
+            >
+              <p className="mobile_menu_classname_anii text-xl">{item.title}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+
+      <div className="mobile_dummy_paren"></div>
+      <div className="mobile_header padding">
+        <div className="mobile_header_bg"></div>
+        <img onClick={openMenu} className='short_links_icon' src="/icons/menu.svg" alt="" />
+        <a href="/">
+          <img className='mobile_logo' src="/logo.svg" alt="" />
+        </a>
+        <img className='short_links_icon' src="/icons/cart.svg" alt="" />
+      </div>
+    </>
+  )
 }
 
 export default MobileHeader

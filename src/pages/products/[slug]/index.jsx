@@ -13,28 +13,14 @@ import { Navigation, A11y, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-const accordionData = [
-    {
-        title: "DESCRIPTION",
-        content:
-            "At Nahara, Every Piece Is A Blend Of Artistry And Precision Designed To Celebrate Your Story. From Everyday Classics To Statement Creations, Our Jewellery Reflects Beauty That Endures Beyond Trends.",
-    },
-    {
-        title: "INSTRUCTIONS",
-        content:
-            "Handle your jewellery with care. Store it in a soft pouch when not in use and avoid exposure to harsh chemicals or moisture.",
-    },
-];
-
-const images = [
-    "https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500",
-    "https://www.buccellati.com/media/catalog/category/2_Ghirlanda_Desktop.jpg?width=500",
-    "https://www.buccellati.com/media/catalog/category/4_Earrings.jpg?width=500",
-    "https://www.buccellati.com/media/wysiwyg/2_Macri_221102_650x650px.jpg"
-]
+import { useRouter } from 'next/router';
 
 const ProductDetail = () => {
+
+    const router = useRouter();
+    const { slug } = router?.query;
+
+    const product = ProductsData.find((item) => item.slug === slug);
 
     const [openIndex, setOpenIndex] = useState(0);
 
@@ -47,6 +33,14 @@ const ProductDetail = () => {
 
     const [swiperInstance, setSwiperInstance] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    useEffect(() => {
+        if (swiperInstance && product?.images?.length) {
+            swiperInstance.update();
+            swiperInstance.slideToLoop(0, 0);
+            setActiveIndex(0);
+        }
+    }, [swiperInstance, product]);
+
 
     const handleThumbnailClick = (index) => {
         if (swiperInstance) {
@@ -63,7 +57,7 @@ const ProductDetail = () => {
                     <div className="MobileImageSlider_container">
                         {/* Thumbnails */}
                         <div className="MobileImageSlider_thumbnails">
-                            {images?.map((image, index) => (
+                            {product?.images.map((image, index) => (
                                 <div
                                     key={index}
                                     onMouseEnter={() => handleThumbnailClick(index)}
@@ -78,28 +72,30 @@ const ProductDetail = () => {
                         </div>
 
                         {/* Swiper */}
-                        <Swiper
-                            modules={[Navigation, A11y, Autoplay, Pagination]}
-                            spaceBetween={0}
-                            slidesPerView={1}
-                            speed={800}
-                            navigation={true}
-                            loop
-                            className="MobileImageSlider_swiper"
-                            autoplay={{ delay: 4500, disableOnInteraction: false }}
-                            onSwiper={setSwiperInstance}
-                            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-                        >
-                            {images?.map((image, index) => (
-                                <SwiperSlide key={index} className="MobileImageSlider_slide">
-                                    <img
-                                        src={image}
-                                        alt={`Product Image ${index + 1}`}
-                                        className="MobileImageSlider_slideImage"
-                                    />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                        {product?.images?.length > 0 && (
+                            <Swiper
+                                modules={[Navigation, A11y, Autoplay, Pagination]}
+                                spaceBetween={0}
+                                slidesPerView={1}
+                                speed={800}
+                                navigation={true}
+                                loop
+                                className="MobileImageSlider_swiper"
+                                autoplay={{ delay: 4500, disableOnInteraction: false }}
+                                onSwiper={setSwiperInstance}
+                                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                            >
+                                {product?.images.map((image, index) => (
+                                    <SwiperSlide key={index} className="MobileImageSlider_slide">
+                                        <img
+                                            src={image}
+                                            alt={`Product Image ${index + 1}`}
+                                            className="MobileImageSlider_slideImage"
+                                        />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        )}
                         <div className="MobileImageSlider_nav">
                             <button
                                 className="MobileImageSlider_arrow left"
@@ -130,8 +126,8 @@ const ProductDetail = () => {
                                 <a href="/products">
                                     <p className="productDetail_category text-sm ">RINGS</p>
                                 </a>
-                                <h2 className="productDetail_title text-lg uppercase">Aurora</h2>
-                                <p className="productDetail_price text-base">₹  28,200</p>
+                                <h2 className="productDetail_title text-lg uppercase">{product?.title}</h2>
+                                <p className="productDetail_price text-base">₹  {product?.price}</p>
                             </div>
                             <div className="productDetail_info_right">
                                 <div className="productDetail_btn_icon center">
@@ -170,7 +166,7 @@ const ProductDetail = () => {
                             </div>
                         </div>
                         <div className="accordion_container">
-                            {accordionData.map((item, index) => (
+                            {product?.accordionData.map((item, index) => (
                                 <div className="accordion_item" key={index}>
                                     <button
                                         className="accordion_header"
@@ -219,7 +215,7 @@ const ProductDetail = () => {
                     >
                         {ProductsData?.map((item, i) => (
                             <SwiperSlide key={i} className="featured_shopcard">
-                                <a href="/products/ring">
+                                <a href={`/products/${item.slug}`}>
                                     <div className="featured_shopcard">
                                         <ShopCard item={item} />
                                     </div>

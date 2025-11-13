@@ -1,5 +1,5 @@
 .category_header {
-  margin-top: 6rem;
+  margin-top: 5rem;
   text-align: center;
 }
 
@@ -43,7 +43,7 @@
 
 @media (min-width: 750px) {
   .category_header {
-    margin-top: 4rem;
+    margin-top: 6rem;
   }
 
   .home_category_paren {

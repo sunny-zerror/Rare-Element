@@ -36,3 +36,70 @@
   mix-blend-mode: difference;
   width: 11rem;
 }
+
+
+/* ============================= */
+/* Mobile Menu (Normal CSS)      */
+/* Prefix: mobile_menu_classname */
+/* ============================= */
+
+.mobile_menu_classname_open_menu {
+  position: fixed;
+  left: -100%;
+  width: 100%;
+  height: 100dvh;
+  background-color: #FFFDF6;
+  color: #2E2D2B;
+  padding: 1.25rem; /* 20px */
+  z-index: 9999999;
+}
+
+.mobile_menu_classname_close_icon_container {
+  position: absolute;
+  top: 3rem;
+  left: 1rem; /* 20px */
+}
+.mobile_menu_classname_close_icon_container img {
+  width: 2rem;
+}
+
+.mobile_menu_classname_center {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Common link styles */
+.mobile_menu_classname_link {
+  text-transform: uppercase;
+  position: relative;
+  display: block;
+  width: fit-content;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Underline hover animation */
+.mobile_menu_classname_link::after {
+  content: "";
+  position: absolute;
+  bottom: 0.125rem; /* bottom-0.5 */
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #2E2D2B;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.mobile_menu_classname_link:hover::after {
+  width: 100%;
+}
+
+/* Optional text styling (if .anii is animated text) */
+.mobile_menu_classname_anii {
+  transition: all 0.3s ease;
+}

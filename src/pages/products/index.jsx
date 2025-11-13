@@ -24,7 +24,7 @@ const AllProducts = () => {
             <div className="padding">
                 <div className="allproducts_paren ">
                     {ProductsData.map((item, i) => (
-                        <a key={i} href="/products/ring">
+                        <a key={i} href={`/products/${item.slug}`}>
                             <ShopCard item={item} />
                         </a>
                     ))}
