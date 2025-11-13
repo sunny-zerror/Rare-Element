@@ -221,9 +221,6 @@
   justify-content: space-between;
   align-items: center;
 }
-.productDetail_quantity_icon{
-  width: .75rem;
-}
 
 .productDetail_footer {
   width: 100%;
@@ -305,8 +302,7 @@
   opacity: .7;
 }
 .productDetail_quantity_icon {
-  width: 16px;
-  height: 16px;
+  width: .75rem;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
