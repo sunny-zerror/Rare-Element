@@ -171,8 +171,9 @@
   margin: 0.5rem 0rem;
 }
 .productDetail_info {
+  width: 100%;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
   position: relative;
 }
@@ -250,7 +251,6 @@
   background-color: #174d38;
   color: white;
 }
-
 .productDetail_btn_icon {
   width: 15%;
 }
