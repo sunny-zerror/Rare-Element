@@ -8,6 +8,7 @@ import FreeShipping from "../../../public/icons/animationJson/FreeShipping.json"
 import ChatSupport from "../../../public/icons/animationJson/ChatSupport.json";
 import StoresRetail from "../../../public/icons/animationJson/StoresRetail.json";
 import StretchArrow from "../../../public/icons/animationJson/StretchArrow.json";
+import Link from 'next/link';
 
 
 gsap.registerPlugin(ScrollTrigger)
@@ -42,16 +43,16 @@ export const featureData = [
 const Footer = () => {
 
   useEffect(() => {
-    gsap.from(".footer_below", {
+    gsap.to(".footer_below", {
       scrollTrigger: {
         trigger: ".footer_classname_wrapper",
         start: "15% bottom",
         end: "bottom bottom",
         scrub: true,
-        // markers:true
+        // markers: true
       },
-      transform: "translateY(-100%)",
-      opacity: 0,
+      transform: "translateY(0%)",
+      opacity: 1,
       ease: "linear"
     })
   })
@@ -157,9 +158,9 @@ const Footer = () => {
 
           {/* Footer Bottom Section */}
           <div className="footer_classname_bottom">
-            <a href="/">
-            <img className='footer_logo' src="/logo.svg" alt="Nahara Logo" />
-            </a>
+            <Link scroll={false} href="/">
+              <img className='footer_logo' src="/logo.svg" alt="Nahara Logo" />
+            </Link>
             <h3 className='uppercase text-xs copyright_txt'>© 2025 Nahara. All rights reserved. Developed by Zerror Studios</h3>
           </div>
         </div>

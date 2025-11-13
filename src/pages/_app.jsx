@@ -23,11 +23,11 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <LenisScroll />
-      {/* <PageTransition routeKey={router.asPath}> */}
+      <PageTransition routeKey={router.asPath}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      {/* </PageTransition> */}
+      </PageTransition>
     </>
   );
 }

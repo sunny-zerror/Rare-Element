@@ -1,9 +1,39 @@
 import ShopCard from '@/components/common/ShopCard'
 import { ProductsData } from '@/utils/ProductsData'
+import gsap from 'gsap'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const AllProducts = () => {
+
+    useEffect(() => {
+        var height
+
+        if (window.innerWidth >750) {
+            height = "38.5rem"
+        } else {
+            height = "47.5rem"
+        }
+
+        gsap.to(".products_hero-section", {
+            height: height,
+            duration: 1,
+            ease: "ease-secondary"
+        })
+
+        gsap.set(".products_content, .products_hero-img, .products_header ,.allproducts_paren", {
+            opacity: 0
+        })
+        gsap.to(".products_content, .products_hero-img, .products_header ,.allproducts_paren", {
+            opacity: 1,
+            delay: 0.5,
+            stagger: 0.1,
+            duration: 1,
+            ease: "ease-secondary"
+        })
+    }, [])
+
+
     return (
         <>
             <div className="products_hero-section ">
@@ -24,9 +54,9 @@ const AllProducts = () => {
             <div className="padding">
                 <div className="allproducts_paren ">
                     {ProductsData.map((item, i) => (
-                        <a key={i} href={`/products/${item.slug}`}>
+                        <Link scroll={false} key={i} href={`/products/${item.slug}`}>
                             <ShopCard item={item} />
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </div>

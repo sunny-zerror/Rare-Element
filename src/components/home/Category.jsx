@@ -38,14 +38,14 @@ const Category = () => {
                 <div className="home_category_paren scroller_none">
                     <div className="home_category_inner scroller_none">
                         {categoryData.map((item, index) => (
-                            <a key={index} href="/products">
+                            <Link scroll={false} key={index} href="/products">
                                 <div className="category_box">
                                     <div className="category_box_img_paren">
                                         <img src={item.img} className='category_box_img' alt={item.title} />
                                     </div>
                                     <p className='text-sm uppercase'>{item.title}</p>
                                 </div>
-                            </a>
+                            </Link>
                         ))}
                     </div>
                 </div>

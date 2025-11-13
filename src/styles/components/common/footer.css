@@ -38,6 +38,11 @@
 .footer_classname_featureCard h3 {
   width: 100%;
 }
+
+.footer_below{
+  transform: translateY(-100%);
+  opacity: 0;
+}
 /* ========== Links Grid Section ========== */
 .footer_classname_linksGrid {
   margin: 4rem 0;

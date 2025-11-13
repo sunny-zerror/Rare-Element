@@ -14,9 +14,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 const ProductDetail = () => {
-
+    const pathname = usePathname()
     const router = useRouter();
     const { slug } = router?.query;
 
@@ -24,12 +25,9 @@ const ProductDetail = () => {
 
     const [openIndex, setOpenIndex] = useState(0);
 
-
-
     const handleToggle = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     };
-
 
     const [swiperInstance, setSwiperInstance] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -41,12 +39,26 @@ const ProductDetail = () => {
         }
     }, [swiperInstance, product]);
 
-
     const handleThumbnailClick = (index) => {
         if (swiperInstance) {
             swiperInstance.slideToLoop(index);
         }
     };
+
+
+    useEffect(() => {
+        gsap.set(".MobileImageSlider_thumbnails, .MobileImageSlider_swiper, .MobileImageSlider_nav, .productDetail_info ,.productDetail_options ,.productDetail_addtocart,.accordion_container", {
+            opacity: 0
+        })
+        gsap.to(".MobileImageSlider_thumbnails, .MobileImageSlider_swiper, .MobileImageSlider_nav, .productDetail_info ,.productDetail_options ,.productDetail_addtocart,.accordion_container", {
+            opacity: 1,
+            delay: 0.5,
+            stagger: 0.1,
+            duration: 1,
+            ease: "ease-secondary"
+        })
+    }, [pathname])
+
 
     return (
         <>
@@ -123,9 +135,9 @@ const ProductDetail = () => {
                     <div className="productDetail_sticky">
                         <div className="productDetail_info">
                             <div className="productDetail_info_left">
-                                <a href="/products">
+                                <Link scroll={false} href="/products">
                                     <p className="productDetail_category text-sm ">RINGS</p>
-                                </a>
+                                </Link>
                                 <h2 className="productDetail_title text-lg uppercase">{product?.title}</h2>
                                 <p className="productDetail_price text-base">₹  {product?.price}</p>
                             </div>
@@ -215,11 +227,11 @@ const ProductDetail = () => {
                     >
                         {ProductsData?.map((item, i) => (
                             <SwiperSlide key={i} className="featured_shopcard">
-                                <a href={`/products/${item.slug}`}>
+                                <Link scroll={false} href={`/products/${item.slug}`}>
                                     <div className="featured_shopcard">
                                         <ShopCard item={item} />
                                     </div>
-                                </a>
+                                </Link>
                             </SwiperSlide>
                         ))}
                     </Swiper>

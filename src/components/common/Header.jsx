@@ -33,7 +33,7 @@ const Header = () => {
   const pathname = usePathname()
 
   useEffect(() => {
-    if(window.innerWidth < 750) return
+    if (window.innerWidth < 750) return
     // Reset or set conditions when changing paths
     if (pathname?.startsWith("/products/")) {
       gsap.set(".header_bg", { top: 0 });
@@ -41,7 +41,7 @@ const Header = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if(window.innerWidth < 750) return
+    if (window.innerWidth < 750) return
     if (pathname === "/") {
       gsap.set(".dummy_paren", { display: "block" });
       gsap.set(".header", {
@@ -54,7 +54,7 @@ const Header = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if(window.innerWidth < 750) return
+    if (window.innerWidth < 750) return
     if (pathname !== "/") {
       gsap.set(".dummy_paren", { display: "none" });
       gsap.set(".header", { top: 0, position: "fixed", left: 0 });
@@ -62,7 +62,7 @@ const Header = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if(window.innerWidth < 750) return
+    if (window.innerWidth < 750) return
     if (pathname?.startsWith("/products/")) return;
 
     // Kill old ScrollTriggers
@@ -94,29 +94,29 @@ const Header = () => {
       <div className="header padding">
         <div className="header_bg"></div>
         <div className="logo_paren">
-          <a href="/">
+          <Link scroll={false} href="/">
             <img className='header_logo' src="/logo.svg" alt="" />
-          </a>
+          </Link>
         </div>
         <div className="nav_links">
           {
             navLinks.map((item, index) => (
-              <a href={item.link} key={index}>
+              <Link scroll={false} href={item.link} key={index}>
                 <h3 className='text-sm hover_text'>{item.title}</h3>
-              </a>
+              </Link>
             ))
           }
         </div>
         <div className="short_links">
-          <a href="/">
+          <Link scroll={false} href="/">
             <img className='short_links_icon' src="/icons/heart.svg" alt="" />
-          </a>
-          <a href="/">
+          </Link>
+          <Link scroll={false} href="/">
             <img className='short_links_icon' src="/icons/cart.svg" alt="" />
-          </a>
-          <a href="/">
+          </Link>
+          <Link scroll={false} href="/">
             <img className='short_links_icon' src="/icons/profile.svg" alt="" />
-          </a>
+          </Link>
         </div>
       </div>
     </>

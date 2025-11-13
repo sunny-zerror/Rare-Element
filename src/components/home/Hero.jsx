@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger)
@@ -24,6 +24,34 @@ const Hero = () => {
         })
     }, [pathname])
 
+    
+    useEffect(() => {
+        var height
+
+        if (window.innerWidth >750) {
+            height = "36.3rem"
+        } else {
+            height = "45rem"
+        }
+
+        gsap.to(".home_hero", {
+            height: height,
+            duration: 1,
+            ease: "ease-secondary"
+        })
+
+        gsap.set(".home_hero_inner, .category_header, .home_category_paren", {
+            opacity: 0
+        })
+        gsap.to(".home_hero_inner, .category_header, .home_category_paren", {
+            opacity: 1,
+            delay: 0.5,
+            stagger: 0.1,
+            duration: 1,
+            ease: "ease-secondary"
+        })
+    }, [pathname])
+
     return (
         <>
             {pathname === "/" && (
@@ -36,9 +64,9 @@ const Hero = () => {
                 <video className=' home_hero_video cover' loop muted playsInline autoPlay src="https://365ayearof.cartier.com/hero-carousel/1_Creative_Alchemy_Desktop%20test%20loop%208%20sec.mp4"></video>
                 <div className="home_hero_inner">
                     <h2 className='text-3xl'>The Aurora Collection</h2>
-                    <a href="/products">
+                    <Link scroll={false} href="/products">
                         <button className='green_button'><h3 className='text-base ' >Discover</h3></button>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>

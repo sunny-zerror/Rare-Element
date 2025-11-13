@@ -139,14 +139,14 @@ const MobileHeader = () => {
 
         <div className="mobile_menu_classname_center">
           {navLinks.map((item, index) => (
-            <a
+            <Link scroll={false}
               key={index}
               href={item.link}
               onClick={() => closeMenu()}
               className="mobile_menu_classname_link"
             >
               <p className="mobile_menu_classname_anii text-xl">{item.title}</p>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -156,9 +156,9 @@ const MobileHeader = () => {
       <div className="mobile_header padding">
         <div className="mobile_header_bg"></div>
         <img onClick={openMenu} className='short_links_icon' src="/icons/menu.svg" alt="" />
-        <a href="/">
+        <Link scroll={false} href="/">
           <img className='mobile_logo' src="/logo.svg" alt="" />
-        </a>
+        </Link>
         <img className='short_links_icon' src="/icons/cart.svg" alt="" />
       </div>
     </>
