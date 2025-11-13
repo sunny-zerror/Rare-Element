@@ -33,7 +33,7 @@ body {
 @media (min-width: 1020px) {
   html,
   body {
-    font-size: 1vw;
+    font-size: .9vw;
   }
 }
 a {
