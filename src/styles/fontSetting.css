@@ -1,10 +1,18 @@
 @font-face {
+  font-family: railway-medium;
+  src: url(../../public/fonts/raleway/Raleway-Medium.ttf);
+}
+@font-face {
   font-family: railway-light;
   src: url(../../public/fonts/raleway/Raleway-Light.ttf);
 }
 @font-face {
   font-family: railway-regular;
   src: url(../../public/fonts/raleway/Raleway-Regular.ttf);
+}
+@font-face {
+  font-family: railway-semibold;
+  src: url(../../public/fonts/raleway/Raleway-SemiBold.ttf);
 }
 @font-face {
   font-family: safira;
@@ -19,13 +27,13 @@ body {
 @media (min-width: 750px) {
   html,
   body {
-    font-size: .75vw;
+    font-size: 1vw;
   }
 }
 @media (min-width: 1020px) {
   html,
   body {
-    font-size: 12px;
+    font-size: 1vw;
   }
 }
 a {
@@ -41,7 +49,7 @@ input,
 li,
 button {
   font-weight: 1000;
-  letter-spacing: .1rem;
+  letter-spacing: .05rem;
   font-family: railway-light;
   cursor: pointer;
 }
@@ -50,6 +58,22 @@ h2 {
   letter-spacing: .1rem;
   font-family: safira;
 }
+
+
+h4{
+  font-weight: 100;
+  font-family: safira;
+}
+h5{
+  font-weight: 100;
+  font-family: railway-medium;
+}
+h6{
+  font-weight: 1000;
+  font-family: railway-regular;
+}
+
+
 h3 {
   font-weight: 100;
   letter-spacing: .05rem;
@@ -131,3 +155,6 @@ h3 {
   font-size: 8rem; /* 128px */
   line-height: 1;
 }
+
+
+
