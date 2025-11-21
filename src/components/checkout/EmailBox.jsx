@@ -1,6 +1,7 @@
 import { RiCheckLine } from '@remixicon/react'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import CheckoutInput from '../inputs/CheckoutInput'
 
 const EmailBox = ({ user }) => {
     const [acceptEmailOfferBtn, setAcceptEmailOfferBtn] = useState(false)
@@ -16,7 +17,7 @@ const EmailBox = ({ user }) => {
                         </div>
                     </Link>
                 </div>
-                <input type="email" placeholder="" className="checkOut_input" defaultValue={user.email} name="" id="" />
+                <CheckoutInput placeholder="Email" />
                 <div onClick={() => setAcceptEmailOfferBtn(!acceptEmailOfferBtn)} className="cards_inner_content">
                     <div className={`check_box_div center ${acceptEmailOfferBtn ? "check_box_div_active" : ""} `}>
                         {acceptEmailOfferBtn && <RiCheckLine size={14} />}

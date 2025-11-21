@@ -39,7 +39,6 @@ const DetailsForm = ({ user, expandDetailForm, setExpandDetailForm }) => {
                     <div className="inp_paren text-base">
                         <p className='text-sm '>Contact <span>*</span> </p>
                         <div className="settings_input">
-
                             <PhoneInput
                                 defaultCountry="in"
                                 className="delivery__phone_btn"

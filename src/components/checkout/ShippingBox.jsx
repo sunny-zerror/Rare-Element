@@ -38,7 +38,7 @@ const ShippingBox = ({ user }) => {
                     {
                         expandForm && (
                             <div onClick={() => setExpandForm(false)} className="settings__link">
-                                <p className="underline uppercase"> Use saved address</p>
+                                <p className="underline uppercase text-base"> Use saved address</p>
                             </div>
                         )
                     }
