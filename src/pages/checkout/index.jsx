@@ -28,8 +28,8 @@ const Checkout = () => {
     return (
         <>
             <div className="checkout_section">
-                
-                <p className=" text-3xl bold uppercase checkout_heading">Checkout</p>
+                <div className="checkout_section_inner">
+                <h2 className=" text-2xl checkout_heading">Checkout</h2>
 
                 <div className="checkout_Wrapper">
 
@@ -41,16 +41,16 @@ const Checkout = () => {
 
                         <BillingBox user={user} />
 
-                        <OrderSummaryBox user={user} quantity={quantity} setQuantity={setQuantity} />
 
                     </div>
 
                     <div className="checkout_summaryContainer">
 
-                        <AmountTotalBox quantity={quantity} />
+                        <AmountTotalBox user={user} quantity={quantity} setQuantity={setQuantity}  />
 
                     </div>
 
+                </div>
                 </div>
 
             </div>

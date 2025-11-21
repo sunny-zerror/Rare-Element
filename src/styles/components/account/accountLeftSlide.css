@@ -8,7 +8,7 @@
   padding-right: 1rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 750px) {
   .accountLeftSlide {
     width: 30rem;
     gap: 5rem;
@@ -41,7 +41,7 @@
   display: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 750px) {
   .accountLeftSlide_navItem_hidden {
     display: block;
   }
@@ -73,7 +73,7 @@
   justify-content: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 750px) {
   .accountLeftSlide_signoutBtn {
     width: 100%;
   }

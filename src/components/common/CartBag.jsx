@@ -1,8 +1,9 @@
-import { RiCloseLine } from '@remixicon/react';
+import { RiCloseLine, RiDeleteBinLine } from '@remixicon/react';
 import gsap from 'gsap';
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import GreenBoxBtn from '../buttons/GreenBoxBtn';
+import { ProductsData } from '@/utils/ProductsData';
 
 const CartBag = ({ openCartBag, setOpenCartBag, headerOverlayRef }) => {
 
@@ -12,7 +13,7 @@ const CartBag = ({ openCartBag, setOpenCartBag, headerOverlayRef }) => {
                 const tedv = gsap.timeline();
                 tedv.to(".cartBag_openBagParent", {
                     opacity: 1,
-                    height: "40rem",
+                    right: "0",
                     ease: "power2.out",
                     duration: 0.5
                 })
@@ -25,7 +26,7 @@ const CartBag = ({ openCartBag, setOpenCartBag, headerOverlayRef }) => {
                 const dsc = gsap.timeline();
                 dsc.to(".cartBag_openBagParent", {
                     opacity: 0,
-                    height: 0,
+                    right: "-100%",
                     ease: "power2.out",
                     duration: 0.5
                 })
@@ -41,7 +42,7 @@ const CartBag = ({ openCartBag, setOpenCartBag, headerOverlayRef }) => {
                 const tedv = gsap.timeline();
                 tedv.to(".cartBag_openBagParent", {
                     opacity: 1,
-                    right: "2rem",
+                    right: "0rem",
                     ease: "power2.out",
                     duration: 0.5
                 })
@@ -73,53 +74,69 @@ const CartBag = ({ openCartBag, setOpenCartBag, headerOverlayRef }) => {
             <div className="cartBag_openBagParent">
                 <div className="cartBag_bagHeader">
                     <div className="cartBag_bagHeaderLeft">
-                        <p className="cartBag_bagTitle text-sm">Bag</p>
-                        <p className="cartBag_bagCount text-sm">3</p>
+                        <h2 className="cartBag_bagTitle text-2xl">Cart</h2>
+                        <p className="cartBag_bagCount text-base"> (3) </p>
                     </div>
                     <div
                         onClick={() => { setOpenCartBag(false) }}
                         className="cartBag_menuHeaderClose">
-                        <RiCloseLine size={14} />
+                        <RiCloseLine size={14} className='close_icon' />
                     </div>
                 </div>
 
+                {/* empty cart bag */}
+
+                {/* <div className="empty_cart_box">
+                        <p className='text-lg'>There are currently no items in your bag.</p>
+                    </div> */}
+
+                {/* bag scroll */}
                 <div data-lenis-prevent className="cartBag_bagScroll">
-                    {[1, 2, 3].map((_, index) => (
+                    {ProductsData.slice(0, 3).map((item, index) => (
                         <div key={index} className="cartBag_bagItem">
                             <div className="cartBag_bagItemInner">
                                 <div className="cartBag_bagImageWrapper">
-                                    <img
-                                        className="cartBag_bagImage"
-                                        src="http://localhost:3000/images/homepage/category/earings.svg"
-                                        alt=""
-                                    />
+                                    <Link onClick={() => setOpenCartBag(false)} key={index} href={`/products/${item.slug}`} className='cartBag_bagImage'>
+                                        <img
+                                            className="cartBag_bagImage"
+                                            src={item.hoverImage}
+                                            alt=""
+                                        />
+                                    </Link>
                                 </div>
                                 <div className="cartBag_bagItemDetails">
                                     <div className="cartBag_bagItemTop">
                                         <div>
-                                            <p className="cartBag_itemName text-base">Product Name</p>
-                                            <p className="cartBag_itemSize text-sm">Size</p>
+                                            <p className="cartBag_itemName text-base">{item.title}</p>
+                                            <p className="cartBag_itemSize text-sm">Color - Gold</p>
+                                            <p className="cartBag_itemSize text-sm">Size - 16</p>
+
                                         </div>
-                                        <p className='text-base'>₹ 599</p>
+                                        <p className='text-xl'>₹ {item.price}</p>
                                     </div>
                                     <div className="cartBag_bagItemBottom">
-                                        <div className="cartBag_qtyControl text-base">
-                                            <p>−</p>
+                                        <div className="cartBag_qtyControl text-lg">
+                                            <div className="cartBag_qtyControl_dec">
+                                                <p>−</p>
+                                            </div>
                                             <p>1</p>
-                                            <p>+</p>
+                                            <div className="cartBag_qtyControl_inc">
+                                                <p>+</p>
+                                            </div>
                                         </div>
                                         <div className="cartBag_removeButton">
-                                            <p className="cartBag_removeText underline text-xs">Remove</p>
+                                            <RiDeleteBinLine size={16} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     ))}
                 </div>
 
                 <div className="cartBag_bagFooter">
-                    <div className="cartBag_totalRow text-xl">
+                    <div className="cartBag_totalRow text-2xl">
                         <p>Total</p>
                         <p>₹ 1,797</p>
                     </div>
@@ -127,12 +144,9 @@ const CartBag = ({ openCartBag, setOpenCartBag, headerOverlayRef }) => {
                         <div
                             onClick={() => { setOpenCartBag(false) }}
                             className="cartBag_checkoutButton">
-                            <GreenBoxBtn text={"Checkout"} />
+                            <GreenBoxBtn text={"Proceed to Checkout"} />
                         </div>
                     </Link>
-                    <div className="cartBag_continueShopping">
-                        <p className="cartBag_continueText text-sm underline">Continue Shopping</p>
-                    </div>
                 </div>
             </div>
 

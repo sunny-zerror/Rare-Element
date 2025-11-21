@@ -30,6 +30,13 @@
   background-color: #174d38;
   border: 1px solid #174d38;
   color: white;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+}
+.green_box_btn:hover{
+  background-color: transparent;
+  border: 1px solid #174d38;
+  color: #174d38; 
+  font-weight: 1000 !important;
 }
 .green_box_btn p {
   transform: translateY(0.1rem);

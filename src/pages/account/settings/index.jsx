@@ -51,10 +51,9 @@ const Settings = () => {
                     <div className="checkout_thin_line"></div>
                     <div className="settings__block ">
                         <div>
-                            <p>{user.email}</p>
-                            <p>{user.phone}</p>
                             <p>{user.name}</p>
-                            <p>{user.dob}</p>
+                            <p>{user.phone}</p>
+                            <p>{user.email}</p>
                         </div>
                         {!expandDetailForm && (
                             <div onClick={() => setExpandDetailForm(true)} className="settings__link">
