@@ -1,7 +1,7 @@
 import React from "react";
 import SeoHeader from "@/components/seo/SeoHeader";
 
-const shippingReturns = () => {
+const shippingReturns = ({ meta }) => {
   return (
     <>
       <SeoHeader meta={meta} />
