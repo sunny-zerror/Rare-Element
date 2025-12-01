@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { formatePrice, renderVariants } from "@/utils/Util";
+import { RiDeleteBinLine } from "@remixicon/react";
 const CartItem = ({
   item,
   handleAddItem,
@@ -34,17 +35,17 @@ const CartItem = ({
     <div className="cartBag_bagItem">
       <div className="cartBag_bagItemInner">
         <div className="cartBag_bagImageWrapper">
-          <Link onClick={() => setOpenCartBag(false)} key={index} href={`/products/${item.slug}`} className='cartBag_bagImage'>
+          <div className='cartBag_bagImage'>
             <img
               className="cartBag_bagImage"
               src={item?.asset?.path || ""}
               alt={item?.asset?.altText || ""}
             />
-          </Link>
+          </div>
         </div>
         <div className="cartBag_bagItemDetails">
           <div className="cartBag_bagItemTop">
-            <div>
+            <div className="cartBag_itemHead">
               <p className="cartBag_itemName text-base">{item?.name}</p>
               {renderVariants(item?.variantDetail?.selectedOptions || [])}
 
