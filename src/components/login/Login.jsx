@@ -1,9 +1,60 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { RiEyeLine, RiEyeOffLine } from "@remixicon/react";
 import GreenBoxBtn from "../buttons/GreenBoxBtn";
+import { useLazyQuery } from "@apollo/client/react";
+import { LOGIN_USER } from "@/graphql";
+import { toast } from "react-toastify";
+import { useAuthStore } from "@/store/auth-store";
+import { AuthCookies } from "@/utils/AuthCookies";
+
+// Schema validation
+const LoginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
+});
+
 
 const Login = ({ setToggle }) => {
+  const router = useRouter();
   const [visible, setVisible] = useState(false);
+  const { setUser, setIsLoggedIn } = useAuthStore((state) => state);
+  const [loginUser, { loading }] = useLazyQuery(LOGIN_USER, { fetchPolicy: "network-only" });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(LoginSchema),
+  });
+
+
+  const onSubmit = async (formData) => {
+    try {
+      const { data } = await loginUser({ variables: formData });
+      const { user, userToken } = data?.userLogin || {};
+      if (userToken && user) {
+        localStorage.removeItem("visitorId");
+        localStorage.removeItem("visitorExpire");
+        AuthCookies.remove(); // clear previous
+        AuthCookies.set(userToken);
+        setUser(user);
+        setIsLoggedIn(true);
+        toast.success("Login successful!");
+        router.back();
+      } else {
+        toast.error("Invalid login credentials.");
+      }
+    } catch (error) {
+      console.error("Login error:", err);
+      const gqlMessage = err?.graphQLErrors?.[0]?.message;
+      toast.error(gqlMessage || err.message || "Login failed");
+    }
+  };
 
   return (
     <div className="left-two">
@@ -14,14 +65,18 @@ const Login = ({ setToggle }) => {
           </p>
         </div>
 
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="inp-rel">
             <input
               className="login-inp text-lg"
               placeholder="Email"
               type="email"
               required
+              {...register("email")}
             />
+            {errors?.email && (
+              <div className="error-p">{errors?.email?.message || ""}</div>
+            )}
           </div>
 
           <div className="pass-cont inp-rel">
@@ -36,10 +91,14 @@ const Login = ({ setToggle }) => {
               type={visible ? "text" : "password"}
               placeholder="Password"
               required
+              {...register("password")}
             />
+            {errors?.password && (
+              <div className="error-p">{errors?.password?.message || ""}</div>
+            )}
           </div>
 
-         <GreenBoxBtn text={"Login"} />
+          <GreenBoxBtn title={"Login"} loading={loading} />
         </form>
 
         <div className="not-up">

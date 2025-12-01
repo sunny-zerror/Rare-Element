@@ -1,316 +1,187 @@
-import { useGSAP } from '@gsap/react'
+import React, { useEffect, useMemo, useState } from "react";
 import gsap from 'gsap'
-import React, { useEffect, useState } from 'react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import ShopCard from '@/components/common/ShopCard';
-import { ProductsData } from '@/utils/ProductsData';
-import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { useRouter } from "next/router";
+import { useVisitor } from "@/hooks/useVisitor";
+import { createApolloClient } from '@/lib/apolloClient';
+import { useMutation } from '@apollo/client/react';
+import { useAuthStore } from '@/store/auth-store';
+import { useCartStore } from '@/store/cart-store';
+import { Const, ProductStatus } from '@/utils/Constant';
+import { ADD_ITEM_TO_CART, CREATE_BACK_IN_STOCK_REQUEST, GET_PRODUCT_BY_ID, GET_PRODUCTS } from "@/graphql";
+import SeoHeader from "@/components/seo/SeoHeader";
+import ProductImageGrid from '@/components/product/ProductImageGrid';
+import ProductContant from '@/components/product/ProductContant';
+import ProductListGrid from "@/components/product/ProductListGrid";
+import ProductBanner from "@/components/product/ProductBanner";
 gsap.registerPlugin(ScrollTrigger);
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, A11y, Autoplay, Pagination } from "swiper/modules";
+const ProductDetail = ({ meta, data, productList }) => {
+  const router = useRouter();
+  const { visitorId } = useVisitor();
+  const basePrice = useMemo(
+    () => (data?.discountedPrice > 0 ? data.discountedPrice : data?.price || 0),
+    [data]
+  );
+  const [finalPrice, setFinalPrice] = useState(basePrice);
+  const [variantMatched, setVariantMatched] = useState(null);
+  const [cartBtn, setCartBtn] = useState(false);
+  const { token, user, isLoggedIn } = useAuthStore((state) => state);
+  const { openCart } = useCartStore((state) => state);
+  const [addItemToCart, { loading }] = useMutation(ADD_ITEM_TO_CART);
+  const [createNotifyRequest, { loading: notifyLoading }] = useMutation(CREATE_BACK_IN_STOCK_REQUEST);
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { useRouter } from 'next/router';
-import { usePathname } from 'next/navigation';
-import GreenBoxBtn from '@/components/buttons/GreenBoxBtn';
+  useEffect(() => {
+    gsap.set(".MobileImageSlider_thumbnails, .MobileImageSlider_swiper, .MobileImageSlider_nav, .productDetail_info ,.productDetail_options ,.productDetail_addtocart,.accordion_container", {
+      opacity: 0
+    })
+    gsap.to(".MobileImageSlider_thumbnails, .MobileImageSlider_swiper, .MobileImageSlider_nav, .productDetail_info ,.productDetail_options ,.productDetail_addtocart,.accordion_container", {
+      opacity: 1,
+      delay: 0.5,
+      stagger: 0.1,
+      duration: 1,
+      ease: "ease-secondary"
+    })
+  }, [router?.query?.slug])
 
-const ProductDetail = () => {
-    const pathname = usePathname()
-    const router = useRouter();
-    const { slug } = router?.query;
+  const handleAddToCart = async () => {
+    if (!cartBtn || variantMatched.stockStatus === Const.OUT_OF_STOCK) return;
 
-    const product = ProductsData.find((item) => item.slug === slug);
+    try {
+      const productId = router?.query?.slug;
+      if (!productId) throw new Error("Product ID not found");
 
-    const [openIndex, setOpenIndex] = useState(null);
+      const payload = {
+        input: {
+          productId,
+          variantDetail: variantMatched,
+          ...(isLoggedIn && token ? { token } : {}),
+        },
+        ...(!isLoggedIn && visitorId ? { guestId: visitorId } : {}),
+      };
 
-    const [openDropdown, setOpenDropdown] = useState(null); // "color" | "size" | null
+      await addItemToCart({ variables: payload });
+      openCart();
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || "Failed to add item to cart");
+    }
+  };
 
-    const toggleDropdown = (type) => {
-        setOpenDropdown((prev) => (prev === type ? null : type));
-    };
+  const handleNotifyMe = async () => {
+    if (variantMatched.stockStatus !== Const.OUT_OF_STOCK) return;
+    if (!isLoggedIn) return router.push("/login");
+    try {
+      const productId = router?.query?.slug;
+      if (!productId) throw new Error("Product ID not found");
 
-    const handleToggle = (index) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
+      const payload = {
+        input: {
+          productId,
+          email: user?.email,
+          userId: user?._id,
+          variantId: variantMatched?.variantDetailId,
+        },
+      };
 
-    const [swiperInstance, setSwiperInstance] = useState(null);
-    const [activeIndex, setActiveIndex] = useState(0);
-    useEffect(() => {
-        if (swiperInstance && product?.images?.length) {
-            swiperInstance.update();
-            swiperInstance.slideToLoop(0, 0);
-            setActiveIndex(0);
-        }
-    }, [swiperInstance, product]);
+      await createNotifyRequest({ variables: payload });
+      toast.success("You’ll be notified when this item is back in stock!");
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || "Failed to notify");
+    }
+  };
 
-    const handleThumbnailClick = (index) => {
-        if (swiperInstance) {
-            swiperInstance.slideToLoop(index);
-        }
-    };
-
-
-    useEffect(() => {
-        gsap.set(".MobileImageSlider_thumbnails, .MobileImageSlider_swiper, .MobileImageSlider_nav, .productDetail_info ,.productDetail_options ,.productDetail_addtocart,.accordion_container", {
-            opacity: 0
-        })
-        gsap.to(".MobileImageSlider_thumbnails, .MobileImageSlider_swiper, .MobileImageSlider_nav, .productDetail_info ,.productDetail_options ,.productDetail_addtocart,.accordion_container", {
-            opacity: 1,
-            delay: 0.5,
-            stagger: 0.1,
-            duration: 1,
-            ease: "ease-secondary"
-        })
-    }, [pathname])
-
-
-    return (
-        <>
-            <div className="productDetail_main padding">
-
-                <div className="productDetail_left">
-
-                    <div className="MobileImageSlider_container">
-                        {/* Thumbnails */}
-                        <div className="MobileImageSlider_thumbnails">
-                            {product?.images.map((image, index) => (
-                                <div
-                                    key={index}
-                                    onMouseEnter={() => handleThumbnailClick(index)}
-                                    className={`MobileImageSlider_thumbnail ${activeIndex === index
-                                        ? "MobileImageSlider_thumbnail--active"
-                                        : "MobileImageSlider_thumbnail--inactive"
-                                        }`}
-                                >
-                                    <img src={image} alt={`Product Image ${index + 1}`} />
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Swiper */}
-                        {product?.images?.length > 0 && (
-                            <Swiper
-                                modules={[Navigation, A11y, Autoplay, Pagination]}
-                                spaceBetween={0}
-                                slidesPerView={1}
-                                speed={800}
-                                navigation={true}
-                                loop
-                                className="MobileImageSlider_swiper"
-                                autoplay={{ delay: 4500, disableOnInteraction: false }}
-                                onSwiper={setSwiperInstance}
-                                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-                            >
-                                {product?.images.map((image, index) => (
-                                    <SwiperSlide key={index} className="MobileImageSlider_slide">
-                                        <img
-                                            src={image}
-                                            alt={`Product Image ${index + 1}`}
-                                            className="MobileImageSlider_slideImage"
-                                        />
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        )}
-                        <div className="MobileImageSlider_nav">
-                            <button
-                                className="MobileImageSlider_arrow left"
-                                onClick={() => swiperInstance?.slidePrev()}
-                            >
-                                <img src="/icons/arrowLeft.svg" alt="" />
-                            </button>
-                            <button
-                                className="MobileImageSlider_arrow right"
-                                onClick={() => swiperInstance?.slideNext()}
-                            >
-                                <img src="/icons/arrowRight.svg" alt="" />
-
-                            </button>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-
-                <div className="productDetail_right">
-                    <div className="productDetail_sticky">
-                        <div className="productDetail_info">
-                            <div className="productDetail_info_left">
-                                <Link scroll={false} href="/products">
-                                    <p className="productDetail_category text-lg  ">RINGS</p>
-                                </Link>
-                                <h2 className="productDetail_title text-xl ">{product?.title}</h2>
-                                <p className="productDetail_price text-xl ">₹  {product?.price}</p>
-                            </div>
-                        </div>
-                        <div className="productDetail_options">
-                            <div className="productDetail_row">
-                                <div
-                                    className={`productDetail_select ${openDropdown === "color" ? "active" : ""
-                                        }`}
-                                >
-                                    <button className="text-base" onClick={() => toggleDropdown("color")}>
-                                        <p className="productDetail_select_inner_elem">Silver</p>
-                                        <img
-                                            className={`productDetail_quantity_icon productDetail_select_inner_elem_img ${openDropdown === "color" ? "rotate_icon" : ""
-                                                }`}
-                                            src="/icons/LongArrowDown.svg"
-                                            alt=""
-                                        />
-                                    </button>
-                                </div>
-
-                                <div
-                                    className={`productDetail_select ${openDropdown === "size" ? "active" : ""
-                                        }`}
-                                >
-                                    <button className="text-base" onClick={() => toggleDropdown("size")}>
-                                        <p className="productDetail_select_inner_elem">Medium</p>
-                                        <img
-                                            className={`productDetail_quantity_icon productDetail_select_inner_elem_img ${openDropdown === "size" ? "rotate_icon" : ""
-                                                }`}
-                                            src="/icons/LongArrowDown.svg"
-                                            alt=""
-                                        />
-                                    </button>
-                                </div>
-
-                            </div>
-
-                            {/* Dropdowns */}
-                            <div className="productDetail_selection_wrapper">
-                                {/* Colors */}
-                                <div
-                                    className={`productDetail_selction ${openDropdown === "color" ? "open" : ""
-                                        }`}
-                                >
-                                    <div className="color_selection">
-                                        {Array.isArray(product?.colors) &&
-                                            product.colors.map((item, index) => (
-                                                <div key={index} className="select_color_paren">
-                                                    <div className="color_div">
-                                                        <div
-                                                            style={{ backgroundColor: item.code }}
-                                                            className="color_inner"
-                                                        ></div>
-                                                    </div>
-                                                    <p className="text-base capitalize">{item.name}</p>
-                                                </div>
-                                            ))}
-                                    </div>
-                                </div>
-
-                                {/* Sizes */}
-                                <div
-                                    className={`productDetail_selction ${openDropdown === "size" ? "open" : ""
-                                        }`}
-                                >
-                                    <a href="" className='text-xs underline size_link uppercase'>Size guide</a>
-                                    <div className="color_selection">
-                                        {Array.isArray(product?.sizes) &&
-                                            product.sizes.map((item, index) => (
-                                                <div key={index} className="select_color_paren">
-                                                    <div className="color_div">
-                                                        <div className="color_inner center">
-                                                            <p className="text-base">{item}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div className="productDetail_quantity text-xl">
-                                <button className="productDetail_quantity_btn">
-                                    <img className='productDetail_quantity_icon' src="/icons/minus.svg" alt="" />
-                                </button>
-                                <p>1</p>
-                                <button className="productDetail_quantity_btn">
-                                    <img className='productDetail_quantity_icon' src="/icons/plus.svg" alt="" />
-                                </button>
-                            </div>
-                        </div>
-                        <div className="productDetail_addtocart">
-                            <GreenBoxBtn text={"Add To Cart"} />
-                            <div className="productDetail_btn_icon center">
-                                <div className="icon_pr">
-                                    <img className='  short_links_icon_heart ' src="/icons/greenHeart.svg" alt="" />
-                                    <img className=' short_links_icon_heart_hover' src="/icons/heartFill.svg" alt="" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="accordion_container">
-                            {product?.accordionData.map((item, index) => (
-                                <div className="accordion_item" key={index}>
-                                    <button
-                                        className="accordion_header"
-                                        onClick={() => handleToggle(index)}
-                                    >
-                                        <p className="text-sm accordion_title uppercase bold">{item.title}</p>
-
-                                        <img
-                                            className={`productDetail_quantity_icon ${openIndex === index ? "rotated" : ""}`}
-                                            src="/icons/LongArrowRight.svg"
-                                            alt=""
-                                        />
-                                    </button>
-
-                                    <div
-                                        className={`accordion_content ${openIndex === index ? "open" : ""}`}
-                                    >
-                                        <p className="text-base">{item.content}</p>
-                                    </div>
-                                </div>
-                            ))}
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div className="suggestion_parent padding">
-                <div className="suggestion_parent_header">
-                    <p className='text-base thin uppercase'>you may also like </p>
-                </div>
-                <div className="suggestion_scroll relative">
-                    {ProductsData.slice(0, 6)?.map((item, i) => (
-                        <Link key={i} scroll={false} href={`/products/${item.slug}`}>
-                            <div className="suggestion_shopcard">
-                                <ShopCard item={item} />
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            </div>
-
-            <div className="padding">
-                <div className="image_banner_paren">
-                    <div className="image_banner_paren_left">
-                        <img className='cover' src="/images/productpage/giftsHeroimg.svg" alt="" />
-                    </div>
-                    <div className="image_banner_paren_right">
-                        <div className="image_banner_paren_left_txt">
-                            <h2 className='text-3xl uppercase'>Iconic gifts</h2>
-                            <p className='text-xl thin'>From everyday classics to statement <br /> creations, our jewellery reflects beauty that <br /> endures beyond trends.</p>
-                        </div>
-                        <button>
-                            <p className='text-lg bold'>Shop Now</p>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-        </>
-    )
+  return (
+    <>
+      <SeoHeader meta={meta} />
+      <div className="productDetail_main padding">
+        <ProductImageGrid data={data?.assets || []} />
+        <ProductContant
+          data={data || {}}
+          finalPrice={finalPrice}
+          cartBtn={cartBtn}
+          loading={loading}
+          notifyLoading={notifyLoading}
+          isOutOfStock={variantMatched?.stockStatus === Const.OUT_OF_STOCK}
+          setFinalPrice={setFinalPrice}
+          setCartBtn={setCartBtn}
+          setVariantMatched={setVariantMatched}
+          handleAddToCart={handleAddToCart}
+          handleNotifyMe={handleNotifyMe}
+        />
+      </div>
+      <ProductListGrid title="You may also like" data={productList} />
+      <ProductBanner />
+    </>
+  )
 }
 
-export default ProductDetail
+export default ProductDetail;
+
+export async function getServerSideProps({ params }) {
+  const slug = params?.slug || "";
+  const meta = {
+    title: "Shop All Jewellery – Nahara Fine Jewellery Collection",
+    description: "Explore Nahara’s full jewellery collection including rings, earrings, necklaces, bracelets, and anklets crafted in gold, diamonds, and silver.",
+    keywords: [
+      "jewellery online",
+      "Nahara products",
+      "rings earrings bracelets",
+      "gold and diamond jewellery"
+    ],
+    primaryKeywords: ["jewellery online"],
+    author: "Nahara",
+    robots: "index, follow",
+    og: {
+      "title": "Shop All Jewellery – Nahara Fine Jewellery Collection",
+      "description": "Browse the complete Nahara jewellery collection.",
+    },
+    twitter: {
+      "card": "summary_large_image",
+      "title": "Shop All Jewellery – Nahara Fine Jewellery Collection",
+      "description": "Explore Nahara’s jewellery collection.",
+    }
+  };
+
+  try {
+    const client = createApolloClient();
+    const queries = [
+      client.query({
+        query: GET_PRODUCT_BY_ID,
+        variables: { slug },
+      }),
+      client.query({
+        query: GET_PRODUCTS,
+        variables: {
+          offset: 0,
+          limit: 5,
+          filters: {
+            status: ProductStatus.PUBLISHED,
+            slugNotInclude: slug,
+          },
+        },
+      }),
+    ].filter(Boolean);
+
+    const [productRes, productListRes] = await Promise.all(queries);
+    return {
+      props: {
+        meta: productRes?.data?.getClientSideProductById?.meta || meta,
+        data: productRes?.data?.getClientSideProductById || {},
+        productList:
+          productListRes?.data?.getClientSideProducts?.products || [],
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return {
+      props: {
+        meta,
+        data: {},
+        productList: [],
+      },
+    };
+  }
+}

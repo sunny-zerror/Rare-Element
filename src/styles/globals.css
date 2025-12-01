@@ -10,6 +10,9 @@ body::-webkit-scrollbar {
   user-select: none;
   box-sizing: border-box;
 }
+.w-full {
+  width: 100%!important;
+}
 button {
   background-color: transparent;
   border: transparent;

@@ -1,15 +1,15 @@
 import React from 'react';
-import ShopCard from '../common/ShopCard';
-import { ProductsData } from '@/utils/ProductsData';
+import Link from 'next/link';
+import ProductCard from '@/components/common/ProductCard';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { getProductPriceLabel } from '@/utils/Util';
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Link from 'next/link';
 
-const FeaturedCollection = () => {
+const FeaturedCollection = ({ data }) => {
   return (
     <div className="featured_collections_section">
       <div className="featured_header text-center mb-6">
@@ -32,11 +32,16 @@ const FeaturedCollection = () => {
           }}
           className="mySwiper"
         >
-          {ProductsData?.map((item, i) => (
-            <SwiperSlide key={i} className="featured_shopcard">
-              <Link scroll={false} href={`/products/${item.slug}`}>
+          {data?.map((item) => (
+            <SwiperSlide key={item?._id} className="featured_shopcard">
+              <Link scroll={false} href={`/products/${item?.slug || item?._id}`}>
                 <div className="featured_shopcard">
-                  <ShopCard item={item} />
+                  <ProductCard
+                    key={item?._id}
+                    name={item?.name || ""}
+                    price={getProductPriceLabel(item?.variants, item?.discountedPrice)}
+                    assets={item?.assets || []}
+                  />
                 </div>
               </Link>
             </SwiperSlide>

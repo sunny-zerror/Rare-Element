@@ -1,37 +1,17 @@
-import { useGSAP } from '@gsap/react'
+
+import React, { useEffect } from 'react'
 import gsap from 'gsap'
 import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { usePathname } from 'next/navigation';
+import { useAuthStore } from "@/store/auth-store";
+import { MenuData } from '@/helpers/MenuData';
 import CustomEase from 'gsap/dist/CustomEase';
-import CartBag from './CartBag';
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
-const navLinks = [
-  {
-    title: "rings",
-    link: "/products"
-  },
-  {
-    title: "earings",
-    link: "/products"
-  },
-  {
-    title: "necklaces",
-    link: "/products"
-  },
-  {
-    title: "bracelets",
-    link: "/products"
-  },
-  {
-    title: "anklets",
-    link: "/products"
-  },
-]
-const Header = ({setOpenCartBag}) => {
+const Header = ({ openCart }) => {
   const pathname = usePathname()
+  const { isLoggedIn } = useAuthStore((state) => state);
 
   useEffect(() => {
     if (window.innerWidth < 750) return
@@ -99,7 +79,7 @@ const Header = ({setOpenCartBag}) => {
         </div>
         <div className="nav_links">
           {
-            navLinks.map((item, index) => (
+            MenuData.map((item, index) => (
               <Link scroll={false} href={item.link} key={index}>
                 <p className='text-sm  hover_text'>{item.title}</p>
               </Link>
@@ -107,13 +87,13 @@ const Header = ({setOpenCartBag}) => {
           }
         </div>
         <div className="short_links">
-          <Link scroll={false} href="/account/wishlist">
+          <Link scroll={false} href={isLoggedIn ? "/account/wishlist" : "/login"}>
             <img className='short_links_icon' src="/icons/heart.svg" alt="" />
           </Link>
-          <Link scroll={false} href="/login">
+          <Link scroll={false} href={isLoggedIn ? "/account/settings" : "/login"}>
             <img className='short_links_icon' src="/icons/profile.svg" alt="" />
           </Link>
-          <button onClick={() => setOpenCartBag(true)}>
+          <button onClick={openCart}>
             <img className='short_links_icon' src="/icons/cart.svg" alt="" />
           </button>
         </div>

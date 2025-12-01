@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Image from "next/image";
+import SeoHeader from "@/components/seo/SeoHeader";
 import Login from "@/components/login/Login";
 import Signup from "@/components/login/Signup";
 
@@ -7,6 +7,7 @@ const UserLogin = ({ meta }) => {
   const [toggle, setToggle] = useState(false);
   return (
     <>
+      <SeoHeader meta={meta} />
       <div className="login-cont">
         <div
           className="login-left-cont"
@@ -38,3 +39,24 @@ const UserLogin = ({ meta }) => {
 };
 
 export default UserLogin;
+
+export async function getStaticProps() {
+  const meta = {
+    title: "Login – Access Your Nahara Jewellery Account",
+    description: "Login to your Nahara account to track orders, manage information, and access exclusive offers.",
+    keywords: ["Nahara login", "customer login", "jewellery account login"],
+    primaryKeywords: ["Nahara login"],
+    author: "Nahara",
+    robots: "noindex, nofollow",
+    og: {
+      title: "Login – Nahara Jewellery",
+      description: "Sign in to your Nahara account.",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Login – Nahara Jewellery",
+      description: "Access your Nahara account.",
+    }
+  };
+  return { props: { meta } };
+}

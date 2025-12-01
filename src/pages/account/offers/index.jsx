@@ -1,7 +1,7 @@
-import { RiArrowRightSLine } from '@remixicon/react'
-import Link from 'next/link'
 import React from 'react'
-import AccountLeftSlide from '@/components/account/AccountLeftSlide'
+import SeoHeader from '@/components/seo/SeoHeader';
+import AccountLayout from '@/components/layouts/AccountLayout';
+import AccountBreadcrumb from '@/components/account/AccountBreadcrumb';
 
 
 const offers = [
@@ -22,24 +22,14 @@ const offers = [
   },
 ];
 
-const Purchases = () => {
-    return (
-        <div className="purchases_wrapper">
-
-            <div className="purchases_leftSlide">
-                <AccountLeftSlide />
-            </div>
-
-            <div className="purchases_breadcrumb">
-                <Link href="/account">
-                    <p className="purchases_breadcrumbLink text-sm">Account</p>
-                </Link>
-                <RiArrowRightSLine size={14} />
-                <p className='text-sm'>Offers</p>
-            </div>
-
-            <div className="purchases_rightSection">
-                          <h2 className="account_heading text-xl">Account and Rewards</h2>
+const Purchases = ({ meta }) => {
+  return (
+    <>
+      <SeoHeader meta={meta} />
+      <AccountLayout>
+        <AccountBreadcrumb title={"Offers"} />
+        <div className="purchases_rightSection">
+          <h2 className="account_heading text-xl">Account and Rewards</h2>
 
           <div className="account_gridBox">
             {offers.map((offer, index) => (
@@ -60,9 +50,40 @@ const Purchases = () => {
               </div>
             ))}
           </div>
-            </div>
         </div>
-    )
+      </AccountLayout>
+    </>
+  )
 }
 
 export default Purchases
+
+export async function getStaticProps() {
+  const meta = {
+    title: "Exclusive Offers | Best Deals on Jewellery – Nahara",
+    description:
+      "Discover exclusive discounts and offers on premium handcrafted jewellery. Limited-time deals on rings, earrings, necklaces, bracelets and more.",
+    keywords: [
+      "jewellery offers",
+      "discounts",
+      "Nahara deals",
+      "exclusive jewellery sale"
+    ],
+    primaryKeywords: ["offers", "discounts"],
+    author: "Nahara",
+    robots: "index,follow",
+    og: {
+      title: "Exclusive Offers | Nahara",
+      description:
+        "Explore the latest jewellery deals and exclusive savings at Nahara.",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Exclusive Offers | Nahara",
+      description:
+        "Discover premium jewellery at special discounted prices.",
+    }
+  };
+
+  return { props: { meta } };
+}

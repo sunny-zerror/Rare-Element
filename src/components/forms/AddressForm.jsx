@@ -43,7 +43,7 @@ const AddressForm = ({ user, expandAddressForm, setExpandAddressForm }) => {
                         <input type="text" placeholder="" defaultValue={user.address.country} name="" id="" />
                         <RiCheckLine className='check_icon' />
                     </div>
-                    <GreenBoxBtn text='Save' />
+                    <GreenBoxBtn title='Save' />
 
                     <button type='button' onClick={() => setExpandAddressForm(false)} className='cancel_form_btn'>
                         <p>

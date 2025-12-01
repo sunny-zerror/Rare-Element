@@ -1,9 +1,11 @@
-import ContactForm from '@/components/forms/ContactForm'
 import React from 'react'
+import SeoHeader from '@/components/seo/SeoHeader'
+import ContactForm from '@/components/forms/ContactForm'
 
-const index = () => {
+const ContactSupport = ({ meta }) => {
   return (
     <>
+      <SeoHeader meta={meta} />
       <section id="contact_form" >
         <div className=""></div>
         <div className="animate-item">
@@ -40,4 +42,30 @@ const index = () => {
   )
 }
 
-export default index
+export default ContactSupport
+
+export async function getStaticProps() {
+  const meta = {
+    title: "Contact Us – Nahara Fine Jewellery Support",
+    description: "Need help? Contact Nahara for support, product inquiries, custom jewellery requests, and order assistance.",
+    keywords: [
+      "Nahara contact",
+      "jewellery customer support",
+      "Nahara help"
+    ],
+    primaryKeywords: ["Nahara contact"],
+    author: "Nahara",
+    robots: "index, follow",
+    og: {
+      title: "Contact Us – Nahara Fine Jewellery Support",
+      description: "Reach out to the Nahara team for assistance and inquiries.",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Contact Us – Nahara Fine Jewellery Support",
+      description: "Need assistance? Contact Nahara support.",
+    }
+  };
+
+  return { props: { meta } };
+}

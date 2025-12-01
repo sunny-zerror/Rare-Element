@@ -4,17 +4,14 @@ import { Autoplay, Pagination, Controller } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
-
-import { ProductsData } from "@/utils/ProductsData";
 import { usePathname } from "next/navigation";
-
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useGSAP } from "@gsap/react";
 import GreenBoxBtn from "../buttons/GreenBoxBtn";
 gsap.registerPlugin(ScrollTrigger)
 
-const LookBook = () => {
+const LookBook = ({ data }) => {
 
     const leftSwiperRef = useRef(null);
     const rightSwiperRef = useRef(null);
@@ -41,7 +38,7 @@ const LookBook = () => {
                 const currentIndex = typeof right.realIndex === "number"
                     ? right.realIndex
                     : right.activeIndex || 0; // fallback
-                const prevIndex = (currentIndex - 1 + ProductsData.length) % ProductsData.length;
+                const prevIndex = (currentIndex - 1 + data.length) % data.length;
 
                 // Jump left to prevIndex instantly
                 left.slideToLoop(prevIndex, 0);
@@ -66,7 +63,7 @@ const LookBook = () => {
                     const left = leftSwiperRef.current;
                     const right = rightSwiperRef.current;
                     const currentIndex = right.realIndex ?? right.activeIndex ?? 0;
-                    const prevIndex = (currentIndex - 1 + ProductsData.length) % ProductsData.length;
+                    const prevIndex = (currentIndex - 1 + data.length) % data.length;
                     left.slideToLoop(prevIndex, 0);
                     try { right.autoplay.start(); } catch (e) { }
                     try { left.autoplay.start(); } catch (e) { }
@@ -76,7 +73,7 @@ const LookBook = () => {
 
         tryInit();
         // no cleanup required (we used timeouts that stop by themselves)
-    }, [ProductsData.length]);
+    }, [data.length]);
 
 
 
@@ -174,10 +171,10 @@ const LookBook = () => {
                         allowTouchMove={false}
                         className="lookbook_swiper_left"
                     >
-                        {ProductsData.map((item, index) => (
-                            <SwiperSlide key={index}>
+                        {data.map((item) => (
+                            <SwiperSlide key={item?._id}>
                                 <div className="lookbookSlider_card_image_left">
-                                    <img className="cover" src={item.hoverImage} alt="" />
+                                    <img className="cover" src={item?.assets?.[1]?.path || ""} alt={item?.assets?.[1]?.altText || ""} />
                                 </div>
                             </SwiperSlide>
                         ))}
@@ -203,18 +200,18 @@ const LookBook = () => {
                             allowTouchMove={false}
                             className="lookbook_swiper"
                         >
-                            {ProductsData.map((item, index) => (
-                                <SwiperSlide key={index} className="lookbookSlider_card">
+                            {data?.map((item) => (
+                                <SwiperSlide key={item?._id} className="lookbookSlider_card">
                                     <div className="lookbookSlider_card">
                                         <div className="lookbookSlider_card_image">
-                                            <img className="cover" src={item.hoverImage} alt="" />
+                                            <img className="cover" src={item?.assets?.[1]?.path || ""} alt={item?.assets?.[1]?.altText || ""} />
                                         </div>
                                         <p className="lookbookSlider_card_description uppercase text-xl">
-                                            {item.title}
+                                            {item?.name || ""}
                                         </p>
                                         <div className="center ">
                                             <div className="lookbook_button_paren">
-                                           <GreenBoxBtn text={"shop Now"} />
+                                                <GreenBoxBtn title={"shop Now"} href={`/products/${item?.slug || item?._id}`} />
                                             </div>
                                         </div>
                                     </div>

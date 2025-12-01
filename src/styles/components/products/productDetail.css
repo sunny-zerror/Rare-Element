@@ -270,7 +270,7 @@
   bottom: 0;
 }
 .productDetail_selction.open {
-  height: 6rem;
+  height: auto;
   /* padding-top: 1rem; */
 }
 

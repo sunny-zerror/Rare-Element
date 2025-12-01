@@ -30,7 +30,7 @@ const PasswordForm = ({ user, expandPasswordForm, setExpandPasswordForm }) => {
 
                         <RiCheckLine className='check_icon' />
                     </div>
-                    <GreenBoxBtn text='Save' />
+                    <GreenBoxBtn title='Save' />
 
                     <button type='button' onClick={() => setExpandPasswordForm(false)} className='cancel_form_btn'>
                         <p>

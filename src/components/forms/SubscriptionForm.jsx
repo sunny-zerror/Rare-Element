@@ -55,7 +55,7 @@ const SubscriptionForm = ({ user, expandSubscribeForm, setExpandSubscribeForm })
                     </div>
                 </div>
 
-                <GreenBoxBtn text='Save' />
+                <GreenBoxBtn title='Save' />
 
                 <button onClick={() => setExpandSubscribeForm(false)} className='cancel_form_btn'>
                     <p>

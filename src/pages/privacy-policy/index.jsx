@@ -1,8 +1,10 @@
 import React from "react";
+import SeoHeader from "@/components/seo/SeoHeader";
 
-const privacyPolicy = () => {
+const privacyPolicy = ({ meta }) => {
   return (
     <>
+      <SeoHeader meta={meta} />
       <div id="legal-page" className="text-lg">
         <h2 className=" text-2xl">Privacy Policy</h2>
         <div className="legal-container">
@@ -91,3 +93,24 @@ const privacyPolicy = () => {
 };
 
 export default privacyPolicy;
+
+export async function getStaticProps() {
+  const meta = {
+    title: "Privacy Policy – Nahara Jewellery",
+    description: "Review Nahara's privacy policy to understand how we collect, use, and protect your personal information.",
+    keywords: ["Nahara privacy policy", "data protection", "user privacy"],
+    primaryKeywords: ["Nahara privacy policy"],
+    author: "Nahara",
+    robots: "index, follow",
+    og: {
+      title: "Privacy Policy – Nahara Jewellery",
+      description: "Learn how we protect your data at Nahara.",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Privacy Policy – Nahara Jewellery",
+      description: "Understand Nahara’s privacy policy.",
+    }
+  };
+  return { props: { meta } };
+}

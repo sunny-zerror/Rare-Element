@@ -1,36 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
-import Footer from "../common/Footer";
-import Header from "../common/Header";
-import MobileHeader from "../common/MobileHeader";
-import CartBag from "../common/CartBag";
+import React, { useEffect, useRef } from "react";
+import { useCartStore } from "@/store/cart-store";
 import gsap from "gsap";
+import Header from "@/components/common/Header";
+import MobileHeader from "@/components/common/MobileHeader";
+import Footer from "@/components/common/Footer";
+import CartDrawer from "@/components/cart/CartDrawer";
 const Layout = ({ children }) => {
-  const [openCartBag, setOpenCartBag] = useState(false)
+  const { isCartOpen, openCart, closeCart } = useCartStore((state) => state);
   const overlayRef = useRef()
 
-
   useEffect(() => {
-    if(openCartBag){
-      gsap.set(overlayRef.current,{pointerEvents:"auto"})
-    }else{
-      gsap.set(overlayRef.current,{pointerEvents:"none"})
+    if (isCartOpen) {
+      gsap.set(overlayRef.current, { pointerEvents: "auto" })
+    } else {
+      gsap.set(overlayRef.current, { pointerEvents: "none" })
     }
-  }, [openCartBag])
-  
+  }, [isCartOpen])
+
 
   return (
     <>
-      <div onClick={()=>setOpenCartBag(false)} ref={overlayRef} className="header_overlay scroller_none" />
-
-      <CartBag
-        openCartBag={openCartBag}
-        setOpenCartBag={setOpenCartBag}
-        headerOverlayRef={overlayRef}
-      />
-
-      <Header setOpenCartBag={setOpenCartBag} />
-      <MobileHeader setOpenCartBag={setOpenCartBag} />
-
+      <div onClick={closeCart} ref={overlayRef} className="header_overlay scroller_none" />
+      <CartDrawer isOpen={isCartOpen} overlayRef={overlayRef} closeCart={closeCart} />
+      <Header openCart={openCart} />
+      <MobileHeader openCart={openCart} />
       {children}
       <Footer />
     </>

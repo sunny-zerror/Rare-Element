@@ -1,12 +1,14 @@
 import React from "react";
+import SeoHeader from "@/components/seo/SeoHeader";
 
 const shippingReturns = () => {
   return (
     <>
+      <SeoHeader meta={meta} />
       <div id="legal-page" className="text-lg">
         <h2 className=" text-2xl">Shipping And Returns</h2>
 
-        <div className="legal-container"> 
+        <div className="legal-container">
           <p className="text-2xl ">Shipping Policy</p>
           <p className="subheading-legal"><strong>How long will it take to deliver my order (domestic and international)?</strong></p>
           <ul>
@@ -30,4 +32,26 @@ const shippingReturns = () => {
 };
 
 export default shippingReturns;
+
+export async function getStaticProps() {
+  const meta = {
+    title: "Shipping & Return Policy – Nahara Jewellery",
+    description: "View Nahara’s shipping guidelines, delivery information, and return/exchange policies for all jewellery purchases.",
+    keywords: ["jewellery shipping policy", "return policy", "Nahara delivery"],
+    primaryKeywords: ["Nahara shipping policy"],
+    author: "Nahara",
+    robots: "index, follow",
+    og: {
+      title: "Shipping & Return Policy – Nahara Jewellery",
+      description: "Learn about our delivery and return policies.",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Shipping & Return Policy – Nahara Jewellery",
+      description: "Read Nahara’s shipping and returns policy.",
+    }
+  };
+
+  return { props: { meta } };
+}
 

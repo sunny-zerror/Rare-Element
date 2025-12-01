@@ -1,36 +1,13 @@
-import { useGSAP } from '@gsap/react'
+import React, { useEffect } from 'react'
 import gsap from 'gsap'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { usePathname } from 'next/navigation';
+import { MenuData } from '@/helpers/MenuData';
 import CustomEase from 'gsap/dist/CustomEase';
-import { RiCloseLine } from '@remixicon/react';
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
-const navLinks = [
-  {
-    title: "rings",
-    link: "/products"
-  },
-  {
-    title: "earings",
-    link: "/products"
-  },
-  {
-    title: "necklaces",
-    link: "/products"
-  },
-  {
-    title: "bracelets",
-    link: "/products"
-  },
-  {
-    title: "anklets",
-    link: "/products"
-  },
-]
-const MobileHeader = ({ setOpenCartBag }) => {
+const MobileHeader = ({ openCart }) => {
 
   CustomEase.create("in-out-quint", "0.83,0,0.17,1");
 
@@ -137,7 +114,7 @@ const MobileHeader = ({ setOpenCartBag }) => {
         </div>
 
         <div className="mobile_menu_classname_center">
-          {navLinks.map((item, index) => (
+          {MenuData.map((item, index) => (
             <Link scroll={false}
               key={index}
               href={item.link}
@@ -158,7 +135,7 @@ const MobileHeader = ({ setOpenCartBag }) => {
         <Link scroll={false} href="/">
           <img className='mobile_logo' src="/logo.svg" alt="" />
         </Link>
-        <img onClick={() => setOpenCartBag(true)}  className='short_links_icon' src="/icons/cart.svg" alt="" />
+        <img onClick={openCart}  className='short_links_icon' src="/icons/cart.svg" alt="" />
       </div>
     </>
   )

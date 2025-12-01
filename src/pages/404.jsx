@@ -1,10 +1,39 @@
-export default function Custom404() {
+import SeoHeader from "@/components/seo/SeoHeader";
+
+const Custom404 = ({ meta }) => {
   return (
-    <div style={style}>
-      <p>Sorry, we couldn't find the page you're looking for.</p>
-      <p>Page not found</p>
-    </div>
+    <>
+      <SeoHeader meta={meta} />
+      <div style={style}>
+        <p>Sorry, we couldn't find the page you're looking for.</p>
+        <p>Page not found</p>
+      </div>
+    </>
   );
+}
+
+export default Custom404;
+
+export async function getStaticProps() {
+  const meta = {
+    title: "Page Not Found – Nahara Jewellery",
+    description: "The page you’re looking for doesn’t exist. Explore our fine jewellery collection instead.",
+    keywords: ["404", "page not found", "Nahara error page"],
+    primaryKeywords: ["404 page"],
+    author: "Nahara",
+    robots: "noindex, follow",
+    og: {
+      title: "Page Not Found – Nahara Jewellery",
+      description: "This page does not exist. Explore our jewellery collection instead.",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Page Not Found – Nahara Jewellery",
+      description: "Page not found on Nahara.",
+    }
+  };
+
+  return { props: { meta } };
 }
 const style = {
   height: '100vh',

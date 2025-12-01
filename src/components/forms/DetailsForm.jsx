@@ -47,7 +47,7 @@ const DetailsForm = ({ user, expandDetailForm, setExpandDetailForm }) => {
                         </div>
                         <RiCheckLine className='check_icon' />
                     </div>
-                    <GreenBoxBtn text='Save' />
+                    <GreenBoxBtn title='Save' />
                     <button type='button' onClick={() => setExpandDetailForm(false)} className='cancel_form_btn'>
                         <p>
                             Cancel
