@@ -14,14 +14,9 @@
 }
 
 .settings__left {
-  display: none;
+  display: block;
 }
 
-@media (min-width: 750px) {
-  .settings__left {
-    display: block;
-  }
-}
 
 .settings__breadcrumb {
   display: flex;
