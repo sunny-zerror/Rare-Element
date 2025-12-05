@@ -54,7 +54,9 @@ button {
 .underline:hover{
   text-decoration: underline;
 }
-
+.italic{
+  font-style: italic;
+}
 .under_anim{
   position: relative;
   width: fit-content;

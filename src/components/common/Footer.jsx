@@ -42,20 +42,20 @@ export const featureData = [
 
 const footerLinksData = [
   {
-    title: "Category",
+    title: " Links",
     links: [
-      { label: "Rings", href: "/rings" },
-      { label: "Earrings", href: "/earings" },
-      { label: "Bracelets", href: "/bracelets" },
-      { label: "Necklaces", href: "/necklaces" },
-      { label: "Anklets", href: "/anklets" },
+      { label: "Home", href: "/" },
+      { label: "About ", href: "/about" },
     ],
   },
   {
-    title: "Brand",
+    title: "Category",
     links: [
-      { label: "Home", href: "/" },
-      { label: "About Nahara", href: "/about" },
+      { label: "Rings", href: "/rings" },
+      { label: "Earings", href: "/earings" },
+      { label: "Bracelet", href: "/bracelets" },
+      { label: "Necklace", href: "/necklaces" },
+      { label: "Anklets", href: "/anklets" },
     ],
   },
   {
@@ -70,15 +70,16 @@ const footerLinksData = [
   {
     title: "Contact Us",
     links: [
-      { label: "hello@rareelement.in", href: "mailto:hello@rareelement.in" },
       { label: "Instagram", href: "https://instagram.com" },
       { label: "WhatsApp", href: "https://wa.me/0000000000" },
+      { label: "contact@nahara.co.in", href: "https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKjgCNjxJKkzZhJktdvrWdssGbJXkRJqFwsZljDKHnPDRLXcrkzLKSLVtRgNBJQQtgTCQjs" },
     ],
   },
 ];
 
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     gsap.to(".footer_below", {
@@ -178,7 +179,7 @@ const Footer = () => {
             </Link>
 
             <div className="uppercase text-xs copyright_txt">
-              <p>© 2025 Nahara. All rights reserved. Developed by</p>
+              <p>© {currentYear} Nahara. All rights reserved. Developed by</p>
               <a href="https://www.zerrorstudios.com/" target="_blank">Zerror Studios</a>
             </div>
           </div>

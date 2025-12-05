@@ -5,6 +5,7 @@
 @import "./pages/legals.css";
 @import "./pages/account.css";
 @import "./pages/contact.css";
+@import "./pages/about.css";
 
 @import "./components/common/header.css";
 @import "./components/common/mobileheader.css";
