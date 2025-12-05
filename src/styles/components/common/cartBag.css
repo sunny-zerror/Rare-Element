@@ -17,7 +17,6 @@
 /* Bag */
 .cartBag_openBagParent {
   padding-right: .2rem;
-  opacity: 0;
   height: 100vh;
   background-color: #f6f6f6;
   top: 0rem;
@@ -25,7 +24,7 @@
   overflow: hidden;
   width: 40rem;
   z-index: 9999;
-  right: -38rem;
+  right: -42rem;
 }
 .cartBag_bagHeader {
   width: 100%;

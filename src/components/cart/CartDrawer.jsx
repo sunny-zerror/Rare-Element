@@ -114,10 +114,9 @@ const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
       if (isOpen) {
         const tedv = gsap.timeline();
         tedv.to(".cartBag_openBagParent", {
-          opacity: 1,
           right: "0",
-          ease: "power2.out",
-          duration: 0.5
+          duration: .8,
+          ease: "in-out-quint",
         })
           .to(overlayRef.current, {
             opacity: 1,
@@ -127,10 +126,9 @@ const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
       } else {
         const dsc = gsap.timeline();
         dsc.to(".cartBag_openBagParent", {
-          opacity: 0,
           right: "-100%",
-          ease: "power2.out",
-          duration: 0.5
+          duration: .8,
+          ease: "in-out-quint",
         })
           .to(overlayRef.current, {
             opacity: 0,
@@ -143,10 +141,9 @@ const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
         if (window.lenis) window.lenis.stop();
         const tedv = gsap.timeline();
         tedv.to(".cartBag_openBagParent", {
-          opacity: 1,
           right: "0rem",
-          ease: "power2.out",
-          duration: 0.5
+          duration: .8,
+          ease: "in-out-quint",
         })
           .to(overlayRef.current, {
             opacity: 1,
@@ -157,10 +154,9 @@ const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
         if (window.lenis) window.lenis.start();
         const dsc = gsap.timeline();
         dsc.to(".cartBag_openBagParent", {
-          opacity: 0,
-          right: "-38rem",
-          ease: "power2.out",
-          duration: 0.5
+          right: "-42rem",
+          duration: .8,
+          ease: "in-out-quint",
         })
           .to(overlayRef.current, {
             opacity: 0,
