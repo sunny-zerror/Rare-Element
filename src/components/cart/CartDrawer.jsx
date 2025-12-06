@@ -214,6 +214,7 @@ const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
             onClick={navigateCheckout}
             loading={isBtnLoading}
           />
+          <p className="text-sm  crt_btn_txt"> Free shipping on orders above ₹3,000, with easy returns and fast support—always.</p>
         </div>
       </div>
     </div>

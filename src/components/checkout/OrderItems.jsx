@@ -26,7 +26,9 @@ const OrderItems = ({ data }) => {
                   <div className="checkout_topRow">
                     <div>
                       <Link scroll={false} href={`/products/${item?.product?.slug}`} className="checkout_productName text-base">{item?.name}</Link>
-                      {renderVariants(item?.product?.productOptions || [], item?.variantDetail?.selectedOptions || [])}
+                      <div className="cart_varients_div">
+                        {renderVariants(item?.product?.productOptions || [], item?.variantDetail?.selectedOptions || [])}
+                      </div>
                       <p className="checkout_metaText text-xs ">Quantity: {item?.qty}</p>
                     </div>
                     <p className="checkout_price  text-base">{price}</p>
