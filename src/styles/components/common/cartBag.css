@@ -144,6 +144,9 @@
 .cartBag_itemHead {
   width: 70%;
 }
+.cart_varients_div{
+  margin-top: .5rem;
+}
 
 .cartBag_itemName {
   margin-bottom: .5rem;

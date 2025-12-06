@@ -49,8 +49,9 @@ const CartItem = ({
           <div className="cartBag_bagItemTop">
             <div className="cartBag_itemHead">
               <Link scroll={false} onClick={onClose} href={`/products/${item?.product?.slug}`} className="cartBag_itemName text-base">{item?.name}</Link>
-              {renderVariants(item?.product?.productOptions || [], item?.variantDetail?.selectedOptions || [])}
-
+              <div className="cart_varients_div">
+                {renderVariants(item?.product?.productOptions || [], item?.variantDetail?.selectedOptions || [])}
+              </div>
             </div>
             <p className='text-xl crt_itms_price'>{`${item.qty > 1 ? `${item?.qty} x` : ""} ${formatePrice(
               item?.variantDetail?.variantPrice || 0

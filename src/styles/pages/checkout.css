@@ -266,9 +266,9 @@
 }
 
 .checkout_imgWrapper {
+  border: 1px solid rgba(0, 0, 0, 0.082);
   aspect-ratio: 3/4;
   overflow: hidden;
-  border-radius: 0.25rem;
   width: 30%;
 }
 
