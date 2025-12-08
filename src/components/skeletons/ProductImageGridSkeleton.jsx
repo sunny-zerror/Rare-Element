@@ -1,0 +1,44 @@
+import React from 'react'
+
+const ProductImageGridSkeleton = () => {
+  return (
+    <>
+      <div className="productDetail_left   ">
+        <div className="MobileImageSlider_container  skeleton_detail_left skeleton_animate">
+          {/* Thumbnails */}
+          <div className="MobileImageSlider_thumbnails ">
+            {[1, 2, 3, 4 , 5]?.map((item, index) => (
+              <div
+                key={index}
+                className={`MobileImageSlider_thumbnail skeleton_animate `}
+              >
+              </div>
+            ))}
+          </div>
+          <div
+            className="MobileImageSlider_swiper"
+          >
+            <div className="MobileImageSlider_slide ">
+              <div
+                className="MobileImageSlider_slideImage "
+              />
+            </div>
+            <div className="MobileImageSlider_nav">
+              <button
+                className="MobileImageSlider_arrow   left"
+              >
+              </button>
+              <button
+                className="MobileImageSlider_arrow   right"
+              >
+
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default ProductImageGridSkeleton

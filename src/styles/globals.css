@@ -97,3 +97,32 @@ button {
 .scroller span {
   flex-shrink: 0;
 }
+.hidden{
+  opacity: 0;
+}
+
+.whatsapp_chat{
+  display: flex;
+  padding-right: 1rem;
+  padding-left: .5rem;
+  align-items: center;
+  position: fixed;
+  background-color: white;
+  box-shadow: 0px 0px 4px 4px #a5a5a52b;
+  border-radius: 100px;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.whatsapp_chat_img{
+  width: 3rem;
+  aspect-ratio: 1/1;
+}
+.whatsapp_chat:hover{
+  transform: scale(1.05);
+}
+.whatsapp_chat:hover p{
+  text-decoration: underline;
+}

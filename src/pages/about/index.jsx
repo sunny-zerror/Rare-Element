@@ -1,12 +1,10 @@
 import React from 'react'
-import Marquee from 'react-fast-marquee'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import ScrollVelocity from '@/components/about/ScrollVelocity';
+import ScrollVelocityThree from '@/components/about/ScrollVelocity';
 
 gsap.registerPlugin(ScrollTrigger)
-
 
 const About = () => {
 
@@ -87,20 +85,20 @@ const About = () => {
         <div className="about_marque_img_paren_1">
           <div className="marq_img_paren">
             <div className="marq_img_1">
-              <img className='cover' src="/images/aboutpage/about_img1.webp" alt="loading" />
+              <img className='cover' src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="loading" />
             </div>
             <div className="marq_img_2">
-              <img className='cover' src="/images/aboutpage/about_img2.webp" alt="loading" />
+              <img className='cover' src="https://images.unsplash.com/photo-1631982690223-8aa4be0a2497?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="loading" />
             </div>
           </div>
           <div className="marq_img_3">
-            <img className='cover' src="/images/aboutpage/landscape_img1.webp" alt="loading" />
+            <img className='cover' src="https://images.unsplash.com/photo-1619119069152-a2b331eb392a?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="loading" />
           </div>
         </div>
       </div>
       <div className="abt_mob_txt">
         <div className="about_txt_img">
-          <img className='cover' src="/images/aboutpage/desc_img.webp" alt="loading" />
+          <img className='cover' src="https://images.unsplash.com/photo-1620656798579-1984d9e87df7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="loading" />
         </div>
         <p className='  text-base bold uppercase '>Behind Rare Element</p>
         <div className=" text-base">
@@ -108,7 +106,7 @@ const About = () => {
         </div>
       </div>
 
-      <ScrollVelocity />
+        <ScrollVelocityThree />
 
       <div className="about_sticker_section">
         <img className=' sticker_bg_img cover' src="/images/aboutpage/about_sticker_bg.webp" alt="loading" />

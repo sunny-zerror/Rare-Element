@@ -109,8 +109,10 @@ const ContactForm = () => {
 
   return (
     <div id="form">
-      <div id="left"></div>
       <div id="right" className="text-base">
+          <div className="form_header">
+            <p className='text-base  uppercase '> get in touch with us</p>
+          </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input lineanime">
             <input type="text" className="text-base" error={errors.name} {...register("name")} />
