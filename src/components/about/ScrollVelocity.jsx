@@ -1,210 +1,112 @@
-import { useRef, useLayoutEffect, useState } from 'react';
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useMotionValue,
-  useVelocity,
-  useAnimationFrame,
-} from 'framer-motion';
-import AboutImageEffect from './AboutImageEffect';
+import React from 'react'
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import AboutImageEffect from './AboutImageEffect'
+import { useGSAP } from '@gsap/react'
+gsap.registerPlugin(ScrollTrigger);
 
-function useElementWidth(ref) {
-  const [width, setWidth] = useState(0);
+const ScrollVelocity = () => {
 
-  useLayoutEffect(() => {
-    function updateWidth() {
-      if (ref.current) {
-        setWidth(ref.current.getBoundingClientRect().width);
-      }
-    }
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
-  }, [ref]);
-
-  return width;
-}
-
-export const ScrollVelocity = ({
-  scrollContainerRef,
-  items = [],
-  velocity = 50,
-  className = '',
-  damping = 50,
-  stiffness = 400,
-  numCopies = 6,
-  velocityMapping = { input: [0, 100], output: [0, 5] },
-  parallaxClassName = 'parallax',
-  scrollerClassName = 'scroller',
-  parallaxStyle,
-  scrollerStyle
-}) => {
-  const isHovering = useMotionValue(0);
-
-  const aboutMarqueeItems = [
-    <div className="about_marquee_paren">
-
-      <div className="about_marque_img_paren_1">
-        <div className="marq_img_paren">
-          <div onMouseEnter={() => isHovering.set(1)}
-            onMouseLeave={() => isHovering.set(0)}
-            className="marq_img_1">
-            <AboutImageEffect imageUrl="/images/aboutpage/about_img1.webp" />
-          </div>
-          <div onMouseEnter={() => isHovering.set(1)}
-            onMouseLeave={() => isHovering.set(0)} className="marq_img_2">
-            <AboutImageEffect imageUrl="/images/aboutpage/about_img2.webp" />
-          </div>
-        </div>
-        <div onMouseEnter={() => isHovering.set(1)}
-          onMouseLeave={() => isHovering.set(0)} className="marq_img_3">
-          <AboutImageEffect imageUrl="/images/aboutpage/landscape_img1.webp" />
-        </div>
-      </div>
-
-      <div className="about_marq_txt_paren">
-        <div className="about_txt_upper">
-          <div className="about_txt_img_paren">
-            <div onMouseEnter={() => isHovering.set(1)}
-              onMouseLeave={() => isHovering.set(0)} className="about_txt_img">
-              <AboutImageEffect imageUrl="/images/aboutpage/desc_img.webp" />
-            </div>
-          </div>
-          <p className='  text-base uppercase '>Behind Rare Element</p>
-        </div>
-        <div className=" text-xl">
-          <p className='thin italic'>“ Nahara was born from the idea that beauty should be honest and thoughtful. We create slowly, with intention, allowing every design to carry a story. What you see here is more than a brand it’s a journey shaped with clarity, purpose, and heart.”</p>
-        </div>
-      </div>
-
-      <div className="about_marque_img_paren_2">
-        <div onMouseEnter={() => isHovering.set(1)}
-          onMouseLeave={() => isHovering.set(0)} className="marq_img_4">
-          <AboutImageEffect imageUrl="/images/aboutpage/landscape_img2.webp" />
-        </div>
-        <div className="marq_img_paren_next">
-          <div onMouseEnter={() => isHovering.set(1)}
-            onMouseLeave={() => isHovering.set(0)} className="marq_img_1">
-            <AboutImageEffect imageUrl="/images/aboutpage/about_img3.webp" />
-          </div>
-          <div onMouseEnter={() => isHovering.set(1)}
-            onMouseLeave={() => isHovering.set(0)} className="marq_img_2">
-            <AboutImageEffect imageUrl="/images/aboutpage/about_img4.webp" />
-          </div>
-        </div>
-      </div>
-
-      <div className="about_marq_txt_paren">
-        <div className="about_txt_upper">
-          <div className="about_txt_img_paren">
-            <div onMouseEnter={() => isHovering.set(1)}
-              onMouseLeave={() => isHovering.set(0)} className="about_txt_img">
-              <AboutImageEffect imageUrl="/images/aboutpage/desc_img.webp" />
-            </div>
-          </div>
-          <p className='  text-base uppercase '>Behind Rare Element</p>
-        </div>
-        <div className=" text-xl">
-          <p className='thin italic'>“ Nahara was born from the idea that beauty should be honest and thoughtful. We create slowly, with intention, allowing every design to carry a story. What you see here is more than a brand it’s a journey shaped with clarity, purpose, and heart.”</p>
-        </div>
-      </div>
-
-    </div>
-  ]
-
-  function VelocityItem({
-    children,
-    baseVelocity = velocity
-  }) {
-    const baseX = useMotionValue(0);
-    const scrollOptions = scrollContainerRef ? { container: scrollContainerRef } : {};
-    const { scrollY } = useScroll(scrollOptions);
-    const scrollVelocity = useVelocity(scrollY);
-
-    const smoothVelocity = useSpring(scrollVelocity, {
-      damping,
-      stiffness
-    });
-    const hoverSmooth = useSpring(isHovering, {
-      damping: 20,
-      stiffness: 300,
-    });
-
-    const velocityFactor = useTransform(
-      smoothVelocity,
-      velocityMapping.input,
-      velocityMapping.output,
-      { clamp: false }
-    );
-
-    const copyRef = useRef(null);
-    const copyWidth = useElementWidth(copyRef);
-
-    function wrap(min, max, v) {
-      const range = max - min;
-      const mod = (((v - min) % range) + range) % range;
-      return mod + min;
-    }
-
-    const x = useTransform(baseX, v => {
-      if (copyWidth === 0) return '0px';
-      return `${wrap(-copyWidth, 0, v)}px`;
-    });
-
-    const directionFactor = useRef(1);
-
-    useAnimationFrame((_, delta) => {
-      const hoverFactor = 1 - hoverSmooth.get(); // 1 → moving, 0 → paused
-      let moveBy =
-        directionFactor.current *
-        baseVelocity *
-        (delta / 1000) *
-        hoverFactor;
-
-      if (velocityFactor.get() < 0) directionFactor.current = -1;
-      else if (velocityFactor.get() > 0) directionFactor.current = 1;
-
-      moveBy +=
-        directionFactor.current *
-        moveBy *
-        velocityFactor.get() *
-        hoverFactor;
-
-      baseX.set(baseX.get() + moveBy);
-    });
-
-    return (
-      <div className={parallaxClassName} style={parallaxStyle}>
-        <motion.div className={scrollerClassName} style={{ x, ...scrollerStyle }}>
-          {Array.from({ length: numCopies }).map((_, i) => (
-            <div
-              key={i}
-              ref={i === 0 ? copyRef : null}
-              className={className}
-              style={{ flexShrink: 0 }}
-            >
-              {children}
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    );
-  }
+  useGSAP(() => {
+    gsap.to(".about_marquee_paren", {
+      scrollTrigger: {
+        trigger: ".about_mr_pr",
+        start: "top top",
+        pin: true,
+        anticipatePin: 1,
+        end:"+=200%",
+        scrub: .4,
+        // markers:true
+      },
+      xPercent: -58,
+      ease: "linear",
+    })
+  })
 
   return (
-    <section>
-      {aboutMarqueeItems.map((item, index) => (
-        <VelocityItem
-          key={index}
-          baseVelocity={index % 2 !== 0 ? -velocity : velocity}
-        >
-          {item}
-        </VelocityItem>
-      ))}
-    </section>
-  );
-};
+    <div className='about_mr_pr'>
+      <div className="about_marquee_paren">
 
-export default ScrollVelocity;
+        <div className="about_marque_img_paren_1">
+          <div className="marq_img_paren">
+            <div
+              className="marq_img_1">
+              <AboutImageEffect imageUrl="https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            </div>
+            <div className="marq_img_2">
+              <AboutImageEffect imageUrl="https://images.unsplash.com/photo-1631982690223-8aa4be0a2497?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            </div>
+          </div>
+          <div className="marq_img_3">
+            <AboutImageEffect imageUrl="https://images.unsplash.com/photo-1619119069152-a2b331eb392a?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+          </div>
+        </div>
+
+        <div className="about_marq_txt_paren center">
+          <div className="about_txt_upper">
+            <div className="about_txt_img_paren center">
+              <div className="about_txt_img">
+                <AboutImageEffect imageUrl="https://images.unsplash.com/photo-1620656798579-1984d9e87df7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+              </div>
+            </div>
+            <p className='  text-base uppercase '>Behind Rare Element</p>
+          </div>
+          <div className=" text-xl">
+            <p className='thin italic'>“ Nahara was born from the idea that beauty should be honest and thoughtful. We create slowly, with intention, allowing every design to carry a story. What you see here is more than a brand it’s a journey shaped with clarity, purpose, and heart.”</p>
+          </div>
+        </div>
+
+        <div className="about_marque_img_paren_2">
+          <div className="marq_img_6">
+            <AboutImageEffect imageUrl="https://plus.unsplash.com/premium_photo-1681276169939-5ad54d5de5fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+          </div>
+        </div>
+
+        <div className="about_marq_txt_paren start">
+          <div className="about_txt_upper">
+            <div className="about_txt_img_paren start">
+              <div className="about_txt_img_2">
+                <AboutImageEffect imageUrl="https://images.unsplash.com/photo-1581090465980-58ea88b43443?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+              </div>
+            </div>
+            <p className='  text-base uppercase '>Quiet Craftsmanship</p>
+          </div>
+          <div className=" text-xl">
+            <p className='thin italic'>“ Every piece we create holds a quiet confidence — not loud, not rushed, but crafted with patience.”</p>
+          </div>
+        </div>
+
+        <div className="about_marque_img_paren_2">
+          <div className="marq_img_4">
+                <AboutImageEffect imageUrl="https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+          </div>
+          <div className="marq_img_paren_next">
+            <div className="marq_img_1">
+              <AboutImageEffect imageUrl="https://images.unsplash.com/photo-1708222170510-bb7d358798f0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            </div>
+            <div className="marq_img_2">
+              <AboutImageEffect imageUrl="https://images.unsplash.com/photo-1634229537034-16d6a751d91b?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            </div>
+          </div>
+        </div>
+
+        <div className="about_marq_txt_paren">
+          <div className="about_txt_upper">
+            <div className="about_txt_img_paren">
+              <div className="about_txt_img_3">
+            <AboutImageEffect imageUrl="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+              </div>
+            </div>
+            <p className='  text-base uppercase '>Design With Intention</p>
+          </div>
+          <div className=" text-xl">
+            <p className='thin italic'>“ Our work is guided by a belief in slow creation and truthful design. Each element reflects the balance between simplicity and depth.”</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+export default ScrollVelocity

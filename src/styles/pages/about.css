@@ -11,9 +11,17 @@
 .abt_mob_txt img {
     opacity: 0;
 }
-.about_marquee_paren {
-  display: flex;
+.about_mr_pr{
   width: 100%;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+.about_marquee_paren {
+  padding-left: 2rem;
+  /* overflow: hidden; */
+  /* width: 100%; */
+  display: flex;
 }
 .marq_img_paren {
   display: flex;
@@ -22,10 +30,10 @@
   gap: 1.25rem;
 }
 .marq_img_paren_next {
+  margin-top: 1.25rem;
   flex-shrink: 0;
   display: flex;
   align-items: start;
-  padding-top: 1.25rem;
   gap: 1.25rem;
 }
 
@@ -33,24 +41,41 @@
   width: 18vw;
   overflow: hidden;
   aspect-ratio: 3/4;
+  position: relative;
 }
 
 .marq_img_2 {
   width: 15vw;
   overflow: hidden;
   aspect-ratio: 3/4;
+  position: relative;
 }
 .marq_img_3 {
   margin-top: 1.25rem;
   width: 34vw;
   overflow: hidden;
   aspect-ratio: 4/2;
+  position: relative;
+}
+.marq_img_6 {
+  width: 31.5vw;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  position: relative;
+}
+.marq_img_7 {
+  width: 20vw;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  position: relative;
 }
 .marq_img_4 {
   width: 34vw;
   overflow: hidden;
   aspect-ratio: 4/2;
+  position: relative;
 }
+
 .about_marquee_paren img {
   transition: all 0.3s ease;
 }
@@ -61,6 +86,17 @@
   width: 45vw;
   flex-shrink: 0;
   padding: 5rem 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  text-align: center;
+}
+.about_marq_txt_paren.start {
+  width: 45vw;
+  flex-shrink: 0;
+  padding: 0rem 8rem;
+  padding-bottom: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -78,11 +114,31 @@
   display: flex;
   justify-content: flex-end;
 }
+.about_txt_img_paren.center {
+  justify-content: center;
+}
+.about_txt_img_paren.start {
+  justify-content: start;
+}
 .about_txt_img {
   width: 14vw;
   overflow: hidden;
   aspect-ratio: 3/2;
+  position: relative;
 }
+.about_txt_img_2 {
+  width: 14vw;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  position: relative;
+}
+.about_txt_img_3 {
+  width: 20vw;
+  overflow: hidden;
+  aspect-ratio: 3/2;
+  position: relative;
+}
+
 .about_marq_txt_paren p {
   line-height: 1.25rem;
 }
@@ -129,6 +185,7 @@
 /* ////Mobile part//// */
 @media (max-width: 750px) {
   .about_marquee_paren,
+  .about_mr_pr,
   .about_sticker_1 {
     display: none;
   }
@@ -152,18 +209,21 @@
     width: calc(100% - 0.5rem);
     overflow: hidden;
     aspect-ratio: 3/4;
+    position: relative;
   }
 
   .marq_img_2 {
     width: 100%;
     overflow: hidden;
     aspect-ratio: 3/4;
+    position: relative;
   }
   .marq_img_3 {
     margin-top: 0.5rem;
     width: 100%;
     overflow: hidden;
     aspect-ratio: 4/2;
+    position: relative;
   }
 
   .abt_mob_txt {

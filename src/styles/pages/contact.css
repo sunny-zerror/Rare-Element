@@ -1,76 +1,117 @@
-/* contact css */
+/* ---------- CONTACT FORM MAIN ---------- */
 #contact_form {
-  height: 100vh;
   width: 100%;
-  padding: 10vh 3vw;
-  padding-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   position: relative;
   overflow: hidden;
-  color: black;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: bottom;
-  position: relative;
-}
-#contact_form #form {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
+  padding-top: 10rem;
+  height: 100vh;
+  padding: 0;
+}
+.contact_img_paren {
+  overflow: hidden;
   position: relative;
-}
-#contact_form #left {
-  width: 50%;
+  padding: 10rem 2rem;
+  width: 100vw;
+  flex-shrink: 0;
   height: 100%;
 }
-.phone_container {
+.contact_bg_img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
   position: absolute;
+  z-index: -1;
+  top: 0;
   left: 0;
-  top: 5%;
-  width: 49%;
-  height: 100%;
-  z-index: 3;
-}
-#contact_form #left h2 {
-  text-transform: capitalize;
-}
-#contact_form #right {
-  width: 50%;
-  height: 100%;
 }
 
+.slider_box_paren {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  z-index: 9;
+  gap: 2rem;
+}
+.slider_box {
+  width: 22vw;
+  padding-inline: 2rem;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  background-color: white;
+}
+.slider_box p {
+  line-height: 1.25rem;
+}
+.desc_prn {
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+}
+/* ---------- FORM WRAPPER ---------- */
+#form {
+  /* padding-top: 10rem; */
+  padding: 14rem 4rem;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* ---------- RIGHT SIDE (FORM) ---------- */
+#contact_form #right {
+  width: 100%;
+}
+.form_header {
+  margin-bottom: 4rem;
+}
 #contact_form #right form {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-#contact_form #right form #common_black_btn {
-  margin-top: 1.9rem;
-  max-width: 100%;
-}
+
+/* ---------- INPUT FIELDS ---------- */
 #contact_form #right form .input {
   width: 48%;
   margin-bottom: 1.9rem;
   position: relative;
 }
-#contact_form .linei {
+
+#contact_form #right form .textarea {
   width: 100%;
-  height: 0.08vw;
-  background-color: black;
-  position: absolute;
-  bottom: 0%;
-  left: 0;
-  transform-origin: left; /* Scale starts from the left initially */
-  transform: scaleX(0);
+  height: 20vh;
+  position: relative;
+}
+#right form textarea {
+  padding: 1vw 0;
+  width: 100%;
+  resize: none;
+  height: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.745);
+  outline: none;
 }
 
-#contact_form #right form .input.label_active p {
-  top: 0%;
-  opacity: 0.8;
+#contact_form #right form input {
+  width: 100%;
+  padding: 1vw 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.745);
+  color: black;
+  resize: none;
 }
+
+/* ---------- LABEL ANIMATION ---------- */
 #contact_form #right form .input p,
 #contact_form #right form .textarea p {
   position: absolute;
@@ -78,159 +119,174 @@
   transform: translateY(-50%);
   pointer-events: none;
   color: black;
-  transition: all ease 0.3s;
+  transition: all 0.3s ease;
   text-transform: capitalize;
 }
+
 #contact_form #right form .textarea p {
   top: 15%;
 }
+
+#contact_form #right form .input.label_active p,
 #contact_form #right form .textarea.label_active p {
   top: 0%;
   opacity: 0.8;
 }
-#contact_form #right form input {
-  flex-shrink: 0;
+
+/* ---------- LINE ANIMATION ---------- */
+.linei {
   width: 100%;
-  padding: 1vw 0;
-  background-color: transparent;
-  border: none;
-  color: black;
-  outline: none;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.745);
-}
-#contact_form #right form .textarea {
-  width: 100%;
-  position: relative;
-  height: 20vh;
-}
-#contact_form #right form textarea {
-  padding: 1vw 0;
-  flex-shrink: 0;
-  width: 100%;
-  height: 100%;
-  resize: none;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.745);
-}
-#contact_form #address {
-  width: 100%;
-  height: 10vh;
-  display: flex;
-  justify-content: space-between;
+  height: 0.08vw;
+  background-color: black;
+  position: absolute;
+  bottom: 0%;
+  left: 0;
+  transform-origin: left;
+  transform: scaleX(0);
 }
 
-#contact_form #address .elem {
-  width: 50%;
-  height: 50%;
-  display: flex;
-  justify-content: space-between;
-}
-#contact_form .elem-lf p {
-  width: 50%;
-}
-#contact_form .elem .add {
-  width: 49%;
-  height: 100%;
-}
-.ct_head{
-  margin-bottom: .5rem;
-}
-.add h3{
-  margin-bottom: .5rem;
-}
-#contact_form .elem .add h5,
-#contact_form .elem .add a {
-  text-decoration: none;
-  display: block;
-}
-.submit_form_btn_paren{
+/* ---------- SUBMIT BUTTON ---------- */
+.submit_form_btn_paren {
   margin-top: 4rem;
   width: 20%;
 }
 
+/* ---------- RESPONSIVE: MOBILE ---------- */
 @media (max-width: 576px) {
+  .contact_img_paren {
+    overflow: hidden;
+    position: relative;
+    padding: 10rem 1rem;
+    width: 100vw;
+    flex-shrink: 0;
+    height: 100%;
+  }
+  #form {
+    /* padding-top: 10rem; */
+    padding: 0rem 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .slider_box {
+    width: 60vw;
+    padding-inline: 2rem;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    background-color: white;
+  }
   #contact_form {
     height: auto;
     min-height: 100vh;
-    padding: 150px 20px 80px;
-    gap: 10vw;
   }
-  #contact_form #left {
-    display: none;
-  }
+
   #contact_form #right {
     width: 100%;
   }
-  .phone_container {
-    position: static;
-    width: 100%;
-    height: 30vh;
-    margin-top: -10vw;
-  }
-  #contact_form #address {
-    flex-direction: column;
-    height: auto;
-    gap: 7vw;
-  }
-  #contact_form #address .elem {
-    width: 100%;
-    display: flex;
-    gap: 1.25rem;
-  }
-  #contact_form .elem-lf p {
-    width: 100%;
-  }
-  #contact_form .elem .add {
-    width: 100%;
-  }
+
   #contact_form #right form input {
     padding: 3vw 0;
   }
-  .submit_form_btn_paren{
-  margin-top: 4rem;
-  width: 100%;
-}
+
+  .submit_form_btn_paren {
+    width: 100%;
+  }
 }
 
-/* Tablets (portrait) */
+/* ---------- RESPONSIVE: TABLETS ---------- */
 @media (min-width: 577px) and (max-width: 768px) {
-    #contact_form {
+  #contact_form {
     height: auto;
     min-height: 100vh;
     padding: 150px 25px 80px;
-    gap: 10vw;
   }
-  #contact_form #left {
-    display: none;
-  }
+
   #contact_form #right {
     width: 100%;
   }
-  .phone_container {
-    position: static;
-    width: 100%;
-    height: 30vh;
-    margin-top: -10vw;
-  }
-  #contact_form #address {
-    flex-direction: column;
-    height: auto;
-    gap: 7vw;
-  }
-  #contact_form #address .elem {
-    width: 100%;
-    display: flex;
-    gap: 1.25rem;
-  }
-  #contact_form .elem-lf p {
-    width: 30%;
-  }
-  #contact_form .elem .add {
-    width: 45%;
-  }
+
   #contact_form #right form input {
     padding: 3vw 0;
+  }
+}
+
+.faq_paren {
+  width: 100%;
+  padding: 8rem 2rem;
+}
+
+.faq_paren_inner {
+  width: 100%;
+  display: flex;
+  padding-top: 6rem;
+  justify-content: flex-end;
+}
+.faq_drop_paren {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.faq_drop {
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.146);
+}
+.faq_drop.open {
+  padding-inline: 2rem;
+}
+@media (min-width: 1020px) {
+  .faq_drop:hover {
+    padding-inline: 2rem;
+  }
+}
+.faq_drop_title {
+  height: 7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq_drop_close {
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+}
+.faq_drop_close.open {
+  transform: rotate(90deg);
+}
+
+.faq_drop_desc {
+  transition: height 0.35s ease;
+  height: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 750px) {
+  .faq_paren {
+    padding: 2rem 1rem;
+  }
+  .faq_drop_paren {
+    width: 100%;
+  }
+  .faq_paren_inner {
+    padding-top: 2rem;
+  }
+  .faq_drop_title {
+    height: 5rem;
+  }
+  .faq_drop_title h2 {
+    font-size: 0.75rem;
+    line-height: 1.8rem;
+  }
+  .faq_drop.open {
+    padding-inline: 0rem;
   }
 }

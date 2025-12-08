@@ -20,6 +20,16 @@ const Layout = ({ children }) => {
 
   return (
     <>
+
+      <a href="https://wa.me/910000000000">
+        <div className="whatsapp_chat">
+          <div className="whatsapp_chat_img center">
+            <img className="cover" src="/gifs/whatsapp.gif" alt="" />
+          </div>
+          <p className="bold">CHAT</p>
+        </div>
+      </a>
+
       <div onClick={closeCart} ref={overlayRef} className="header_overlay scroller_none" />
       <CartDrawer isOpen={isCartOpen} overlayRef={overlayRef} closeCart={closeCart} />
       <Header openCart={openCart} />

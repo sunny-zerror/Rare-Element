@@ -16,6 +16,8 @@ import ProductContant from '@/components/product/ProductContant';
 import ProductListGrid from "@/components/product/ProductListGrid";
 import ProductBanner from "@/components/product/ProductBanner";
 import { AuthCookies } from "@/utils/AuthCookies";
+import ProductImageGridSkeleton from "@/components/skeletons/ProductImageGridSkeleton";
+import ProductContantSkeleton from "@/components/skeletons/ProductContantSkeleton";
 gsap.registerPlugin(ScrollTrigger);
 
 const ProductDetail = ({ meta, data, productList }) => {
