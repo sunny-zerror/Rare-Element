@@ -6,7 +6,7 @@ const Category = ({ data }) => {
         <>
             <div className="padding">
                 <div className="category_header">
-                    <p className='text-base uppercase thin'>The Essence of Elegance</p>
+                    <p className='text-base uppercase thin'>Shop by Category</p>
                 </div>
                 <div className="home_category_paren scroller_none">
                     <div className="home_category_inner scroller_none">

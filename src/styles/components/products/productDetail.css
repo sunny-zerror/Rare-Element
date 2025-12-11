@@ -53,7 +53,6 @@
   width: 5rem;
   transform-origin: bottom left;
   transition: all 0.2s ease;
-  filter: brightness(0.7);
   cursor: pointer;
 }
 .MobileImageSlider_thumbnail--active::after {
@@ -84,6 +83,9 @@
 }
 
 .MobileImageSlider_slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
 }
@@ -91,7 +93,7 @@
 .MobileImageSlider_slideImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .MobileImageSlider_swiper .swiper-button-next,
@@ -297,12 +299,12 @@
   padding: 0.2rem;
   border: 1px solid #a5a5a5;
   height: 3rem;
-  border-radius: 100%;
+  border-radius: 0%;
 }
 .color_inner {
   width: 100%;
   height: 100%;
-  border-radius: 100%;
+  border-radius: 0%;
 }
 .color_inner p{
   transform: translateY(0px);
@@ -457,9 +459,9 @@
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .accordion_header .productDetail_quantity_icon {
-  width: 1rem;
+  width: .8rem;
   flex-shrink: 0;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .productDetail_quantity_icon {
   cursor: pointer;
@@ -469,7 +471,7 @@
 }
 
 .productDetail_quantity_icon.rotated {
-  transform: rotate(-90deg);
+  transform: rotate(-180deg);
 }
 
 .suggestion_parent {

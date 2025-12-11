@@ -201,7 +201,7 @@ const ProductContant = ({
 
                   <img
                     className={`productDetail_quantity_icon ${accordionIndex === index ? "rotated" : ""}`}
-                    src="/icons/LongArrowRight.svg"
+                    src="/icons/LongArrowDown.svg"
                     alt="loading"
                   />
                 </button>

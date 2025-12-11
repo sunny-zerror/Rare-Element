@@ -154,7 +154,7 @@ const LookBook = ({ data }) => {
             </div> */}
 
             <div className="lookBook_header">
-                <h2 className="featured_title text-3xl font-semibold">The Looks</h2>
+                <h2 className="featured_title text-3xl font-semibold"> Gift Guide</h2>
             </div>
             <div className="lookbookSlider_section">
 

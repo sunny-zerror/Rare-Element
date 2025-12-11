@@ -52,7 +52,7 @@ const ScrollVelocity = () => {
             <p className='  text-base uppercase '>Behind Rare Element</p>
           </div>
           <div className=" text-xl">
-            <p className='thin italic'>“ Nahara was born from the idea that beauty should be honest and thoughtful. We create slowly, with intention, allowing every design to carry a story. What you see here is more than a brand it’s a journey shaped with clarity, purpose, and heart.”</p>
+            <p className='thin italic'> “ Nahara brings a fresh spark to modern jewellery. Every piece is dreamed up, designed, and crafted under one roof, giving us the freedom to play with form, experiment with detail, and chase bold ideas. “</p>
           </div>
         </div>
 
@@ -72,7 +72,7 @@ const ScrollVelocity = () => {
             <p className='  text-base uppercase '>Quiet Craftsmanship</p>
           </div>
           <div className=" text-xl">
-            <p className='thin italic'>“ Every piece we create holds a quiet confidence — not loud, not rushed, but crafted with patience.”</p>
+            <p className='thin italic'> “ Blending inventive design with next-gen craftsmanship, our jewellery celebrates a new wave of elegance: fun, fearless silhouettes paired with the kind of delicate finishing that makes each piece feel truly special. “</p>
           </div>
         </div>
 

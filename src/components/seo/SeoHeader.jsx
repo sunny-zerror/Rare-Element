@@ -53,10 +53,10 @@ const SeoHeader = ({ meta }) => {
       <meta charset="UTF-8" />
       <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon.jpeg" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon.jpeg" />
-      <link rel="icon" type="image/png" sizes="192x192" href="/favicon.jpeg" />
-      <link rel="apple-touch-icon" href="/favicon.jpeg" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-chrome-192x192.png" />
+      <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
       <link
         rel="alternate"
         hreflang="en-in"
@@ -68,9 +68,9 @@ const SeoHeader = ({ meta }) => {
         url={meta?.canonical ?? canonical}
       />
       <NewsMediaOrganizationSchema
-        name={"DeVeSheDreams"}
+        name={"Nahara"}
         clientLink={`${Const.ClientLink}/`}
-        logoUrl={`${Const.ClientLink}/favicon.jpeg`}
+        logoUrl={`${Const.ClientLink}/logo.svg`}
         address={{
           streetAddress: "Bankeybihari Holdings B5, 3rd floor, Everest Apt., Pt. Madan Mohan Malviya Marg, Tardeo",
           addressLocality: "Mumbai",

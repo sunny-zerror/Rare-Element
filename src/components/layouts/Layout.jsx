@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
       <a href="https://wa.me/910000000000">
         <div className="whatsapp_chat">
           <div className="whatsapp_chat_img center">
-            <img className="cover" src="/gifs/whatsapp.gif" alt="" />
+            <img className="cover" src="/gifs/whatsapp.gif" alt="loading" />
           </div>
           <p className="bold">CHAT</p>
         </div>

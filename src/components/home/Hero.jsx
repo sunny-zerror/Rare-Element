@@ -64,7 +64,7 @@ const Hero = () => {
       <div className="home_hero">
         <video className=' home_hero_video cover' loop muted playsInline autoPlay src="https://365ayearof.cartier.com/hero-carousel/1_Creative_Alchemy_Desktop%20test%20loop%208%20sec.mp4"></video>
         <div className="home_hero_inner">
-          <h2 className='text-3xl'>The Aurora Collection</h2>
+          <h2 className='text-3xl'>World of Nahara</h2>
           <Link scroll={false} href="/rings">
             <WhiteBorderBtn text={"Discover"} />
           </Link>
