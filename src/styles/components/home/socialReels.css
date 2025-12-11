@@ -68,7 +68,11 @@
 
 /* Text */
 .socialCard_title {
+  width: 90%;
   line-height: 2.5rem !important;
+}
+.socialCard_title span {
+  color: white !important;
 }
 
 .socialCard_description {

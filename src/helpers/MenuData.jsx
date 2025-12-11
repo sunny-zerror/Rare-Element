@@ -5,7 +5,7 @@ export const MenuData = [
     image: "/images/homepage/category/rings.svg"
   },
   {
-    title: "Earings",
+    title: "Earrings",
     link: "/earings",
     image: "/images/homepage/category/earings.svg"
   },

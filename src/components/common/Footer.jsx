@@ -53,7 +53,7 @@ const footerLinksData = [
     title: "Category",
     links: [
       { label: "Rings", href: "/rings" },
-      { label: "Earings", href: "/earings" },
+      { label: "Earrings", href: "/earings" },
       { label: "Bracelet", href: "/bracelets" },
       { label: "Necklace", href: "/necklaces" },
       { label: "Anklets", href: "/anklets" },
@@ -155,7 +155,7 @@ const Footer = () => {
                 <img className="footer_logo" src="/logo.svg" alt="Nahara Logo" />
               </Link>
               <p className=" footer_about text-base thin">
-                Nahara is where timeless design meets modern craftsmanship — every piece a statement of individuality.
+                Nahara brings a bold, playful edge to modern jewellery. Designed and crafted in-house, each piece blends inventive ideas with refined details, creating a fresh kind of elegance spirited, stylish, and made to stand out.
               </p>
             </div>
 

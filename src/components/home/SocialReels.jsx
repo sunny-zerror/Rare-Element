@@ -6,29 +6,30 @@ export const SocialCardData = [
     id: 1,
     img: "https://www.buccellati.com/media/.renditions/wysiwyg/1_HP_Mobile_Cover.jpg",
     vid: "https://www.buccellati.com/media/wysiwyg/videos/PLP_Hawaii_CUT_1_1.mp4",
-    title: "Bespoke Jewellery Design",
-    description: "Created exclusively to express your individuality. Crafted with care and precision. A reflection of timeless elegance and beauty.",
+    title: "Customisation Available",
+    description: "Craft jewellery that reflects your unique style. Tailored designs, personalized details, and unmatched craftsmanship.",
   },
   {
     id: 2,
     img: "https://www.buccellati.com/media/.renditions/wysiwyg/1_HP_Cover_Mobile_ADV23.jpg",
     vid: "https://www.buccellati.com/media/wysiwyg/videos/PLP_Tulle_CUT_1_1.mp4",
-    title: "Luxury Handcrafted Rings",
-    description: "Where artistry meets precision in every curve. Designed to celebrate love and sophistication. A symbol of grace that endures forever.",
+    title: "Free Shipping",
+    description: "Enjoy seamless delivery at no extra cost. Fast, secure, and insured shipping for every order.",
   },
   {
     id: 3,
     img: "https://www.buccellati.com/media/.renditions/wysiwyg/7_HP_Cover_video_Mobile.jpg",
-    title: "Modern Timeless Elegance",
+    title: "Years of Industry Experience",
+    titleSpan: "50+",
     vid: "https://www.buccellati.com/media/wysiwyg/videos/PLP_Opera_CUT_1_1.mp4",
-    description: "Inspired by contemporary form and fluid motion. Crafted to enhance every moment of life. A design that balances power and poise.",
+    description: "A legacy of trust and excellence. Decades of mastery ensure precision, quality, and timeless design.",
   },
   {
     id: 4,
     img: "https://www.buccellati.com/media/wysiwyg/SOA_HP.jpg",
     vid: "https://www.buccellati.com/media/wysiwyg/videos/PLP_Ramage_Cut_1_1.mp4",
-    title: "Heritage Inspired Craftsmanship",
-    description: "Rooted in tradition, refined through innovation. Each creation tells a story of devotion and mastery. A legacy of beauty passed through generations.",
+    title: "Dedicated Customer Service",
+    description: "Our team is always ready to assist you. From inquiries to support, experience smooth and personalised service.",
   },
 ]
 
@@ -52,7 +53,10 @@ const SocialReels = () => {
               />
             </div>
 
-            <h2 className="socialCard_title text-xl uppercase">{item.title}</h2>
+            <h2 className="socialCard_title text-xl  uppercase">
+              <span className=" text-4xl thin">{item.titleSpan}</span>{" "}
+              {item.title}
+            </h2>
             <p className="socialCard_description thin text-lg">
               {item.description}
             </p>

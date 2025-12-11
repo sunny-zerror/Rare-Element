@@ -4,6 +4,7 @@ import { Navigation, A11y, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import Image from "next/image";
 
 const ProductImageGrid = ({ data }) => {
   const [swiperInstance, setSwiperInstance] = useState(null);
@@ -37,7 +38,7 @@ const ProductImageGrid = ({ data }) => {
                 : "MobileImageSlider_thumbnail--inactive"
                 }`}
             >
-              <img src={item?.path} alt={item?.altText || ""} />
+              <Image width={150} height={200} src={item?.path} alt={item?.altText || ""} />
             </div>
           ))}
         </div>
@@ -57,8 +58,10 @@ const ProductImageGrid = ({ data }) => {
             onSlideChange={(swiper) => setSelectedAssetIndex(swiper.realIndex)}
           >
             {data?.map((item, index) => (
-              <SwiperSlide key={index} className="MobileImageSlider_slide">
-                <img
+              <SwiperSlide key={index} className="MobileImageSlider_slide ">
+                <Image
+                  fill
+                  // quality={5}
                   src={item?.path}
                   alt={item?.altText || ""}
                   className="MobileImageSlider_slideImage"
