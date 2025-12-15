@@ -103,7 +103,7 @@ const MobileHeader = ({ openCart }) => {
     });
   }
   const closeMenu = () => {
-    if (window.lenis) lenis.stop();
+    if (window.lenis) lenis.start();
     gsap.to(".mobile_menu_classname_open_menu", {
       left: "-100%",
       delay: 0.4,
@@ -141,23 +141,19 @@ const MobileHeader = ({ openCart }) => {
         </div>
 
         <div className="links_paren">
-          <div className="menu_links_iner">
-            <Link href={"/"} onClick={() => closeMenu()}>
-              <h2 className='text-3xl capitalize underline'>Home</h2>
-            </Link>
+          <Link href={"/"} className='menu_links_iner' onClick={() => closeMenu()}>
+            <h2 className='text-3xl capitalize underline'>Home</h2>
             <RiArrowRightSLine size={16} />
-          </div>
+          </Link>
           <div className="">
-            <div className="menu_links_iner">
-              <Link href={"/rings"} onClick={() => closeMenu()}>
-                <h2 className='text-3xl capitalize underline'>Categories</h2>
-              </Link>
+            <Link href={"/rings"} className='menu_links_iner' onClick={() => closeMenu()}>
+              <h2 className='text-3xl capitalize underline'>Categories</h2>
               <RiArrowRightSLine size={16} />
-            </div>
+            </Link>
             <div className="home_category_paren scroller_none">
               <div className="home_category_inner scroller_none">
                 {MenuData?.map((item, index) => (
-                  <Link scroll={false} key={index} href={`${item?.link}`}>
+                  <Link scroll={false} key={index} href={`${item?.link}`} onClick={() => closeMenu()}>
                     <div className="category_box">
                       <div className="category_box_img_paren">
                         <img src={item?.image} className='category_box_img' alt={item?.title || ""} />
@@ -170,19 +166,15 @@ const MobileHeader = ({ openCart }) => {
             </div>
           </div>
 
-          <div className="menu_links_iner">
-            <Link href={"/about"} onClick={() => closeMenu()}>
-              <h2 className='text-3xl capitalize underline'>about</h2>
-            </Link>
+          <Link href={"/about"} className='menu_links_iner' onClick={() => closeMenu()}>
+            <h2 className='text-3xl capitalize underline'>about</h2>
             <RiArrowRightSLine size={16} />
-          </div>
+          </Link>
 
-          <div className="menu_links_iner">
-            <Link href={"/contact"} onClick={() => closeMenu()}>
-              <h2 className='text-3xl capitalize underline'>contact</h2>
-            </Link>
+          <Link href={"/contact"} className='menu_links_iner' onClick={() => closeMenu()}>
+            <h2 className='text-3xl capitalize underline'>contact</h2>
             <RiArrowRightSLine size={16} />
-          </div>
+          </Link>
         </div>
 
         <div className="menu_footer">
