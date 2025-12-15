@@ -145,7 +145,7 @@ const BillingAddress = ({ errors, control, register, setValue }) => {
           <div className="checkout_inp_flex">
 
             <div className="relative">
-              <RiArrowDownSLine size={18} className="select_arrow" />
+              <RiArrowDownSLine size={12} className="select_arrow" />
               <select
                 required
                 className="checkOut_input"
