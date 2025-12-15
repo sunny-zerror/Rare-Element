@@ -150,10 +150,10 @@ const MobileHeader = ({ openCart }) => {
               <h2 className='text-3xl capitalize '>Categories</h2>
               <RiArrowRightSLine size={16} />
             </Link>
-            <div className="home_category_paren scroller_none">
+            <div data-lenis-prevent className="home_category_paren scroller_none">
               <div className="home_category_inner scroller_none">
                 {MenuData?.map((item, index) => (
-                  <Link scroll={false} key={index} href={`${item?.link}`} onClick={() => closeMenu()}>
+                  <Link  key={index} href={`${item?.link}`} onClick={() => closeMenu()}>
                     <div className="category_box">
                       <div className="category_box_img_paren">
                         <img src={item?.image} className='category_box_img' alt={item?.title || ""} />

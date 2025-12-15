@@ -3,6 +3,7 @@
   justify-content: center;
   width: 100%;
   padding-top: 6rem;
+  margin-bottom: -3rem;
 }
 .checkout_section_inner {
   width: 100%;
@@ -337,7 +338,6 @@
 
 .checkout_summaryContainer {
   padding: 1rem;
-  background-color: #174d38;
   width: 100%;
 }
 
@@ -350,8 +350,10 @@
 }
 
 .checkout_summaryWrapper {
+  color: white;
+  font-weight: normal;
   border-radius: 0.25rem;
-  background-color: #fff;
+  background-color: #174d38;
   padding: 1rem;
   position: relative;
   width: 100%;
@@ -361,6 +363,7 @@
 
 @media (min-width: 768px) {
   .checkout_summaryWrapper {
+    color: #000;
     border-radius: 0;
     background: #fff;
     padding: 2rem;
@@ -422,7 +425,23 @@
   margin-bottom: 1.25rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+@media (max-width: 750px) {
+  .checkout_borderRow {
+    border-bottom: 1px solid rgba(194, 194, 194, 0.331);
+  }
 
+  .checkout_btn .green_box_btn,
+  .checkout_couponBtn .green_box_btn {
+    background-color: white;
+    color: #174d38;
+    font-weight: 600;
+  }
+
+  .checkout_subtotalText,
+  .checkout_subtotalValue {
+    color: white !important;
+  }
+}
 .checkout_paymentImg {
   width: 40%;
 }

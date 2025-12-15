@@ -40,7 +40,7 @@ const Hero = () => {
       duration: 1,
       ease: "ease-secondary"
     })
-
+    if (window.innerWidth < 750) return
     gsap.set(".home_hero_inner, .category_header, .home_category_paren", {
       opacity: 0
     })

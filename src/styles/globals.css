@@ -7,8 +7,17 @@ body::-webkit-scrollbar {
 * {
   margin: 0;
   padding: 0;
-  user-select: none;
   box-sizing: border-box;
+  
+  /* Disable text selection */
+  user-select: none;
+  -webkit-user-select: none;   /* iOS Safari */
+  -ms-user-select: none;       /* Old Edge */
+  -moz-user-select: none;
+
+  /* Disable long-press menu (iOS) */
+  -webkit-touch-callout: none;
+   -webkit-tap-highlight-color: transparent;
 }
 .w-full {
   width: 100%!important;
