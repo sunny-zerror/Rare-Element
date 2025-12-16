@@ -163,6 +163,9 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.checkOut_input_pren{
+  height: 3.5rem;
+}
 /* Base select */
 .checkOut_input {
   position: relative;
@@ -178,6 +181,23 @@
   color: #000; /* normal text */
   transition: all 0.1s ease;
 }
+.checkOut_input:disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.checkOut_input:has(input:disabled) {
+  pointer-events: none;
+  border: 1px solid #00000023 !important;
+}
+.delivery__phone_btn:has(input:disabled) {
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: not-allowed !important;
+}
+
+
+
 .select_arrow {
   color: black !important;
   position: absolute;
@@ -189,7 +209,7 @@
 @media (min-width: 1020px) {
   .checkOut_input:hover {
     padding-left: 1.5rem;
-    border: 2px solid #1f9468;
+    border: 2px solid #1f9468 !important;
   }
   .checkOut_input {
     padding-left: 1rem;
@@ -198,15 +218,37 @@
 
 /* Remove iOS default input styling */
 .checkOut_input {
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: #fff;
+  -webkit-user-select: text;
+  user-select: text;
+  /* caret-color: #000; */
+  /* -webkit-text-fill-color: #000 !important; */
+  background-clip: padding-box;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background-color: #fff !important;
+}
+.checkOut_input::selection {
+  background: transparent !important;
+  color: #000 !important;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .checkOut_input {
+    background-color: #fff !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+}
+
+.checkOut_input::-moz-selection {
+  background: transparent;
+  color: #000;
 }
 
 /* iOS focus blue background fix */
 .checkOut_input:focus {
   background-color: #fff !important;
-  outline: none;
+  outline: none !important;
 }
 
 /* iOS autofill (blue/yellow background) fix */
@@ -240,7 +282,7 @@
   /* border: 1px solid #dedede !important; */
   scale: 1;
   border: none !important;
-  background-color: rgba(255, 255, 255, 0.6) !important;
+  background-color: rgba(198, 38, 38, 0) !important;
   height: 110%;
 }
 /* 50% opacity placeholder */
