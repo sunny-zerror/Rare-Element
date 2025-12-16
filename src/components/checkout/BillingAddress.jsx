@@ -101,7 +101,7 @@ const BillingAddress = ({ errors, control, register, setValue }) => {
               />
             </div>
 
-            <div className="relative">
+            <div className="relative checkOut_input_pren">
               <RiArrowDownSLine size={12} className="select_arrow" />
 
               <select
@@ -144,7 +144,7 @@ const BillingAddress = ({ errors, control, register, setValue }) => {
           {/* Country + State */}
           <div className="checkout_inp_flex">
 
-            <div className="relative">
+            <div className="relative checkOut_input_pren">
               <RiArrowDownSLine size={12} className="select_arrow" />
               <select
                 required

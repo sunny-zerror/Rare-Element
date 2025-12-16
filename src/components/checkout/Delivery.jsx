@@ -133,7 +133,7 @@ const Delivery = ({ errors, control, register, setValue }) => {
                   {...register("shippingAddress.phone")}
                 />
               </div>
-              <div className="relative">
+              <div className="relative checkOut_input_pren">
                 <RiArrowDownSLine size={12} className="select_arrow" />
                 <select className="checkOut_input" {...register("shippingAddress.addressType")}>
                   <option value="" disabled hidden className="placeholderOption">Address Type</option>
@@ -167,7 +167,7 @@ const Delivery = ({ errors, control, register, setValue }) => {
 
             {/* Country + State */}
             <div className="checkout_inp_flex">
-              <div className="relative">
+              <div className="relative checkOut_input_pren">
                 <RiArrowDownSLine size={12} className="select_arrow" />
                 <select className="checkOut_input" required {...register("shippingAddress.country")}>
                   <option value="" disabled hidden className="placeholderOption">

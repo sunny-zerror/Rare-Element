@@ -13,6 +13,9 @@ const Input = ({
     <div className="w-full text-base">
       {label && (<p className='text-sm'>{label}{isRequired && (<span> * </span>)}</p>)}
       <input
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
         type={type}
         placeholder={placeholder}
         className={`checkOut_input ${className}`}
