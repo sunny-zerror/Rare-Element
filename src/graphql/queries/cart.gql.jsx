@@ -20,8 +20,6 @@ export const CART_LIST = gql`
           type
           isFeatured
           altText
-          createdAt
-          updatedAt
         }
         qty
         freeQty
@@ -54,6 +52,9 @@ export const CART_LIST = gql`
             showInProductPageAs
           }
         }
+      }
+      coupon {
+        couponId
       }
       nimbblOrderId
       nimbblInvoiceId

@@ -7,7 +7,6 @@ export const Const = {
 
 export const StatusCode = {
   Success: 200,
-  Success: 200,
   NotFound: 404,
   UnAuthorized: 401,
   Forbidden: 403,
