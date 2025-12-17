@@ -5,10 +5,9 @@ import { useAuthStore } from "@/store/auth-store";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckoutSchema } from "@/validations/CheckoutValidation";
-import { createApolloClient } from "@/lib/apolloClient";
-import { useMutation } from "@apollo/client/react";
+import { useMutation, useQuery } from "@apollo/client/react";
 import { CART_LIST, CHECKOUT_ORDER } from "@/graphql";
-import { EmailSubscribedStatus, Sort } from "@/utils/Constant";
+import { EmailSubscribedStatus } from "@/utils/Constant";
 import Checkout from "nimbbl_sonic";
 import SeoHeader from "@/components/seo/SeoHeader";
 import ContactDetail from "@/components/checkout/ContactDetail";
@@ -18,12 +17,28 @@ import OrderSummary from "@/components/checkout/OrderSummary";
 import Loader from "@/components/checkout/Loader";
 
 
-const CheckoutPage = ({ meta, initialCartData }) => {
+const CheckoutPage = ({ meta }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(false);
   const { isLoggedIn, user } = useAuthStore((state) => state);
   const [checkoutOrder] = useMutation(CHECKOUT_ORDER);
+  const cartListPayload = {
+    cartId: router?.query?.id,
+  };
+  const {
+    data: response,
+    loading,
+    refetch,
+  } = useQuery(CART_LIST, {
+    skip: !router?.query?.id,
+    variables: cartListPayload,
+    fetchPolicy: "network-only",
+    nextFetchPolicy: "cache-first",
+  });
+
+  const cartData = response?.getCart || {};
+
   const {
     register,
     handleSubmit,
@@ -140,7 +155,7 @@ const CheckoutPage = ({ meta, initialCartData }) => {
           countryCode: shippingAddress.countryCode,
           emailSubscribedStatus,
         },
-        cartId: initialCartData?._id,
+        cartId: cartData?._id,
         shippingAddress: { email, ...shippingAddress },
         billingAddress: { email, ...billingAddress },
       };
@@ -156,6 +171,7 @@ const CheckoutPage = ({ meta, initialCartData }) => {
       toast.error(err.message || "Failed");
     }
   };
+
   return (
     <>
       <SeoHeader meta={meta} />
@@ -184,7 +200,7 @@ const CheckoutPage = ({ meta, initialCartData }) => {
                 errors={errors}
               />
             </div>
-            <OrderSummary data={initialCartData} loading={isLoading} />
+            <OrderSummary data={cartData} loading={isLoading} refetch={refetch} />
           </form>
         </div>
       </div>
@@ -215,27 +231,9 @@ export async function getServerSideProps({ params }) {
     }
   };
 
-  try {
-    const cartId = params?.id || null;
-    const client = createApolloClient();
-    const { data: response } = await client.query({
-      query: CART_LIST,
-      variables: { cartId },
-    });
-    const data = response?.getCart || {};
-    return {
-      props: {
-        meta: meta,
-        initialCartData: data,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-    return {
-      props: {
-        meta: meta,
-        initialCartData: {},
-      },
-    };
-  }
+  return {
+    props: {
+      meta: meta,
+    },
+  };
 }
