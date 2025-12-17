@@ -40,7 +40,7 @@ const Hero = () => {
       duration: 1,
       ease: "ease-secondary"
     })
-
+    if (window.innerWidth < 750) return
     gsap.set(".home_hero_inner, .category_header, .home_category_paren", {
       opacity: 0
     })
@@ -62,7 +62,7 @@ const Hero = () => {
       )}
       <div className="dummy_hero_div"></div>
       <div className="home_hero">
-        <video className=' home_hero_video cover' loop muted playsInline autoPlay src="https://365ayearof.cartier.com/hero-carousel/1_Creative_Alchemy_Desktop%20test%20loop%208%20sec.mp4"></video>
+        <video className=' home_hero_video cover' loop muted playsInline autoPlay src="/videos/hero_video.mp4"></video>
         <div className="home_hero_inner">
           <h2 className='text-3xl'>World of Nahara</h2>
           <Link scroll={false} href="/rings">

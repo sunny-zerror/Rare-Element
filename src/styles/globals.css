@@ -7,8 +7,17 @@ body::-webkit-scrollbar {
 * {
   margin: 0;
   padding: 0;
-  user-select: none;
   box-sizing: border-box;
+  
+  /* Disable text selection */
+  user-select: none;
+  -webkit-user-select: none;   /* iOS Safari */
+  -ms-user-select: none;       /* Old Edge */
+  -moz-user-select: none;
+
+  /* Disable long-press menu (iOS) */
+  -webkit-touch-callout: none;
+   -webkit-tap-highlight-color: transparent;
 }
 .w-full {
   width: 100%!important;
@@ -26,9 +35,7 @@ button {
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
-.background {
-  background-color: #f6f6f6;
-}
+
 .padding{
   padding: 0rem 1rem;
 }
@@ -81,8 +88,9 @@ button {
   width: 100%;
 }
 
-
-
+.relative{
+  position: relative;
+}
 
 .parallax {
   position: relative;
