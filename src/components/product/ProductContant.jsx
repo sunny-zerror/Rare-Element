@@ -14,6 +14,7 @@ const ProductContant = ({
   setFinalPrice,
   setVariantMatched,
   setCartBtn,
+  setAssetsFilter,
   handleAddToCart,
   handleNotifyMe,
 }) => {
@@ -140,6 +141,7 @@ const ProductContant = ({
                               productOption.optionName,
                               choice.name
                             );
+                            setAssetsFilter(choice?.assetsId)
                           }}
                           style={{
                             opacity: selected ? 1 : 0.7,

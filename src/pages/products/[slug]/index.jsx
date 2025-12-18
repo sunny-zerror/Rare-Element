@@ -27,6 +27,7 @@ const ProductDetail = ({ meta, data, productList }) => {
     () => (data?.discountedPrice > 0 ? data.discountedPrice : data?.price || 0),
     [data]
   );
+  const [assetsFilter, setAssetsFilter] = useState([])
   const [finalPrice, setFinalPrice] = useState(basePrice);
   const [variantMatched, setVariantMatched] = useState(null);
   const [cartBtn, setCartBtn] = useState(false);
@@ -101,7 +102,7 @@ const ProductDetail = ({ meta, data, productList }) => {
     <>
       <SeoHeader meta={meta} />
       <div className="productDetail_main padding">
-        <ProductImageGrid data={data?.assets || []} />
+        <ProductImageGrid filter={assetsFilter} data={data?.assets || []} />
         <ProductContant
           data={data || {}}
           finalPrice={finalPrice}
@@ -111,6 +112,7 @@ const ProductDetail = ({ meta, data, productList }) => {
           isOutOfStock={variantMatched?.stockStatus === Const.OUT_OF_STOCK}
           setFinalPrice={setFinalPrice}
           setCartBtn={setCartBtn}
+          setAssetsFilter={setAssetsFilter}
           setVariantMatched={setVariantMatched}
           handleAddToCart={handleAddToCart}
           handleNotifyMe={handleNotifyMe}

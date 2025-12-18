@@ -53,7 +53,7 @@ const CheckoutPage = ({ meta }) => {
       shippingAddress: {
         addressType: "",
         countryCode: "+91",
-        country: "",
+        country: "India",
         primary: true,
       },
       billingAddress: {
@@ -200,9 +200,7 @@ const CheckoutPage = ({ meta }) => {
                 control={control}
                 errors={errors}
               />
-              <label className="checkbox-container">
-                <input type="checkbox" className="checkbox-input" />
-                <span className="custom-checkbox" />
+              <label className="">
                 <p>
                   By continuing, I confirm that I have read and accept the{" "}
                   <Link href="/terms-of-service" className="text_decoration_underline ">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, A11y, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 
-const ProductImageGrid = ({ data }) => {
+const ProductImageGrid = ({ filter, data }) => {
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [selectedAssetIndex, setSelectedAssetIndex] = useState(0);
 
@@ -24,12 +24,18 @@ const ProductImageGrid = ({ data }) => {
     }
   };
 
+  const filteredAssets = useMemo(() => {
+    if (!filter.length) return data
+    const idSet = new Set(filter);
+    return data.filter(item => idSet.has(item._id));
+  }, [data, filter])
+
   return (
     <div className="productDetail_left">
       <div className="MobileImageSlider_container">
         {/* Thumbnails */}
         <div data-lenis-prevent className="MobileImageSlider_thumbnails scroller_none">
-          {data?.map((item, index) => (
+          {filteredAssets.map((item, index) => (
             <div
               key={index}
               onMouseEnter={() => handleThumbnailClick(index)}
@@ -57,7 +63,7 @@ const ProductImageGrid = ({ data }) => {
             onSwiper={setSwiperInstance}
             onSlideChange={(swiper) => setSelectedAssetIndex(swiper.realIndex)}
           >
-            {data?.map((item, index) => (
+            {filteredAssets?.map((item, index) => (
               <SwiperSlide key={index} className="MobileImageSlider_slide ">
                 <Image
                   fill
