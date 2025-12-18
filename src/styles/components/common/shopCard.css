@@ -8,6 +8,7 @@
   border-left: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
 }
+
 .shopCard_hoverImg {
   background-color: white;
   position: absolute;
@@ -46,6 +47,20 @@
   opacity: 0.7;
 }
 
+.ribbon_btn{
+  position: absolute;
+  z-index: 99;
+  top: 1rem;
+  left: 1rem;
+  background-color: #174d38;
+  color: white;
+  backdrop-filter: blur(0.25rem);
+  padding-inline: .5rem;
+  padding-block: .3rem;
+}
+.ribbon_btn p{
+  transform: translateY(.05rem);
+}
 .heart_icon {
   position: absolute;
   z-index: 99;

@@ -61,6 +61,10 @@ export const GET_CLIENT_SIDE_CATEGORY_BY_SLUG = gql`
         productType
         slug
         status
+          ribbon {
+          name
+          ribbonId
+        }
         variants {
           selectedOptions
           priceDifference

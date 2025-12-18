@@ -9,6 +9,7 @@ import { getProductPriceLabel } from '@/utils/Util'
 import { StatusCode } from '@/utils/Constant'
 
 const Categories = ({ meta, data, productList }) => {
+  console.log(productList);
 
   useEffect(() => {
     var height
@@ -61,6 +62,7 @@ const Categories = ({ meta, data, productList }) => {
               <ProductCard
                 key={item?._id}
                 name={item?.name || ""}
+                ribbon={item?.ribbon || ""}
                 price={getProductPriceLabel(item?.variants, item?.discountedPrice)}
                 assets={item?.assets || []}
               />
@@ -97,7 +99,7 @@ export async function getServerSideProps({ params }) {
       description: "Shop jewellery categories at Nahara.",
     }
   };
-  
+
   try {
     const client = createApolloClient();
     const response = await client.query({ query: GET_CLIENT_SIDE_CATEGORY_BY_SLUG, variables: { slug } });

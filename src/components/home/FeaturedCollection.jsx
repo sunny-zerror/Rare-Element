@@ -38,6 +38,7 @@ const FeaturedCollection = ({ data }) => {
                   <ProductCard
                     key={item?._id}
                     name={item?.name || ""}
+                    ribbon={item?.ribbon || ""}
                     price={getProductPriceLabel(item?.variants, item?.discountedPrice)}
                     assets={item?.assets || []}
                   />

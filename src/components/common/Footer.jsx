@@ -16,24 +16,28 @@ gsap.registerPlugin(ScrollTrigger)
 export const featureData = [
   {
     title: "Secure Payment",
+    href: "/privacy-policy",
     img: "/icons/lock.svg",
     animationData: SecureLock,
     desc: "Your transactions are encrypted and fully protected for safe checkout.",
   },
   {
     title: "Free Shipping",
+    href: "/shipping-returns",
     img: "/icons/shipping.svg",
     animationData: FreeShipping,
     desc: "Enjoy complimentary shipping on all domestic orders with no minimum spend.",
   },
   {
     title: "Store & Retail",
+    href: "",
     img: "/icons/store.svg",
     animationData: StoresRetail,
     desc: "Visit our boutique stores for an exclusive hands-on shopping experience.",
   },
   {
     title: "Chat Support",
+    href: "https://wa.me/0000000000",
     img: "/icons/chat.svg",
     animationData: ChatSupport,
     desc: "Need help? Our support team is available 24/7 to assist you instantly.",
@@ -106,7 +110,8 @@ const Footer = () => {
             const arrowRef = useRef(null);
 
             return (
-              <div
+              <Link
+                href={item.href}
                 key={i}
                 onMouseEnter={() => {
                   mainRef.current?.goToAndPlay(0, true);
@@ -139,7 +144,7 @@ const Footer = () => {
                     loop={false} // play only once
                   />
                 </div>
-              </div>
+              </Link>
             );
           })}
 

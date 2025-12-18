@@ -19,6 +19,10 @@ export const GET_PRODUCTS = gql`
         slug
         status
         isDeleted
+          ribbon {
+          name
+          ribbonId
+        }
         variants {
           selectedOptions
           priceDifference

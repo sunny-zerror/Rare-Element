@@ -103,14 +103,13 @@ const BillingAddress = ({ errors, control, register, setValue }) => {
 
             <div className="relative checkOut_input_pren">
               <RiArrowDownSLine size={12} className="select_arrow" />
-
               <select
                 required
                 className="checkOut_input"
                 disabled={useShippingAsBilling}
                 {...register("billingAddress.addressType")}
               >
-                <option value="" disabled hidden  className="placeholderOption">Address Type</option>
+                <option value="" disabled hidden className="placeholderOption">Address Type</option>
                 {addressType?.map((item, index) => (
                   <option value={item?.value || ""} key={`addr-${index}`}>{item?.label || ""}</option>
                 ))}

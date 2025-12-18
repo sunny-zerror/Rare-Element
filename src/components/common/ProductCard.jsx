@@ -1,9 +1,15 @@
 import Image from "next/image";
 import React from "react";
 
-const ProductCard = ({ name, price, assets }) => {
+const ProductCard = ({ name, ribbon, price, assets }) => {
+    console.log(ribbon);
     return (
         <div className="shopCard_card">
+            {ribbon?.name && (
+                <div className="ribbon_btn">
+                    <p className="text-xs">{ribbon.name}</p>
+                </div>
+            )}
             {/* Heart Icons */}
             <div className="heart_icon">
                 <div className="icon_pr">
