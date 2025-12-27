@@ -9,7 +9,7 @@ import { getProductPriceLabel } from '@/utils/Util'
 import { StatusCode } from '@/utils/Constant'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import ProductCardSkeleton from '@/components/skeletons/ProductCardSkeleton'
+import CategoryPageSkeleton from '@/components/skeletons/CategoryPageSkeleton'
 
 const Categories = ({ meta, data, productList }) => {
   const pathname = usePathname()
@@ -71,11 +71,67 @@ const Categories = ({ meta, data, productList }) => {
     return () => ctx.revert()
   }, [pathname])
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const height = window.innerWidth > 750 ? "76vh" : "47.5rem"
+
+      gsap.set([
+        ".products_content",
+        ".products_hero-img",
+        ".products_header",
+        ".allproducts_paren",
+        ".category_products_header"
+      ], { opacity: 0 })
+
+      gsap.fromTo(
+        ".products_hero-section",
+        { height: 0 },
+        {
+          height,
+          duration: 1,
+          delay: 0.3,
+          ease: "ease-secondary"
+        }
+      )
+
+      gsap.to([
+        ".products_content",
+        ".products_hero-img",
+        ".products_header",
+        ".allproducts_paren",
+        ".category_products_header"
+      ], {
+        opacity: 1,
+        delay: 0.5,
+        stagger: 0.1,
+        duration: 1,
+        ease: "ease-secondary"
+      })
+
+      if (window.innerWidth < 750) return
+      gsap.to(".products_hero-img", {
+        y: 200,
+        filter: "brightness(0.5)",
+        ease: "linear",
+        scrollTrigger: {
+          trigger: ".products_hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        }
+      })
+
+
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [pathname])
+
 
   return (
     <>
       <SeoHeader meta={meta} />
-      <Suspense fallback={<ProductCardSkeleton />}>
+      <Suspense fallback={<CategoryPageSkeleton />}>
         <div ref={containerRef}>
           <div className="products_hero-section ">
             <Image key={pathname} fill priority={true}
