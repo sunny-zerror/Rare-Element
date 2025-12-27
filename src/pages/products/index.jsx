@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import Link from 'next/link'
 import gsap from 'gsap'
 import SeoHeader from '@/components/seo/SeoHeader'
@@ -11,6 +11,7 @@ import Image from 'next/image'
 import ProductsFilterHeader from '@/components/product/ProductsFilterHeader'
 import ProductsAside from '@/components/product/ProductsAside'
 import { RiEqualizerLine, RiFilterLine } from '@remixicon/react'
+import AllProductsPageSkeleton from '@/components/skeletons/AllProductsPageSkeleton'
 
 const AllProducts = ({ meta, products }) => {
   const [openFilter, setOpenFilter] = useState(false)
@@ -63,39 +64,44 @@ const AllProducts = ({ meta, products }) => {
   return (
     <>
       <SeoHeader meta={meta} />
+      <Suspense fallback={<AllProductsPageSkeleton />}>
 
-      <div className="products_header">
-        <p className="products_subtitle thin text-base uppercase">Crafted for Every Moment</p>
-        <h2 className="products_title text-3xl">Explore  Products</h2>
-      </div>
+        <>
+          <div className="products_header">
+            <p className="products_subtitle thin text-base uppercase">Crafted for Every Moment</p>
+            <h2 className="products_title text-3xl">Explore  Products</h2>
+          </div>
 
-      <div className="w-full center">
-        <button type="button" onClick={() => setOpenFilter(true)} className="open_filter  text-xs uppercase">
-            <RiEqualizerLine size={14}/>
-          <p className="uppercase text-base">
-            Apply Filter
-          </p>
-        </button>
-      </div>
+          <div className="w-full center">
+            <button type="button" onClick={() => setOpenFilter(true)} className="open_filter  text-xs uppercase">
+              <RiEqualizerLine size={14} />
+              <p className="uppercase text-base">
+                Apply Filter
+              </p>
+            </button>
+          </div>
 
-      <div className=" products_layout_paren padding ">
-        <ProductsAside openFilter={openFilter} setOpenFilter={setOpenFilter} />
-        <div className="allproducts_paren ">
-          {products?.length == 0 && <h2 className='text-xl text-center'>No products found</h2>}
+          <div className=" products_layout_paren padding ">
+            <ProductsAside openFilter={openFilter} setOpenFilter={setOpenFilter} />
+            <div className="allproducts_paren ">
+              {products?.length == 0 && <h2 className='text-xl text-center'>No products found</h2>}
 
-          {products?.map((item) => (
-            <Link key={item?._id} scroll={false} href={`/products/${item?.slug || item?._id}`}>
-              <ProductCard
-                key={item?._id}
-                name={item?.name || ""}
-                ribbon={item?.ribbon || ""}
-                price={getProductPriceLabel(item?.variants, item?.discountedPrice)}
-                assets={item?.assets || []}
-              />
-            </Link>
-          ))}
-        </div>
-      </div>
+              {products?.map((item) => (
+                <Link prefetch key={item?._id} scroll={false} href={`/products/${item?.slug || item?._id}`}>
+                  <ProductCard
+                    key={item?._id}
+                    name={item?.name || ""}
+                    ribbon={item?.ribbon || ""}
+                    price={getProductPriceLabel(item?.variants, item?.discountedPrice)}
+                    assets={item?.assets || []}
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </>
+      </Suspense>
+
     </>
   )
 }
