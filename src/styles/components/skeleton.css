@@ -63,3 +63,8 @@
     height: 100vh !important;
   }
 }
+
+
+.category_skeleton{
+  height: 80vh !important;
+}
