@@ -4,15 +4,44 @@ import Link from 'next/link';
 import React, { useEffect } from 'react'
 import GreenBoxBtn from '../buttons/GreenBoxBtn';
 import gsap from 'gsap';
+import { useMutation } from '@apollo/client/react';
+import { ADD_TO_WISHLIST, GET_WISHLIST_ITEMS } from '@/graphql';
+import { useAuthStore } from '@/store/auth-store';
+import { toast } from 'react-toastify';
 
 const WishlistPopup = ({ item, popupActive, setPopupActive, handleAddItem, handleRemoveItem, onClose }) => {
+    const { user } = useAuthStore();
+    const userId = user?._id || user?.id;
+
+    const [addToWishlist, { loading }] = useMutation(ADD_TO_WISHLIST, {
+        update(cache, { data: { addToWishlist: newItem } }) {
+            const existing = cache.readQuery({
+                query: GET_WISHLIST_ITEMS,
+                variables: { userId }
+            });
+
+            if (existing && newItem) {
+                cache.writeQuery({
+                    query: GET_WISHLIST_ITEMS,
+                    variables: { userId },
+                    data: {
+                        getWishlistItems: {
+                            ...existing.getWishlistItems,
+                            items: [...existing.getWishlistItems.items, newItem],
+                            totalCount: existing.getWishlistItems.totalCount + 1
+                        }
+                    }
+                });
+            }
+        }
+    });
 
     useEffect(() => {
         if (popupActive) {
             gsap.to(".add_popup_paren", {
                 opacity: 1,
                 ease: "expo.out",
-                duration:.5,
+                duration: .5,
                 pointerEvents: "auto"
             })
         }
@@ -20,14 +49,38 @@ const WishlistPopup = ({ item, popupActive, setPopupActive, handleAddItem, handl
             gsap.to(".add_popup_paren", {
                 opacity: 0,
                 ease: "expo.out",
-                duration:.5,
+                duration: .5,
                 pointerEvents: "none"
             })
         }
 
     }, [popupActive])
 
+    const handleSaveToWishlist = async () => {
+        try {
+            await addToWishlist({
+                variables: {
+                    input: {
+                        productId: item?.productId,
+                        ...(item?.variantDetail?.variantDetailId ? { variantId: item.variantDetail.variantDetailId } : {})
+                    },
+                    userId
+                }
+            });
+            // Remove from cart
+            await handleRemoveItem(item?.productId, item?.variantDetail?.variantDetailId, true);
+            setPopupActive(false);
+        } catch (error) {
+            toast.error(error.message || "Failed to save to wishlist");
+        }
+    };
 
+    const confirmRemove = async () => {
+        await handleRemoveItem(item?.productId, item?.variantDetail?.variantDetailId, true);
+        setPopupActive(false);
+    };
+
+    const firstAsset = item?.product?.assets?.[0]?.path || "/images/homepage/category/bracelets.svg";
     return (
         <>
             <div className="add_popup_paren center">
@@ -41,15 +94,15 @@ const WishlistPopup = ({ item, popupActive, setPopupActive, handleAddItem, handl
                                     width={150}
                                     height={250}
                                     className="cover"
-                                    src={"/images/homepage/category/bracelets.svg"}
-                                    alt={"loading"}
+                                    src={firstAsset}
+                                    alt={item?.name || "loading"}
                                 />
                             </div>
                         </div>
                         <div className="cartBag_bagItemDetails">
                             <div className="cartBag_bagItemTop">
                                 <div className="cartBag_itemHead">
-                                     <Link prefetch scroll={false} href={`/products/`} className="cartBag_itemName text-base">
+                                    <Link prefetch scroll={false} href={`/products/${item?.product?.slug || item?.productId}`} className="cartBag_itemName text-base">
                                         <p>
                                             {item?.name}
                                         </p>
@@ -69,13 +122,17 @@ const WishlistPopup = ({ item, popupActive, setPopupActive, handleAddItem, handl
 
                         <button
                             type="button"
-                            onClick={()=>setPopupActive(false)}
+                            onClick={confirmRemove}
                             className="cancel_form_btn"
                         >
                             Remove anyway
                         </button>
 
-                        <GreenBoxBtn title="Save to wishlist" />
+                        <GreenBoxBtn
+                            loading={loading}
+                            title="Save to wishlist"
+                            onClick={handleSaveToWishlist}
+                        />
                     </div>
 
                 </div>

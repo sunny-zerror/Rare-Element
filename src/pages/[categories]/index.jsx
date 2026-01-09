@@ -162,6 +162,7 @@ const Categories = ({ meta, data, productList }) => {
                     href={`/products/${item.slug || item._id}`}
                   >
                     <ProductCard
+                      productId={item._id}
                       name={item.name || ""}
                       ribbon={item.ribbon || ""}
                       price={getProductPriceLabel(

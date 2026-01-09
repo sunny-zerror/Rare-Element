@@ -38,6 +38,7 @@ const FeaturedCollection = ({ data }) => {
                 <div className="featured_shopcard">
                   <ProductCard
                     key={item?._id}
+                    productId={item?._id}
                     name={item?.name || ""}
                     ribbon={item?.ribbon || ""}
                     price={getProductPriceLabel(item?.variants, item?.discountedPrice)}

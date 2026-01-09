@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { toast } from 'react-toastify';
@@ -16,7 +16,6 @@ import ProductContant from '@/components/product/ProductContant';
 import ProductListGrid from "@/components/product/ProductListGrid";
 import ProductBanner from "@/components/product/ProductBanner";
 import { AuthCookies } from "@/utils/AuthCookies";
-import ProductDetailPageSkeleton from "@/components/skeletons/ProductDetailPageSkeleton";
 gsap.registerPlugin(ScrollTrigger);
 
 const ProductDetail = ({ meta, data, productList }) => {
@@ -100,32 +99,26 @@ const ProductDetail = ({ meta, data, productList }) => {
   return (
     <>
       <SeoHeader meta={meta} />
-
-      <Suspense fallback={<ProductDetailPageSkeleton />}>
-
-        <>
-          <div className="productDetail_main padding">
-            <ProductImageGrid filter={assetsFilter} data={data?.assets || []} />
-            <ProductContant
-              data={data || {}}
-              finalPrice={finalPrice}
-              cartBtn={cartBtn}
-              loading={loading}
-              notifyLoading={notifyLoading}
-              isOutOfStock={variantMatched?.stockStatus === Const.OUT_OF_STOCK}
-              setFinalPrice={setFinalPrice}
-              setCartBtn={setCartBtn}
-              setAssetsFilter={setAssetsFilter}
-              setVariantMatched={setVariantMatched}
-              handleAddToCart={handleAddToCart}
-              handleNotifyMe={handleNotifyMe}
-            />
-          </div>
-          <ProductListGrid title="You may also like" data={productList} />
-          <ProductBanner />
-        </>
-
-      </Suspense>
+      <div className="productDetail_main padding">
+        <ProductImageGrid filter={assetsFilter} data={data?.assets || []} />
+        <ProductContant
+          data={data || {}}
+          finalPrice={finalPrice}
+          cartBtn={cartBtn}
+          variantMatched={variantMatched} // Pass variantMatched
+          loading={loading}
+          notifyLoading={notifyLoading}
+          isOutOfStock={variantMatched?.stockStatus === Const.OUT_OF_STOCK}
+          setFinalPrice={setFinalPrice}
+          setCartBtn={setCartBtn}
+          setAssetsFilter={setAssetsFilter}
+          setVariantMatched={setVariantMatched}
+          handleAddToCart={handleAddToCart}
+          handleNotifyMe={handleNotifyMe}
+        />
+      </div>
+      <ProductListGrid title="You may also like" data={productList} />
+      <ProductBanner />
     </>
   )
 }

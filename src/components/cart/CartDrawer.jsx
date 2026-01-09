@@ -11,8 +11,7 @@ import GreenBoxBtn from '@/components/buttons/GreenBoxBtn';
 import CartItem from '@/components/cart/CartItem';
 import { RiCloseLine } from "@remixicon/react";
 import { AuthCookies } from "@/utils/AuthCookies";
-import Image from "next/image";
-import Link from "next/link";
+
 import WishlistPopup from "./WishlistPopup";
 
 const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
@@ -20,9 +19,31 @@ const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
   const token = AuthCookies.get();
   const { visitorId } = useVisitor();
   const { user, isLoggedIn } = useAuthStore((state) => state);
-  const [popupActive, setPopupActive] = useState(false)
+  const initialState = {
+    popupActive: false,
+    isBtnLoading: false,
+    itemToSave: null,
+  };
 
-  const [isBtnLoading, setIsBtnLoading] = useState(false);
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "SET_POPUP_ACTIVE":
+        return { ...state, popupActive: action.payload };
+      case "SET_BTN_LOADING":
+        return { ...state, isBtnLoading: action.payload };
+      case "SET_ITEM_TO_SAVE":
+        return { ...state, itemToSave: action.payload };
+      case "OPEN_WISHLIST_POPUP":
+        return { ...state, popupActive: true, itemToSave: action.payload };
+      case "CLOSE_WISHLIST_POPUP":
+        return { ...state, popupActive: false, itemToSave: null };
+      default:
+        return state;
+    }
+  };
+
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const { popupActive, isBtnLoading, itemToSave } = state;
 
   const [addCartItem, { loading: itemAddLoader }] =
     useMutation(ADD_ITEM_TO_CART);
@@ -78,7 +99,7 @@ const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
     }
   };
 
-  const handleRemoveItem = async (
+  const performRemoveItem = async (
     productId,
     variantDetailId,
     isCompleteRemove = true
@@ -102,16 +123,33 @@ const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
     }
   };
 
+  const handleRemoveItem = async (
+    productId,
+    variantDetailId,
+    isCompleteRemove = true
+  ) => {
+    if (isCompleteRemove && isLoggedIn) {
+      const item = cart.find(
+        (i) =>
+          i.productId === productId &&
+          i.variantDetail?.variantDetailId === variantDetailId
+      );
+      dispatch({ type: "OPEN_WISHLIST_POPUP", payload: item });
+      return;
+    }
+    await performRemoveItem(productId, variantDetailId, isCompleteRemove);
+  };
+
   const navigateCheckout = async () => {
     if (count <= 0) return;
     try {
-      setIsBtnLoading(true);
+      dispatch({ type: "SET_BTN_LOADING", payload: true });
       await router.push(`/checkout/${_id}`);
       closeCart();
     } catch (err) {
       console.error("Navigation failed:", err);
     } finally {
-      setIsBtnLoading(false);
+      dispatch({ type: "SET_BTN_LOADING", payload: false });
     }
   };
 
@@ -181,11 +219,13 @@ const CartDrawer = ({ isOpen, closeCart, overlayRef }) => {
 
       {popupActive && (
         <WishlistPopup
-          item={cart?.[0]}
+          item={itemToSave}
           popupActive={popupActive}
-          setPopupActive={setPopupActive}
+          setPopupActive={(val) =>
+            dispatch({ type: "SET_POPUP_ACTIVE", payload: val })
+          }
           handleAddItem={handleAddItem}
-          handleRemoveItem={handleRemoveItem}
+          handleRemoveItem={performRemoveItem}
           onClose={closeCart}
         />
       )}
