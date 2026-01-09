@@ -135,7 +135,7 @@ const ProductCard = React.memo(({ productId, name, ribbon, price, assets }) => {
             <div className="shopCard_hoverImg">
                 <Image
                     src={featuredAsset?.path || "/green_logo.svg"}
-                    alt={featuredAsset?.altText || "loading"}
+                    alt={featuredAsset?.altText || name || "Rare Element Product"}
                     fill
                     loading="lazy"
                     quality={75}
@@ -146,7 +146,7 @@ const ProductCard = React.memo(({ productId, name, ribbon, price, assets }) => {
             <div className="shopCard_img_wrapper center">
                 <Image
                     src={assets?.[0]?.path || "/green_logo.svg"}
-                    alt={assets?.[0]?.altText || "loading"}
+                    alt={assets?.[0]?.altText || name || "Rare Element Product"}
                     fill
                     loading="lazy"
                     quality={75}

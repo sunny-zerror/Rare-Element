@@ -19,6 +19,10 @@ import { AuthCookies } from "@/utils/AuthCookies";
 gsap.registerPlugin(ScrollTrigger);
 
 const ProductDetail = ({ meta, data, productList }) => {
+  const breadcrumbList = [
+    { name: data?.categories?.[0]?.name || "Products", slug: data?.categories?.[0]?.slug ? `/${data.categories[0].slug}` : "/products" },
+    { name: data?.name, slug: `/products/${data?.slug}` }
+  ];
   const router = useRouter();
   const { visitorId } = useVisitor();
   const basePrice = useMemo(
@@ -98,7 +102,7 @@ const ProductDetail = ({ meta, data, productList }) => {
 
   return (
     <>
-      <SeoHeader meta={meta} />
+      <SeoHeader meta={meta} productData={data} breadcrumbList={breadcrumbList} />
       <div className="productDetail_main padding">
         <ProductImageGrid filter={assetsFilter} data={data?.assets || []} />
         <ProductContant

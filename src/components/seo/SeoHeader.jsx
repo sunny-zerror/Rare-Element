@@ -5,8 +5,10 @@ import WebPageSchema from "./WebPageSchema";
 import NewsMediaOrganizationSchema from "./NewsMediaOrganizationSchema";
 import { Const } from "@/utils/Constant";
 import SiteNavigationSchema from "./SiteNavigationSchema";
+import ProductSchema from "./ProductSchema";
+import BreadcrumbSchema from "./BreadcrumbSchema";
 
-const SeoHeader = ({ meta }) => {
+const SeoHeader = ({ meta, productData, breadcrumbList }) => {
   const router = useRouter();
   const canonical = `${Const.ClientLink}/${router.asPath?.slice(1)}`;
   return (
@@ -19,8 +21,7 @@ const SeoHeader = ({ meta }) => {
       <meta
         name="robots"
         content={
-          `${meta?.robots}, max-image-preview:large` ??
-          "index,follow, max-image-preview:large"
+          `${meta?.robots ?? "index,follow"}, max-image-preview:large`
         }
       />
       <link rel="canonical" href={meta?.canonical ?? canonical} />
@@ -92,6 +93,8 @@ const SeoHeader = ({ meta }) => {
         ]}
       />
       <SiteNavigationSchema />
+      {productData && <ProductSchema product={productData} />}
+      {breadcrumbList && <BreadcrumbSchema itemList={breadcrumbList} />}
     </Head>
   );
 };

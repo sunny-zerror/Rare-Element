@@ -1,4 +1,4 @@
-import { Const } from "@/Utils/Constant";
+import { Const } from "@/utils/Constant";
 import Head from "next/head";
 
 const BreadcrumbSchema = ({ itemList }) => {

@@ -44,7 +44,7 @@ export async function getServerSideProps() {
       title: "Nahara – Luxury Fine Jewellery Crafted for Modern Elegance",
       description: "Handcrafted fine jewellery in gold, diamonds, and silver made for modern elegance.",
     },
-    twitte: {
+    twitter: {
       card: "summary_large_image",
       title: "Nahara – Luxury Fine Jewellery Crafted for Modern Elegance",
       description: "Explore premium handcrafted jewellery at Nahara.",

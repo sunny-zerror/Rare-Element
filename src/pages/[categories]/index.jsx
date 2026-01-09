@@ -12,6 +12,9 @@ import { usePathname } from 'next/navigation'
 import CategoryPageSkeleton from '@/components/skeletons/CategoryPageSkeleton'
 
 const Categories = ({ meta, data, productList }) => {
+  const breadcrumbList = [
+    { name: data?.name, slug: `/${data?.categoriesSlug || data?.slug}` }
+  ];
   const pathname = usePathname()
   const containerRef = useRef(null)
 
@@ -130,7 +133,7 @@ const Categories = ({ meta, data, productList }) => {
 
   return (
     <>
-      <SeoHeader meta={meta} />
+      <SeoHeader meta={meta} breadcrumbList={breadcrumbList} />
       <Suspense fallback={<CategoryPageSkeleton />}>
         <div ref={containerRef}>
           <div className="products_hero-section ">
