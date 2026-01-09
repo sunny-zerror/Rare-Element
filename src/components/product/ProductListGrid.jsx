@@ -17,6 +17,7 @@ const ProductListGrid = ({ title, data }) => {
             <div className="suggestion_shopcard">
               <ProductCard
                 key={item?._id}
+                productId={item?._id}
                 name={item?.name || ""}
                 price={getProductPriceLabel(item?.variants, item?.discountedPrice)}
                 assets={item?.assets || []}

@@ -90,6 +90,7 @@ const AllProducts = ({ meta, products }) => {
                 <Link prefetch key={item?._id} scroll={false} href={`/products/${item?.slug || item?._id}`}>
                   <ProductCard
                     key={item?._id}
+                    productId={item?._id}
                     name={item?.name || ""}
                     ribbon={item?.ribbon || ""}
                     price={getProductPriceLabel(item?.variants, item?.discountedPrice)}

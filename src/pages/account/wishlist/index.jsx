@@ -1,12 +1,27 @@
 import React from 'react';
-// import Link from 'next/link';
-// import ProductCard from '@/components/common/ProductCard';
-// import { ProductsData } from '@/utils/ProductsData';
+import Link from 'next/link';
+import ProductCard from '@/components/common/ProductCard';
 import SeoHeader from '@/components/seo/SeoHeader';
 import AccountLayout from '@/components/layouts/AccountLayout';
 import AccountBreadcrumb from '@/components/account/AccountBreadcrumb';
+import { useQuery } from '@apollo/client/react';
+import { GET_WISHLIST_ITEMS } from '@/graphql';
+import { useAuthStore } from '@/store/auth-store';
+import { getProductPriceLabel } from '@/utils/Util';
 
 const Wishlist = ({ meta }) => {
+  const { user } = useAuthStore();
+  const userId = user?._id || user?.id;
+
+  const { data, loading, error } = useQuery(GET_WISHLIST_ITEMS, {
+    variables: { userId },
+    skip: !userId,
+  });
+
+  if (!userId) return null;
+
+  const wishlistItems = data?.getWishlistItems?.items || [];
+
   return (
     <>
       <SeoHeader meta={meta} />
@@ -16,11 +31,26 @@ const Wishlist = ({ meta }) => {
           <h2 className="settings__title text-xl">My Wishlist</h2>
 
           <div className="wishlist_box">
-            {/* {ProductsData?.map((item, idx) => (
-              <Link scroll={false} key={idx} href={`/products/${item.slug}`} className='wishlist_card'>
-                <ProductCard item={item} />
+            {loading && <p>Loading wishlist...</p>}
+            {error && <p className="text-red-500">Error loading wishlist: {error.message}</p>}
+            {!loading && wishlistItems.length === 0 && (
+              <div className="text-center py-10">
+                <p className="text-lg text-gray-500">Your wishlist is empty.</p>
+                <Link href="/products" className="text-blue-600 underline mt-4 inline-block">
+                  Go Shopping
+                </Link>
+              </div>
+            )}
+            {wishlistItems.map((item) => (
+              <Link scroll={false} key={item._id} href={`/products/${item.product?.slug || item.product?._id}`} className='wishlist_card'>
+                <ProductCard
+                  productId={item.product?._id}
+                  name={item.product?.name}
+                  price={getProductPriceLabel(item.product?.variants, item.product?.discountedPrice)}
+                  assets={item.product?.assets}
+                />
               </Link>
-            ))} */}
+            ))}
           </div>
 
         </div>
