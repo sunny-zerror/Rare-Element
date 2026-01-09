@@ -7,6 +7,7 @@ import { MenuData } from '@/helpers/MenuData';
 import CustomEase from 'gsap/dist/CustomEase';
 import { useAuthStore } from '@/store/auth-store';
 import { RiArrowRightSLine } from '@remixicon/react';
+import Image from 'next/image';
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 
@@ -22,9 +23,9 @@ const footer_links = [
   {
     title: "Contact Us",
     links: [
-      { label: "Instagram", href: "https://instagram.com" },
-      { label: "WhatsApp", href: "https://wa.me/0000000000" },
-      { label: "contact@nahara.co.in", href: "https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKjgCNjxJKkzZhJktdvrWdssGbJXkRJqFwsZljDKHnPDRLXcrkzLKSLVtRgNBJQQtgTCQjs" },
+      { label: "Instagram", href: "https://www.instagram.com/nahara.jewellery/?igsh=MXgwcmQ2ODhnaTR3ag%3D%3D#" },
+      { label: "WhatsApp", href: "https://wa.me/+919137159898" },
+      { label: "hello@nahara.co.in", href: "https://mail.google.com/mail/u/0/#inbox?compose=https://mail.google.com/mail/u/0/#inbox?compose=DmwnWsCZFQTSPKdBWzqptmWzRGSXbXPcgGKFLkKhbNnbbmlgJgCbMhkZCbbJRRqmCSbHhCHFkrGB" },
     ],
   },
 ]
@@ -150,13 +151,13 @@ const MobileHeader = ({ openCart }) => {
               <h2 className='text-3xl capitalize '>Categories</h2>
               <RiArrowRightSLine size={16} />
             </Link>
-            <div  className="home_category_paren scroller_none">
+            <div className="home_category_paren scroller_none">
               <div className="home_category_inner scroller_none">
                 {MenuData?.map((item, index) => (
-                  <Link prefetch scroll={false}  key={index} href={`${item?.link}`} onClick={() => closeMenu()}>
+                  <Link prefetch scroll={false} key={index} href={`${item?.link}`} onClick={() => closeMenu()}>
                     <div className="category_box">
                       <div className="category_box_img_paren">
-                        <img src={item?.image} className='category_box_img' alt={item?.title || ""} />
+                        <Image width={200} height={200} src={item?.image} className='category_box_img' alt={item?.title || ""} />
                       </div>
                       <p className='text-sm bold uppercase'>{item?.title || ""}</p>
                     </div>

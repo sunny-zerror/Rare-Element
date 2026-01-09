@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Category = ({ data }) => {
     return (
@@ -14,7 +15,7 @@ const Category = ({ data }) => {
                             <Link prefetch scroll={false} key={index} href={`${item?.link}`}>
                                 <div className="category_box">
                                     <div className="category_box_img_paren">
-                                        <img src={item?.image} className='category_box_img' alt={item?.title || ""} />
+                                        <Image width={200} height={200} src={item?.image} className='category_box_img' alt={item?.title || ""} />
                                     </div>
                                     <p className='text-sm bold uppercase'>{item?.title || ""}</p>
                                 </div>

@@ -36,9 +36,9 @@ const ProductImageGrid = ({ filter, data }) => {
 
   return (
     <div className="productDetail_left">
-      <div className="MobileImageSlider_container">
+      <div className="MobileImageSlider_container scroller_none">
         {/* Thumbnails */}
-        <div data-lenis-prevent className="MobileImageSlider_thumbnails scroller_none">
+        <div  className="MobileImageSlider_thumbnails scroller_none">
           {filteredAssets.map((item, index) => {
             const src = item?.path || "/green_logo.svg";
             const video = isVideo(src);

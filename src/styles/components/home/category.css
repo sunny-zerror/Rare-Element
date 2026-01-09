@@ -87,9 +87,9 @@
   }
 
   .home_category_inner {
-    width: 80%;
+    width: 65%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
 
