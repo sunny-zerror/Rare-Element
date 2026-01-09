@@ -318,7 +318,7 @@ const ProductContant = ({
                         })}
                       </div>
                       {data?.assets?.some(a => a.isSizeGuide) && (
-                        <div className="clear_variatns_btn">
+                        <div className="clear_variatns_btn size_guide_btn">
                           <button type="button" onClick={handleOpenSizeGuide}>
                             <p className="uppercase text-xs">SIZE GUIDE</p>
                           </button>

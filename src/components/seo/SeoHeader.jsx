@@ -74,22 +74,20 @@ const SeoHeader = ({ meta, productData, breadcrumbList }) => {
         clientLink={`${Const.ClientLink}/`}
         logoUrl={`${Const.ClientLink}/logo.svg`}
         address={{
-          streetAddress: "Bankeybihari Holdings B5, 3rd floor, Everest Apt., Pt. Madan Mohan Malviya Marg, Tardeo",
+          streetAddress: "GE 1080 G TOWER EAST WING 1ST FLOOR BHARAT DIAMOND BOURSE BANDRA KURLA COMPLEX 27 MAHARASHTRA",
           addressLocality: "Mumbai",
           addressRegion: "Maharashtra",
-          postalCode: "400034",
+          postalCode: "400051",
           addressCountry: "IN",
         }}
         contact={{
-          telephone: "+919833983775",
+          telephone: "+919137159898",
           contactType: "Customer Service",
           areaServed: "IN",
           availableLanguage: "English",
         }}
         sameAs={[
-          "https://www.instagram.com/",
-          "https://www.linkedin.com/",
-          "https://www.facebook.com/",
+          "https://www.instagram.com/nahara.jewellery/?igsh=MXgwcmQ2ODhnaTR3ag%3D%3D#",
         ]}
       />
       <SiteNavigationSchema />

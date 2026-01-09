@@ -42,7 +42,7 @@ export const featureData = [
   {
     id:4,
     title: "Dedicated Customer Service",
-    href: "https://wa.me/0000000000",
+    href: "https://wa.me/+919137159898",
     img: "/icons/chat.svg",
     animationData: ChatSupport,
     desc: "Our friendly support team is always ready to help you with orders, queries, and guidance.",
@@ -62,11 +62,11 @@ const footerLinksData = [
   {
     title: "Category",
     links: [
+      { label: "All", href: "/products" },
       { label: "Rings", href: "/rings" },
       { label: "Earrings", href: "/earings" },
       { label: "Bracelet", href: "/bracelets" },
       { label: "Necklace", href: "/necklaces" },
-      { label: "Anklets", href: "/anklets" },
     ],
   },
   {
@@ -80,9 +80,9 @@ const footerLinksData = [
   {
     title: "Contact Us",
     links: [
-      { label: "Instagram", href: "https://instagram.com" },
-      { label: "WhatsApp", href: "https://wa.me/0000000000" },
-      { label: "contact@nahara.co.in", href: "https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKjgCNjxJKkzZhJktdvrWdssGbJXkRJqFwsZljDKHnPDRLXcrkzLKSLVtRgNBJQQtgTCQjs" },
+      { label: "Instagram", href: "https://www.instagram.com/nahara.jewellery/?igsh=MXgwcmQ2ODhnaTR3ag%3D%3D#" },
+      { label: "WhatsApp", href: "https://wa.me/+919137159898" },
+      { label: "hello@nahara.co.in", href: "https://mail.google.com/mail/u/0/#inbox?compose=https://mail.google.com/mail/u/0/#inbox?compose=DmwnWsCZFQTSPKdBWzqptmWzRGSXbXPcgGKFLkKhbNnbbmlgJgCbMhkZCbbJRRqmCSbHhCHFkrGB" },
     ],
   },
 ];

@@ -12,6 +12,9 @@
   width: 100%;
 }
 @media (max-width: 750px) {
+  .size_guide_btn{
+  transform: translateY(.8rem) !important;
+}
   .suggestion_parent {
     margin-top: 1rem !important;
   }
@@ -287,6 +290,9 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+.size_guide_btn{
+  transform: translateY(.5rem);
 }
 .clear_variatns_btn button p {
   color: #174d38 !important;

@@ -100,7 +100,7 @@ const Layout = ({ children }) => {
   return (
     <>
 
-      <Link target="_blank" href="https://wa.me/910000000000">
+      <Link target="_blank" href="https://wa.me/+919137159898">
         <div className="whatsapp_chat">
           <div className="whatsapp_chat_img center">
             <img className="cover" src="/gifs/whatsapp.gif" alt="loading" />
