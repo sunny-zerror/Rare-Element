@@ -23,7 +23,14 @@ const OrderList = () => {
   if (!data || data.length === 0) null;
   return (
     <div className="purchases_ordersList">
-      {data.length === 0 && <p className="text-xl">No orders found</p>}
+      {data.length === 0 && (
+        <div className="wishlist_empty_box_inner">
+          <p className="text-xl ">No orders found</p>
+          <Link href="/products" className="underline">
+            Go to Shopping
+          </Link>
+        </div>
+      )}
       {data?.map((item) => {
         const cart = item?.cart && item?.cart?.length > 0 ? item?.cart : [];
         return (
