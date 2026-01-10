@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import WhiteBorderBtn from '../buttons/WhiteBorderBtn'
@@ -9,6 +9,16 @@ gsap.registerPlugin(ScrollTrigger)
 
 const Hero = () => {
   const pathname = usePathname()
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.play().catch(() => { });
+  }, []);
+
 
   useEffect(() => {
     var height
@@ -56,7 +66,7 @@ const Hero = () => {
 
       <div className="introloader_paren  center">
         <div className="loader_img">
-        <img src="/green_logo.svg" alt="Logo" />
+          <img src="/green_logo.svg" alt="Logo" />
         </div>
       </div>
 
@@ -67,7 +77,7 @@ const Hero = () => {
       )}
       <div className="dummy_hero_div"></div>
       <div className="home_hero">
-        <video className=' home_hero_video cover' loop muted playsInline autoPlay src="/videos/hero_video.mp4"></video>
+        <video ref={videoRef} className=' home_hero_video cover' loop muted playsInline autoPlay preload="auto" src="/videos/hero_video.mp4"></video>
         <div className="home_hero_inner">
           <h2 className='text-3xl'>World of Nahara</h2>
           <Link scroll={false} href="/products">

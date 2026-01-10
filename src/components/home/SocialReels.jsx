@@ -59,11 +59,11 @@ const SocialReels = () => {
 
             <h2 className="socialCard_title text-xl  uppercase">
               {/* <span className=" text-4xl thin">{item.titleSpan}</span>{" "} */}
-              {item.title}
-            </h2>
-            <p className="socialCard_description thin text-xl">
               {item.description}
-            </p>
+            </h2>
+            {/* <p className="socialCard_description thin text-xl">
+              {item.description}
+            </p> */}
           </div>
         ))}
       </div>
