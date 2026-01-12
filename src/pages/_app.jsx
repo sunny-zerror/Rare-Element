@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }) {
             </Layout>
           </PageTransition>
         </AuthProvider>
-        <ToastContainer position="top-right" autoClose={1000} hideProgressBar transition={Zoom} />
+        <ToastContainer position="top-right" autoClose={1500} transition={Zoom} />
       </ApolloProvider>
     </>
   );
