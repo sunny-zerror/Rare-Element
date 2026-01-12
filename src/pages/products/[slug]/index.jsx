@@ -122,7 +122,7 @@ const ProductDetail = ({ meta, data, productList }) => {
         />
       </div>
       <ProductListGrid title="You may also like" data={productList} />
-      <ProductBanner />
+      {/* <ProductBanner /> */}
     </>
   )
 }

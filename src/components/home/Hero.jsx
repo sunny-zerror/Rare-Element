@@ -72,12 +72,12 @@ const Hero = () => {
 
       {pathname === "/" && (
         <div className="info_header center">
-          <p className='text-xs'> Free Shipping on orders above ₹  3,000 </p>
+          <p className='text-xs'> Free Shipping on all orders </p>
         </div>
       )}
       <div className="dummy_hero_div"></div>
       <div className="home_hero">
-        <video ref={videoRef} className=' home_hero_video cover' loop muted playsInline autoPlay preload="auto" src="/videos/hero_video.mp4"></video>
+        <video ref={videoRef} className=' home_hero_video cover' loop playsInline preload="auto" src="/videos/hero_video.mp4"></video>
         <div className="home_hero_inner">
           <h2 className='text-3xl'>World of Nahara</h2>
           <Link scroll={false} href="/products">
